@@ -1,0 +1,49 @@
+<app-card [hidHeader]="'true'" class="col-lg-12" cardClass="task-board-left">
+    <form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+        <div class="form-group row col-sm-6 align-items-end">
+            <label for="categoryId" class="col-sm-2 mt-1">Note Type</label>
+            <div class="col-sm-9">
+                <ng-select [ngClass]="'ng-select'" [options]="lstNoteType" [allowClear]="true" formControlName="type">
+                </ng-select>
+                <label *ngIf="!frmC.type.valid && (frmC.type.dirty || frmC.type.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please select a
+          valid Type.</label>
+            </div>
+        </div>
+        <div class="form-group row col-sm-12 align-items-end">
+            <label for="showTo" class="col-sm-1">Show To</label>
+            <div class="col-sm-9">
+                <ng-select [ngClass]="'ng-select'" [disabled]="frmC.TfShowAll.value" [options]="lstOrderContacts" [multiple]="true" formControlName="showTo">
+                </ng-select>
+            </div>
+            <div class="col-sm-2 pt-1">
+                <div class="checkbox checkbox-primary d-inline">
+                    <input formControlName="TfShowAll" id="alow" type="checkbox">
+                    <label class="cr mt-1" for="alow">Allow All </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row col-sm-12 align-items-end">
+            <label for="assignTo" class="col-sm-1">Assign To</label>
+            <div class="col-sm-9">
+                <ng-select [ngClass]="'ng-select'" [disabled]="frmC.TfAssignAll.value" [options]="lstOrderContacts" [multiple]="true" formControlName="assignTo">
+                </ng-select>
+            </div>
+            <div class="col-sm-2 pt-1">
+                <div class="checkbox checkbox-primary d-inline">
+                    <input formControlName="TfAssignAll" id="as" type="checkbox">
+                    <label class="cr mt-1" for="as">To All </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row col-sm-12 mt-2">
+            <app-tinymce formControlName="content" class="col-sm-12" #tinymce='tinymce'></app-tinymce>
+        </div>
+        <div class="form-group row col-sm-12 mt-2">
+            <file-upload class="col-sm-12" formControlName="files"></file-upload>
+
+        </div>
+        <div class="w-100 d-flex justify-content-end mt-2">
+            <button class="btn btn-outline-primary" (click)="add()" type="button"><i class="fas fa-plus"></i>Add</button>
+        </div>
+    </form>
+</app-card>

@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Items" [options]="false" *ngIf="canAddItem">
+        <div class="row d-flex align-items-center">
+            <div class="col-9">
+                <button class="btn btn-outline-primary" [routerLink]="['cu']" [queryParams]="{t:'a'}" type="button"><i
+                        class="fas fa-plus"></i>Create Item</button>
+
+            </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </app-card>
+</div>
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Items" [options]="false">
+        <app-table-items></app-table-items>
+    </app-card>
+</div>

@@ -1,0 +1,42 @@
+<!--  -->
+
+<div class="col-md-12 d-flex justify-content-center">
+    <button *ngIf="canAddContainer" class="btn btn-primary" (click)="openmodel(-1,'false');" type="button"><i class="fas fa-plus"></i>Add
+        New</button>
+</div>
+<table class="table table-hover mt-5">
+    <thead>
+        <tr>
+            <th scope="col" *ngIf="fileds['containerNumber'].show">Container Number</th>
+            <th scope="col" *ngIf="fileds['containerTypeId'].show">Container Type</th>
+            <th *ngIf="fileds['netWeight'].show">Net Weight</th>
+            <th *ngIf="fileds['totalWeight'].show">Total Weight</th>
+            <th *ngIf="fileds['goodsDescription'].show" style="width: 25%; text-align: center;">Goods Description
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let w of lstContainer; let i = index">
+            <td *ngIf="fileds['containerNumber'].show">{{w.containerNumber}}</td>
+            <td *ngIf="w.containerType && fileds['containerTypeId'].show">{{w.containerType.name}}</td>
+            <td *ngIf="fileds['netWeight'].show">{{w.netWeight}}</td>
+            <td *ngIf="fileds['totalWeight'].show">{{w.totalWeight}}</td>
+            <td *ngIf="fileds['goodsDescription'].show">{{w.goodsDescription}}</td>
+            <td>
+                <button (click)="openmodel(i,'true');" class="btn btn-icon btn-rounded btn-primary" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button (click)="deleterow(i)" *ngIf="canDeleteContainer" class="btn btn-icon btn-rounded btn-danger" style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'" *ngIf="canAddContainer">
+    <h3 class="theme-bg2">Add new container</h3>
+    <div>
+        <app-container [initObj]="initObj" [editMode]="editMode"></app-container>
+    </div>
+</app-animation-modal>

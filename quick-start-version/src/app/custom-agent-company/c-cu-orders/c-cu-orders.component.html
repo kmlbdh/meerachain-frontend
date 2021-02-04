@@ -1,0 +1,465 @@
+<app-card cardClass="daily-sales" cardTitle="Order #{{editableOrder.id}} - {{editableOrder.companyName}}" IloadCard='{{cardLoad}}' [options]="false">
+    <div *ngIf='editableOrder' class="row">
+        <div class="col-md-3 form-group">
+            <label for="supplierId" class="col-form-label">Supplier</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.supplierName' placeholder="orderRefrence">
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="numberOfContainers" class="col-form-label">Number Of Containers</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.numberOfContainers' placeholder="orderRefrence">
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="loadingPortId" class="col-form-label">Loading Port</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.loadingPortName' placeholder="orderRefrence">
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderCreationDate" class="col-form-label">Order Creation Date</label>
+            <input type="date" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderCreationDate' placeholder="orderRefrence">
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="containerTypeId" class="col-form-label">Container Type</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.containerTypeName' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="currencyId" class="col-form-label">Currency</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.currencyName' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="shippingType" class="col-form-label">Shipping Type</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.shippingTypeName' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderDescription" class="col-form-label">Order Description</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderDescription' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="incotermsId" class="col-form-label">Incoterms</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.incotermsName' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="arrivalDateToPort" class="col-form-label">Arrival Date To Port</label>
+            <input type="date" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.arrivalDateToPort' placeholder="orderRefrence">
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderPriority" class="col-form-label">Priority</label>
+            <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderPriorityName' placeholder="orderRefrence">
+
+        </div>
+
+    </div>
+</app-card>
+
+
+
+
+<ngb-tabset type="pills">
+    <ngb-tab title="General" class="mb-3  " style="font-size: 97%;
+  font-weight: bold;">
+        <ng-template ngbTabContent>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label for="orderRefrence" class="col-form-label">orderRefrence</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderGenerals.orderRefrence' placeholder="orderRefrence">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="originOfGoods" class="col-form-label">originOfGoods</label> **
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="originOfGoods" [(ngModel)]='editableOrder.orderGenerals.originOfGoods' placeholder="originOfGoods">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="exportCountryId" class="col-form-label">exportCountryId</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderGenerals.exportCountryName' placeholder="orderRefrence">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="paymentTerms" class="col-form-label">paymentTerms</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="paymentTerms" [(ngModel)]='editableOrder.orderGenerals.paymentTerms' placeholder="paymentTerms">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="readyDate" class="col-form-label">readyDate</label>
+                    <input type="date" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderGenerals.readyDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="orderIsUrgent" class="col-form-label">orderIsUrgent</label>
+                    <input type="date" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderGenerals.orderIsUrgent" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="netWeight" class="col-form-label">netWeight</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="netWeight" [(ngModel)]='editableOrder.orderGenerals.netWeight' placeholder="netWeight">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="totalWeight" class="col-form-label">totalWeight</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="totalWeight" [(ngModel)]='editableOrder.orderGenerals.totalWeight' placeholder="totalWeight">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="numberOfPackages" class="col-form-label">numberOfPackages</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="numberOfPackages" [(ngModel)]='editableOrder.orderGenerals.numberOfPackages' placeholder="numberOfPackages">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="cubicVolume" class="col-form-label">cubicVolume</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="cubicVolume" [(ngModel)]='editableOrder.orderGenerals.cubicVolume' placeholder="cubicVolume">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="destinationPortId" class="col-form-label">DestinationPort</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderGenerals.destinationPortName' placeholder="orderRefrence">
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="dischargePortId" class="col-form-label">DischargePort</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderGenerals.dischargePortName' placeholder="orderRefrence">
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="warehousesId" class="col-form-label">Warehouses</label>
+                    <input type="text" [disabled]="'disabled'" class="form-control" id="orderRefrence" [(ngModel)]='editableOrder.orderGenerals.warehousesName' placeholder="orderRefrence">
+
+
+                </div>
+                <div class="col-md-3 form-group pt-5">
+                    <div class="checkbox checkbox-primary d-inline">
+                        <input [disabled]="'disabled'" [(ngModel)]="editableOrder.orderGenerals.transshipmentAllowed" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                        <label class="cr mt-1" for="checkbox-p-1">transshipmentAllowed</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Shipping">
+        <ng-template ngbTabContent>
+
+
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label for="shippingCompanyRefrence" class="col-form-label">shippingCompanyRefrence</label>
+                    <input type="text" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderShippings.shippingCompanyRefrence" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="openingShippingOrderDate" class="col-form-label">openingShippingOrderDate</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderShippings.openingShippingOrderDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="departureDate" class="col-form-label">departureDate</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderShippings.departureDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="shippingDate" class="col-form-label">shippingDate</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderShippings.shippingDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="forwarderId" class="col-form-label">forwarderId</label>
+                    <input type="text" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderShippings.forwarderName" class="form-control" placeholder="Order Creation Date">
+
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="shippingLine" class="col-form-label">shippingLine</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="shippingLine" [(ngModel)]='editableOrder.orderShippings.shippingLine' placeholder="shippingLine">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="foreignAgent" class="col-form-label">foreignAgent</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="foreignAgent" [(ngModel)]='editableOrder.orderShippings.foreignAgent' placeholder="foreignAgent">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="delayedContainerDays" class="col-form-label">delayedContainerDays</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="delayedContainerDays" [(ngModel)]='editableOrder.orderShippings.delayedContainerDays' placeholder="delayedContainerDays">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="bOLNo" class="col-form-label">bOLNo</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="bOLNo" [(ngModel)]='editableOrder.orderShippings.bOLNo' placeholder="bOLNo">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="vessel" class="col-form-label">vessel</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="vessel" [(ngModel)]='editableOrder.orderShippings.vessel' placeholder="vessel">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="shippingPrice" class="col-form-label">shippingPrice</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="shippingPrice" [(ngModel)]='editableOrder.orderShippings.shippingPrice' placeholder="shippingPrice">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="craneFees" class="col-form-label">craneFees</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="craneFees" [(ngModel)]='editableOrder.orderShippings.craneFees' placeholder="craneFees">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="deliveryCost" class="col-form-label">deliveryCost</label>
+                    <input type="text" [attr.disabled]="'disabled'" class="form-control" id="deliveryCost" [(ngModel)]='editableOrder.orderShippings.deliveryCost' placeholder="deliveryCost">
+                </div>
+                <div class="col-md-3 form-group  pt-5">
+                    <div class="checkbox checkbox-primary d-inline">
+                        <input [(ngModel)]="editableOrder.orderShippings.isDirectShipping" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                        <label class="cr mt-1" for="checkbox-p-1">isDirectShipping</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Customs">
+        <ng-template ngbTabContent>
+
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label for="customsAgentId" class="col-form-label">customsAgentId</label>
+                    <input type="text" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.customsAgentName" class="form-control" placeholder="Order Creation Date">
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="documentApproved" class="col-form-label">documentApproved</label>
+                    <input type="date" [(ngModel)]="editableOrder.orderCustoms.documentApproved" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="documentReceived" class="col-form-label">documentReceived</label>
+                    <input type="date" [(ngModel)]="editableOrder.orderCustoms.documentReceived" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="customsFileOpeningDate" class="col-form-label">customsFileOpeningDate</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.customsFileOpeningDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="agentPaymentDate" class="col-form-label">agentPaymentDate</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.agentPaymentDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="localCrossingId" class="col-form-label">Local Crossing</label>
+                    <input type="text" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.localCrossingId" class="form-control" placeholder="Order Creation Date">
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="inlandShipperId" class="col-form-label">inlandShipperId</label>
+                    <input type="text" [disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.inlandShipperName" class="form-control" placeholder="Order Creation Date">
+
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="customesDeclarationNumber" class="col-form-label">customesDeclarationNumber</label>
+                    <input type="text" class="form-control" id="customesDeclarationNumber" [(ngModel)]='editableOrder.orderCustoms.customesDeclarationNumber' placeholder="customesDeclarationNumber">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="customsFileNumber" class="col-form-label">customsFileNumber</label>
+                    <input type="text" class="form-control" id="customsFileNumber" [(ngModel)]='editableOrder.orderCustoms.customsFileNumber' placeholder="customsFileNumber">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="customsPaymentDate" class="col-form-label">customsPaymentDate</label>
+                    <input type="date" [(ngModel)]="editableOrder.orderCustoms.customsPaymentDate" class="form-control" placeholder="Order Creation Date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="isCleared" class="col-form-label">isCleared</label>
+                    <input type="date" [attr.disabled]="'disabled'" [(ngModel)]="editableOrder.orderCustoms.isCleared" class="form-control" placeholder="Order Creation Date">
+                </div>
+            </div>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Containers ">
+        <ng-template ngbTabContent>
+
+            <table class="table table-hover mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Container Number</th>
+                        <th scope="col">Container Type</th>
+                        <th>Net Weight</th>
+                        <th>Total Weight</th>
+                        <th style="width: 25%; text-align: center;">Goods Description</th>
+                        <th *ngIf="editableOrder.orderCustoms.isScanned">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let w of editableOrder.orderContainers; let i = index">
+                        <tr>
+                            <td>{{w.containerNumber}}</td>
+                            <td>{{w.containerTypeName}}</td>
+                            <td>{{w.netWeight}}</td>
+                            <td>{{w.totalWeight}}</td>
+                            <td>{{w.goodsDescription}}</td>
+                            <td *ngIf="editableOrder.orderCustoms.isScanned">
+                                <button (click)="w.openEdit = !w.openEdit" class="btn btn-icon btn-rounded btn-primary" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                  <i class="fas fa-edit"></i>
+                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="w.openEdit">
+                            <td colspan="6">
+                                <div class="col-sm-12">
+                                    <div class="w-100 row">
+                                        <div class="col-md-12">
+                                            <h4>Container info</h4>
+                                            <hr>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="containerNumber">Container Number</label>
+                                            <input type="text" [disabled]="'disabled'" maxlength="11" class="form-control" id="containerNumber" [(ngModel)]='w.containerNumber' placeholder="containerNumber">
+                                        </div>
+                                        <div class="col-md-4 form-group ">
+                                            <label for="delayedContainersDays">delayedContainersDays</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control " id="delayedContainersDays" [(ngModel)]='w.delayedContainersDays' placeholder="delayedContainersDays">
+                                        </div>
+                                        <div class="col-md-4 form-group ">
+                                            <label for="netWeight">netWeight</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control " id="netWeight" [(ngModel)]='w.netWeight' placeholder="netWeight">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="goodsDescription">goodsDescription</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control" id="goodsDescription" [(ngModel)]='w.goodsDescription' placeholder="goodsDescription">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="containerTypeId">Container Type</label>
+                                            <input type="text" [disabled]="'disabled'" maxlength="11" class="form-control" id="containerNumber" [(ngModel)]='w.containerTypeName' placeholder="containerNumber">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inlandShipperId">Main Inland Shipper</label>
+                                            <input type="text" [disabled]="'disabled'" maxlength="11" class="form-control" id="containerNumber" [(ngModel)]='w.inlandShipperName' placeholder="containerNumber">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="sealNumber" class="col-md-4">sealNumber</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control" id="sealNumber" [(ngModel)]='w.sealNumber' placeholder="sealNumber">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="totalWeight">totalWeight</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control" id="totalWeight" [(ngModel)]='w.totalWeight' placeholder="totalWeight">
+                                        </div>
+                                        <div class="col-md-4 form-group pt-5">
+                                            <div class="checkbox checkbox-primary d-inline">
+                                                <input [(ngModel)]="w.goodDangerous" [disabled]="'disabled'" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                                <label class="cr mt-1" for="checkbox-p-1">goodDangerous</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Scanning Info</h4>
+                                            <hr>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="isScanned">Is Scanned</label>
+                                            <input type="date" [(ngModel)]="w.isScanned" class="form-control" placeholder="Order Creation Date">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="scanningHour">Scanning Hour</label>
+                                            <input type="text" class="form-control" id="scanningHour" [(ngModel)]='w.scanningHour' placeholder="scanningHour">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="scanByText">Scan By</label>
+                                            <input type="text" class="form-control" id="scanByText" [(ngModel)]='w.scanByText' placeholder="scanByText">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 pt-5">
+                                            <h4>Process Info</h4>
+                                            <hr>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="returnedDateToPort">Returned Date To Port</label>
+                                            <input type="date" [disabled]="'disabled'" [(ngModel)]="w.returnedDateToPort" class="form-control" placeholder="Order Creation Date">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="arrivalDateToCompany">Arrival Date To Company</label>
+                                            <input type="date" [disabled]="'disabled'" [(ngModel)]="w.arrivalDateToCompany" class="form-control" placeholder="Order Creation Date">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="arrivalTruckNumber">Arrival Truck Number</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control" id="arrivalTruckNumber" [(ngModel)]='w.arrivalTruckNumber' placeholder="arrivalTruckNumber">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="arrivalHourToCompany">Arrival Hour To Company</label>
+                                            <input type="text" [disabled]="'disabled'" class="form-control" id="arrivalHourToCompany" [(ngModel)]='w.arrivalHourToCompany' placeholder="arrivalHourToCompany">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="supervisorGaurd">Supervisor Gaurd</label>
+                                            <input type="text" [disabled]="'disabled'" maxlength="11" class="form-control" id="supervisorGaurd" [(ngModel)]='w.supervisorGaurdName' placeholder="containerNumber">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="exitDate">Exit Date from Port</label>
+                                            <input type="date" [disabled]="'disabled'" [(ngModel)]="w.exitDate" class="form-control" placeholder="Order Creation Date">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="actualArrival">Arrival Date To Port</label>
+                                            <input type="date" [disabled]="'disabled'" [(ngModel)]="w.actualArrival" class="form-control" placeholder="Order Creation Date">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="warehousesId">Warehouse</label>
+                                            <input type="text" [disabled]="'disabled'" maxlength="11" class="form-control" id="containerNumber" [(ngModel)]='w.warehousesName' placeholder="containerNumber">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Items ">
+        <ng-template ngbTabContent>
+
+
+
+            <table class="table table-hover mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th>Unit</th>
+                        <th>Currency</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of editableOrder.orderItems; let rowIndex = index">
+                        <td>
+                            <span>{{w.name}}</span>
+                        </td>
+                        <td>
+                            <span>{{w.unitName}}</span>
+                        </td>
+                        <td>
+                            <span>{{w.currencyName}}</span>
+                        </td>
+                        <td>
+                            <span>{{w.quantity}}</span>
+                        </td>
+                        <td>
+                            <span>{{w.price}}</span>
+                        </td>
+                        <td>
+                            <span>{{!w.totalPrice ? 0:w.totalPrice  | number : '1.2-2'}}</span>
+                        </td>
+                        <td>
+                            <span>{{w.note}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
+
+
+
+<app-card [hidHeader]="true">
+    <div class="w-100 d-flex justify-content-center mt-2">
+        <button class="btn btn-outline-primary" class="btn btn-outline-primary" (click)='save()' type="button"><i class="fas fa-plus"></i>Save</button>
+    </div>
+</app-card>

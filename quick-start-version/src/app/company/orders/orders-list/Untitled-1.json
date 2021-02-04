@@ -1,0 +1,12 @@
+{
+    "id": "70",
+    "arrivalDateToPort": "2020-09-16",
+    "orderCustoms": {
+        "orderId": 70,
+        "documentReceived": "2020-09-16",
+        "documentApproved": "2020-09-16",
+        "customsFileNumber": "11",
+        "customesDeclarationNumber": "33"
+    },
+    "orderContainers": []
+}

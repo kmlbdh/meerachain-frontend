@@ -1,0 +1,94 @@
+<form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+    <div class="col-md-3 form-group" *ngIf="fileds['customsAgentId'].show">
+        <label for="customsAgentId" class="col-form-label">customs agent</label>
+        <ng-select [attr.disabled]="fileds['customsAgentId'].editable" formControlName="customsAgentId"
+            [ngClass]="'ng-select'" (change)='simpleOption(i)' [allowClear]="true" [options]="lstCustomsAgents">
+        </ng-select>
+        <label
+            *ngIf="!frmC.customsAgentId.valid && (frmC.customsAgentId.dirty || frmC.customsAgentId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+            order refrence.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['documentApproved'].show">
+        <label for="documentApproved" class="col-form-label">document approved</label>
+        <input type="date" formControlName="documentApproved" class="form-control" placeholder="Order Creation Date"
+            id="c-documentApproved">
+        <label
+            *ngIf="!frmC.documentApproved.valid && (frmC.documentApproved.dirty || frmC.documentApproved.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['documentReceived'].show">
+        <label for="documentReceived" class="col-form-label">document received</label>
+        <input type="date" [attr.disabled]="fileds['documentReceived'].editable" formControlName="documentReceived"
+            id="c-documentReceived" class="form-control" placeholder="Order Creation Date">
+        <label
+            *ngIf="!frmC.documentReceived.valid && (frmC.documentReceived.dirty || frmC.documentReceived.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['customsFileOpeningDate'].show">
+        <label for="customsFileOpeningDate" class="col-form-label">customs file opening date</label>
+        <input type="date" [attr.disabled]="fileds['customsFileOpeningDate'].editable" id="c-"
+            formControlName="customsFileOpeningDate" class="form-control" placeholder="Order Creation Date"> <label
+            *ngIf="!frmC.customsFileOpeningDate.valid && (frmC.customsFileOpeningDate.dirty || frmC.customsFileOpeningDate.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['agentPaymentDate'].show">
+        <label for="agentPaymentDate" class="col-form-label">agent payment date</label>
+        <input type="date" [attr.disabled]="fileds['agentPaymentDate'].editable" formControlName="agentPaymentDate"
+            id="c-" class="form-control" placeholder="Order Creation Date">
+        <label
+            *ngIf="!frmC.agentPaymentDate.valid && (frmC.agentPaymentDate.dirty || frmC.agentPaymentDate.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['localCrossingId'].show">
+        <label for="localCrossingId" class="col-form-label">Local crossing</label>
+        <ng-select [attr.disabled]="fileds['localCrossingId'].editable" formControlName="localCrossingId"
+            [ngClass]="'ng-select'" (change)='simpleOption(i)' [allowClear]="true"
+            [options]="Options[tupleTypes['Local Crossing']]"></ng-select>
+        <label
+            *ngIf="!frmC.localCrossingId.valid && (frmC.localCrossingId.dirty || frmC.localCrossingId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['inlandShipperId'].show">
+        <label for="inlandShipperId" class="col-form-label">inland shipper</label>
+        <ng-select [attr.disabled]="fileds['inlandShipperId'].editable" formControlName="inlandShipperId"
+            [ngClass]="'ng-select'" (change)='simpleOption(i)' [allowClear]="true" [options]="lstInlandShippers">
+        </ng-select>
+        <label
+            *ngIf="!frmC.inlandShipperId.valid && (frmC.inlandShipperId.dirty || frmC.inlandShipperId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['customesDeclarationNumber'].show">
+        <label for="customesDeclarationNumber" class="col-form-label">Custom declaration number</label>
+        <input type="text" [attr.disabled]="fileds['customesDeclarationNumber'].editable" class="form-control"
+            id="c-customesDeclarationNumber" formControlName='customesDeclarationNumber'
+            placeholder="customes declaration number">
+    </div>
+    <div class="col-md-3 form-group">
+        <label for="customsFileNumber" class="col-form-label">Custom File Number</label>
+        <input type="text" class="form-control" id="customsFileNumber" formControlName='customsFileNumber'
+            placeholder="customsFileNumber">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['customsPaymentDate'].show">
+        <label for="customsPaymentDate" class="col-form-label">Custom payment date</label>
+        <input type="date" [attr.disabled]="fileds['customsPaymentDate'].editable" formControlName="customsPaymentDate"
+            id="c-customsPaymentDate" class="form-control" placeholder="Order Creation Date">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['isCleared'].show">
+        <label for="isCleared" class="col-form-label">is cleared</label>
+        <input type="date" [attr.disabled]="fileds['isCleared'].editable" formControlName="isCleared" id="c-isCleared"
+            class="form-control" placeholder="Order Creation Date">
+    </div>
+
+    <div class="col-md-12 form-group d-flex justify-content-end">
+        <button class="btn btn-outline-primary" (click)="clickOnCustomsCalculation()" [ngClass]="lightButton"
+            type="button">Make Custom Calculation</button>
+    </div>
+
+</form>

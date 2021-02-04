@@ -1,0 +1,39 @@
+<div class="col-sm-12">
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <h4>Group List</h4>
+        </div>
+    </div>
+    <hr class="w-100">
+
+    <div class="w-100 d-flex justify-content-between">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Group Description</th>
+                    <th scope="col"># Users</th>
+                    <th scope="col">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let w of lstGroups">
+                    <th scope="row">{{w.id}}</th>
+                    <td>{{w.name}}</td>
+                    <td>{{w.description}}</td>
+                    <td>
+                        {{w.usersCount}}
+                    </td>
+                    <td>{{w.createdAt | date:'dd/MM/yyyy' }}</td>
+                    <td>
+                        <button (click)="editGroup(w.id)" class="btn btn-icon btn-rounded btn-outline-primary " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+            <i class="fas fa-edit"></i>
+          </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+    <div class="col-md-3 form-group" *ngIf="fileds['orderRefrence'].show">
+        <label for="orderRefrence" class="col-form-label">order refrence</label>
+        <input type="text" [attr.disabled]="fileds['orderRefrence'].editable"
+            [ngClass]="{'is-invalid': !frmC.orderRefrence.valid && (frmC.orderRefrence.dirty || frmC.orderRefrence.touched || isSubmit)}"
+            class="form-control" id="g-orderRefrence" formControlName='orderRefrence' placeholder="order refrence">
+        <label *ngIf="!frmC.orderRefrence.valid && (frmC.orderRefrence.dirty || frmC.orderRefrence.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+            order refrence.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['originOfGoods'].show">
+        <label for="originOfGoods" class="col-form-label">origin of goods</label>
+        <ng-select formControlName="originOfGoods" [attr.disabled]="fileds['originOfGoods'].editable" [ngClass]="'ng-select'"
+            [allowClear]="true" [options]="Options[tupleTypes['Country']]"></ng-select>
+        <label *ngIf="!frmC.originOfGoods.valid && (frmC.originOfGoods.dirty || frmC.originOfGoods.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['exportCountryId'].show">
+        <label for="exportCountryId" class="col-form-label">export country</label>
+        <ng-select formControlName="exportCountryId" [attr.disabled]="fileds['exportCountryId'].editable"
+            [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Country']]"></ng-select>
+        <label
+            *ngIf="!frmC.exportCountryId.valid && (frmC.exportCountryId.dirty || frmC.exportCountryId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['paymentTerms'].show">
+        <label for="paymentTerms" class="col-form-label">payment terms</label>
+        <input type="text" [attr.disabled]="fileds['paymentTerms'].editable"
+            [ngClass]="{'is-invalid': !frmC.paymentTerms.valid && (frmC.paymentTerms.dirty || frmC.paymentTerms.touched || isSubmit)}"
+            class="form-control" id="g-paymentTerms" formControlName='paymentTerms' placeholder="payment terms">
+        <label *ngIf="!frmC.paymentTerms.valid && (frmC.paymentTerms.dirty || frmC.paymentTerms.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['readyDate'].show">
+        <label for="readyDate" class="col-form-label">ready date</label>
+        <input type="date" [attr.disabled]="fileds['readyDate'].editable" formControlName="readyDate" class="form-control" id="g-readyDate"
+            placeholder="Order Creation Date">
+        <label *ngIf="!frmC.readyDate.valid && (frmC.readyDate.dirty || frmC.readyDate.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['orderIsUrgent'].show">
+        <label for="orderIsUrgent" class="col-form-label">order is urgent</label>
+        <input type="date" [attr.disabled]="fileds['orderIsUrgent'].editable" formControlName="orderIsUrgent"
+            class="form-control" placeholder="Order Creation Date">
+        <label *ngIf="!frmC.orderIsUrgent.valid && (frmC.orderIsUrgent.dirty || frmC.orderIsUrgent.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['netWeight'].show">
+        <label for="netWeight" class="col-form-label">net weight</label>
+        <input type="text" [attr.disabled]="fileds['netWeight'].editable"  id="g-netWeight"
+            [ngClass]="{'is-invalid': !frmC.netWeight.valid && (frmC.netWeight.dirty || frmC.netWeight.touched || isSubmit)}"
+            class="form-control" id="netWeight" formControlName='netWeight' placeholder="net weight">
+        <label *ngIf="!frmC.netWeight.valid && (frmC.netWeight.dirty || frmC.netWeight.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['totalWeight'].show">
+        <label for="totalWeight" class="col-form-label">total weight</label>
+        <input type="text" [attr.disabled]="fileds['totalWeight'].editable"  
+            [ngClass]="{'is-invalid': !frmC.totalWeight.valid && (frmC.totalWeight.dirty || frmC.totalWeight.touched || isSubmit)}"
+            class="form-control" id="g-totalWeight" formControlName='totalWeight' placeholder="total weight">
+        <label *ngIf="!frmC.totalWeight.valid && (frmC.totalWeight.dirty || frmC.totalWeight.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['numberOfPackages'].show">
+        <label for="numberOfPackages" class="col-form-label">number of packages</label>
+        <input type="text" [attr.disabled]="fileds['numberOfPackages'].editable"
+            [ngClass]="{'is-invalid': !frmC.numberOfPackages.valid && (frmC.numberOfPackages.dirty || frmC.numberOfPackages.touched || isSubmit)}"
+            class="form-control" id="g-numberOfPackages" formControlName='number of packages'
+            placeholder="numberOfPackages">
+            <label
+            *ngIf="!frmC.numberOfPackages.valid && (frmC.numberOfPackages.dirty || frmC.numberOfPackages.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['cubicVolume'].show">
+        <label for="cubicVolume" class="col-form-label">cubic volume</label>
+        <input type="text" [attr.disabled]="fileds['cubicVolume'].editable"
+            [ngClass]="{'is-invalid': !frmC.cubicVolume.valid && (frmC.cubicVolume.dirty || frmC.cubicVolume.touched || isSubmit)}"
+            class="form-control" id="g-cubicVolume" formControlName='cubicVolume' placeholder="cubic volume">
+        <label *ngIf="!frmC.cubicVolume.valid && (frmC.cubicVolume.dirty || frmC.cubicVolume.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['destinationPortId'].show">
+        <label for="destinationPortId" class="col-form-label">destination port</label>
+        <ng-select formControlName="destinationPortId" [attr.disabled]="fileds['destinationPortId'].editable" id="g-destinationPortId"
+            [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Discharge Destination Port']]">
+        </ng-select>
+        <label
+            *ngIf="!frmC.destinationPortId.valid && (frmC.destinationPortId.dirty || frmC.destinationPortId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['dischargePortId'].show">
+        <label for="dischargePortId" class="col-form-label">discharge port</label>
+        <ng-select formControlName="dischargePortId" [attr.disabled]="fileds['dischargePortId'].editable"
+            [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Discharge Destination Port']]">
+        </ng-select>
+        <label
+            *ngIf="!frmC.dischargePortId.valid && (frmC.dischargePortId.dirty || frmC.dischargePortId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+            Name.</label>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['warehousesId'].show">
+        <label for="warehousesId" class="col-form-label">warehouses</label>
+        <ng-select formControlName="warehousesId" [attr.disabled]="fileds['warehousesId'].editable" [ngClass]="'ng-select'"
+            [allowClear]="true" [options]="lstWarehouses"></ng-select>
+        <label *ngIf="!frmC.warehousesId.valid && (frmC.warehousesId.dirty || frmC.warehousesId.touched || isSubmit)"
+            class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+            Warehouses.</label>
+    </div>
+    <div class="col-md-3 form-group pt-5" *ngIf="fileds['transshipmentAllowed'].show">
+        <div class="checkbox checkbox-primary d-inline">
+            <input [attr.disabled]="fileds['transshipmentAllowed'].editable" formControlName="transshipmentAllowed"
+            id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox" >
+        <label class="cr mt-1" for="checkbox-p-1">transshipment allowed</label>
+        </div>
+    </div>
+</form>

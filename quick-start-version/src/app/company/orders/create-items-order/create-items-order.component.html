@@ -1,0 +1,74 @@
+<table class="table table-hover mt-5">
+    <thead>
+        <tr>
+            <!-- ,,,,,,,dispatchedQuantity -->
+            <th scope="col" *ngIf="fileds['name'].show">Name</th>
+            <th *ngIf="fileds['unitId'].show">Unit</th>
+            <th *ngIf="fileds['currencyId'].show">Currency</th>
+            <th *ngIf="fileds['quantity'].show">Quantity</th>
+            <th *ngIf="fileds['price'].show">Price</th>
+            <th *ngIf="fileds['totalPrice'].show">Total Price</th>
+            <th *ngIf="fileds['note'].show">Note</th>
+            <th *ngIf="this.PageFor == 1">Dispatched</th>
+            <th *ngIf="this.PageFor == 1">Suspending</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let w of lstOrderItems; let rowIndex = index">
+            <td *ngIf="fileds['name'].show">
+                <span (dblclick)="editing[rowIndex + '-name'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-name']">{{w.name}}</span>
+                <ng-select *ngIf="editing[rowIndex + '-name'] && lstItems" [ngClass]="'ng-select'" [allowClear]="true" [(ngModel)]="w['itemId']" (ngModelChange)="modelchange(rowIndex,'name',lstItems,w['itemId'])" [options]="lstItems"></ng-select>
+            </td>
+            <td *ngIf="fileds['unitId'].show">
+                <span (dblclick)="editing[rowIndex + '-unitId'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-unitId'] && w.unit">{{w.unit.name}}</span>
+                <ng-select *ngIf="editing[rowIndex + '-unitId']" [ngClass]="'ng-select'" [allowClear]="true" [(ngModel)]="w['unitId']" (ngModelChange)="modelchange(rowIndex,'unitname',Options[tupleTypes['Unit']],w['unitId'])" [options]="Options[tupleTypes['Unit']]"></ng-select>
+            </td>
+            <td *ngIf="fileds['currencyId'].show">
+                <span (dblclick)="editing[rowIndex + '-currencyId'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-currencyId'] && w.currency">{{w.currency.name}}</span>
+                <ng-select *ngIf="editing[rowIndex + '-currencyId']" [ngClass]="'ng-select'" [allowClear]="true" [(ngModel)]="w['currencyId']" (ngModelChange)="modelchange(rowIndex,'currencyname',Options[tupleTypes['Currency']],w['currencyId'])" [options]="Options[tupleTypes['Currency']]"></ng-select>
+            </td>
+            <td *ngIf="fileds['quantity'].show">
+                <span (dblclick)="editing[rowIndex + '-quantity'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-quantity']">{{w.quantity}}</span>
+                <input *ngIf="editing[rowIndex + '-quantity']" type="text" class="form-control" [(ngModel)]="w['quantity']" placeholder="Enter Quantity" (ngModelChange)="totPriceChange(rowIndex)">
+            </td>
+            <td *ngIf="fileds['price'].show">
+                <span (dblclick)="editing[rowIndex + '-price'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-price']">{{w.price}}</span>
+                <input *ngIf="editing[rowIndex + '-price']" type="text" class="form-control" [(ngModel)]="w['price']" placeholder="Enter price" (ngModelChange)="totPriceChange(rowIndex)">
+            </td>
+            <td *ngIf="fileds['totalPrice'].show">
+                <span>{{!w.totalPrice ? 0:w.totalPrice  | number : '1.2-2'}}</span>
+            </td>
+            <td *ngIf="fileds['note'].show">
+                <span (dblclick)="editing[rowIndex + '-note'] = true ; this.rowSaveIcon[rowIndex] = true" *ngIf="!editing[rowIndex + '-note']">{{w.note}}</span>
+                <input *ngIf="editing[rowIndex + '-note']" type="text" class="form-control" [(ngModel)]="w['note']" placeholder="Enter note">
+            </td>
+            <td *ngIf="this.PageFor == 1">
+                <span>{{w.dispatchedQuantity}}</span>
+            </td>
+            <td *ngIf="this.PageFor == 1 ">
+                <span>{{(w.quantity ? w.quantity : 0 ) - (w.dispatchedQuantity ? w.dispatchedQuantity:0)}}</span>
+            </td>
+            <td>
+                <button (click)="openrowedit(rowIndex) " *ngIf="!this.rowSaveIcon[rowIndex] " class="btn btn-icon btn-rounded btn-outline-info " style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button ">
+                    <i class="fas fa-edit "></i>
+                </button>
+                <button (click)="saverowedit(rowIndex) " *ngIf="this.rowSaveIcon[rowIndex] " class="btn btn-icon btn-rounded btn-success " style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button ">
+                    <i class="fas fa-save "></i>
+                </button>
+                <button (click)="addnewrow(rowIndex,true) " *ngIf="!this.rowSaveIcon[rowIndex] && canAddItem" class="btn btn-icon btn-rounded btn-success " style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button ">
+                    <i class="fas fa-plus "></i>
+                </button>
+                <button (click)="deleterow(rowIndex) " *ngIf="!this.rowSaveIcon[rowIndex] && canDeleteItem" class="btn btn-icon btn-rounded btn-danger " style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button ">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="w-100">
+
+<div class="col-sm-12 d-flex justify-content-end">
+    <p class="col-sm-3" style="font-size: 139%;">Total Price: <span style="font-weight: bold; color: black;">{{itemsTotalPrice | number : '1.2-2'}}</span></p>
+</div>

@@ -1,0 +1,178 @@
+<app-card cardTitle="Coming Soon" cardClass="code-table" blockClass="pb-0" IloadCard='{{loadCard01}}'>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Supplier</th>
+                    <th>Estimated Arrival</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Forworder</th>
+                    <th>Inland Shipper</th>
+                    <th>Local Crossing</th>
+                    <th>Custom File Number</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of lstOrder | paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems }" (click)="openorder(o.orderId)">
+                    <td>
+                        <h6 class="mb-1">{{o.suplierName}}</h6>
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.arrivalDateToPort | date:'yyyy-MM-dd'}}</h6>
+                    </td>
+                    <td>
+                        <i class="fas fa-circle text-c-red f-10 m-r-15" *ngIf="o.status == 'Pending'"></i>
+                        <i class="fas fa-circle text-c-orange f-10 m-r-15" *ngIf="o.status == 'Ready'"></i>
+                        <i class="fas fa-circle text-c-green f-10 m-r-15" *ngIf="o.status == 'Paid'"></i>
+
+                        <a href="javascript:" class="label theme-bg2 text-white f-12" *ngIf="o.isScanned == 1">Scanned</a>
+
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.fullDesc}}</h6>
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.forwarderName}}</h6>
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.inlandShipperName}}</h6>
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.localCrossing}}</h6>
+                    </td>
+                    <td>
+                        <h6 class="m-b-0">{{o.customsFileNumber}}</h6>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</app-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<app-card [customHeader]="true" blockClass="task-comment" [options]="false" IloadCard='{{loadCard02}}'>
+    <div class="app-card-header">
+        <h5 class="card-header-text"><i class="fas fa-plus m-r-5"></i> Tasks</h5>
+    </div>
+    <ul class="media-list p-0">
+        <li class="media" *ngFor="let note of lstAssigned| paginate: {id:paggingManager02.id, itemsPerPage: paggingManager02.itemsPerPage, currentPage: paggingManager02.currentPage, totalItems: paggingManager02.totalItems } ; let i = index ">
+            <div class="media-left mr-3">
+                <a>
+                    <img class="media-object img-radius comment-img" [src]="'./attachment/' + note.userpicture" alt=" ">
+                </a>
+            </div>
+            <div class="media-body">
+
+                <div class="d-flex justify-content-between">
+                    <h6 class="media-heading txt-primary">{{note.fromContactName}} - <a class="text-c-red" href="javascript:" (click)="openorder(note.orderId)">order by {{note.orderSupplierName}}</a> </h6>
+
+                    <h6>
+                        <button type="button" class="btn btn-outline-success " style="padding: 3px;" *ngIf="note.allowToMakeAssign && note.type != 1 && note.type != 3" (click)="MakeNoteAsDone(note.id)">Make As Done</button>
+                        <button type="button" class="btn btn-outline-danger " style="padding: 3px;" *ngIf="note.allowToMakeUndoDone && note.type != 1 && note.type != 3" (click)="UndoDone(note.id)">Undo Done</button>
+                        <span class="label label-success " *ngIf="note.doneByName"> done by: {{note.doneByName}}</span>
+                        <strong>{{note.createdAt | dateAgo}} </strong> |
+                        <span class="f-12 m-l-5">{{note.createdAt | date:'yyyy-MM-dd,h:mm a'}}</span>
+                    </h6>
+                </div>
+
+                <div [innerHTML]="note.content" class="w-100 content" *ngIf="!note.editable"></div>
+                <app-tinymce class="col-sm-12" [(ngModel)]="note.content" #tinymce='tinymce' *ngIf="note.editable">
+                </app-tinymce>
+
+                <!-- <div class="m-t-10 m-b-25 d-flex justify-content-end" *ngIf="note.editable && note.allowToEdit">
+                  <button class="btn btn-outline-primary" (click)="updateNote(note.id)">Edit</button>
+              </div> -->
+
+                <!-- <div class="m-t-10 m-b-25" *ngIf="!note.editable">
+                  <span><a class="m-r-10 text-secondary" (click)="openCloseReplay(note.id,true)">Reply</a></span>
+                  <span *ngIf="note.allowToEdit" (click)="note.editable = true"><a
+                        class="m-r-10 text-secondary">Edit</a> </span>
+
+                  <strong class="m-r-10 text-primary cursor" *ngIf="note.updatedAt" (click)="openHistory(note.id)">
+                    History </strong>
+
+              </div> -->
+                <div class="m-b-25" *ngIf="!note.editable">
+                    <ul>
+                        <li *ngFor="let attach of note.attachments">{{attach.name}} <a [href]="attach.url" target="_blank"><i class="fas fa-download f-18 mx-5" ></i></a> </li>
+                    </ul>
+
+                </div>
+                <hr style="border:1px solid #3F4D67">
+                <div class="media mt-2" *ngFor="let subn of note.lstReplays">
+                    <a class="media-left mr-3">
+                        <img class="media-object img-radius comment-img" [src]="'./attachment/' + subn.userpicture" alt=" ">
+                    </a>
+                    <div class="media-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="media-heading txt-primary">{{subn.fromContactName}} </h6>
+                            <h6>
+                                <strong>{{subn.createdAt | dateAgo}} </strong> |
+                                <span class="f-12 m-l-5">{{subn.createdAt | date:'yyyy-MM-dd,h:mm:ss a'}}</span>
+                            </h6>
+                        </div>
+                        <div [innerHTML]="subn.content" class="w-100 content" *ngIf="!subn.editable"></div>
+                        <app-tinymce class="col-sm-12" [(ngModel)]="subn.content" #tinymce='tinymce' *ngIf="subn.editable">
+                        </app-tinymce>
+
+                        <div class="m-t-10 m-b-25 d-flex justify-content-end" *ngIf="subn.editable && subn.allowToEdit">
+                            <button class="btn btn-outline-primary" (click)="updateNote(subn.id,true)">Edit</button>
+                        </div>
+
+                        <div class="m-t-10 m-b-25" *ngIf="!subn.editable">
+                            <span *ngIf="subn.allowToEdit" (click)="subn.editable = true"><a
+                                class="m-r-10 text-secondary">Edit</a>
+                        </span>
+                            <strong class="m-r-10 text-primary cursor" *ngIf="subn.updatedAt" (click)="openHistory(subn.id)"> History </strong>
+
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+
+                <div class="media mt-2" *ngIf="note.active_replay">
+                    <a class="media-left mr-3">
+                        <img class="media-object img-radius comment-img" src="assets/images/user/avatar-2.jpg" alt=" ">
+                    </a>
+                    <div class="media-body">
+                        <h6 class="media-heading txt-primary">New Replay</h6>
+                        <p>
+                            <app-tinymce class="col-sm-12" [(ngModel)]="replayText" #tinymce='tinymce'></app-tinymce>
+                        </p>
+                        <div class="m-t-10 m-b-25 d-flex justify-content-end">
+                            <button class="btn btn-outline-danger" (click)="note.active_replay = false; replayText=''">Cancel</button>
+                            <button class="btn btn-outline-primary" (click)="makeReplay(note.id)">Reply</button>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+    <div class="nav-item nav-grid w-100 d-flex justify-content-end">
+        <pagination-controls id="ordersPaging01" (pageChange)="pageChanged02($event)" (pageBoundsCorrection)="pageChanged02($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</app-card>

@@ -1,0 +1,245 @@
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Contacts" [options]="false">
+        <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-sm-9">
+                <button class="btn btn-outline-primary" type="button" [routerLink]="['cu']"><i
+                        class="fas fa-plus"></i>Create Contacts</button>
+
+            </div>
+            <div class="col-sm-3 text-right">
+                <button class="btn btn-outline-primary" type="button" (click)="LoadExcelTemplate()">Get Excel</button>
+                <button class="btn btn-outline-primary" type="button" (click)="OpenImportExcel()"
+                    *ngIf="!importExcelExpand">Import Excel</button>
+                <button class="btn btn-primary" type="button" (click)="CloseImportExcel()"
+                    *ngIf="importExcelExpand">Close Import</button>
+            </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="row" *ngIf="importExcelExpand">
+            <div class="col-sm-12 mt-5">
+                <div class="form-group">
+                    <label for="eFC1">Please Select File</label>
+                    <input type="file" class="form-control-file" id="eFC1" (change)="fileChanged($event)">
+                </div>
+                <div *ngIf="lstImportErrors && lstImportErrors.length > 0" class="alert alert-danger">
+                    <ul>
+                        <li *ngFor="let r of lstImportErrors">{{r}}</li>
+                    </ul>
+                </div>
+                <div *ngIf="excelData && excelData.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Contact Number</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">English Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Contact Person</th>
+                                <th scope="col">Telephone Number</th>
+                                <th scope="col">Website</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let r of excelData" [ngClass]="{'alert-danger':r.error}">
+                                <td>{{r.contactNumber}}</td>
+                                <td>{{r.email}}</td>
+                                <td>{{r.englishName}}</td>
+                                <td>{{r.address}}</td>
+                                <td>{{r.contactPerson}}</td>
+                                <td>{{r.telephoneNumber}}</td>
+                                <td>{{r.website}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-outline-primary" type="button" (click)="saveExcelSheet()"> Accept And Save </button>
+
+                </div>
+                <div class="card-loader" *ngIf="excelLoading"><i class="pct-loader1 anim-rotate"></i></div>
+            </div>
+        </div>
+    </app-card>
+</div>
+
+<div class="col-sm-12">
+    <app-card cardTitle="Contacts Table" IloadCard='{{cardLoad}}'>
+        <div class="d-flex justify-content-between pb-1 mb-1">
+            <div class="form-inline">
+                <span>Size :</span>
+                <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='pageSize'
+                    (change)='updateSize()'>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+
+
+                <span>Type :</span>
+                <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='Type'
+                    (change)='updateSize()'>
+                    <option value="-1">All</option>
+                    <ng-container *ngFor="let s of subType; let i = index">
+                        <option value="{{i}}">
+                            {{s}}
+                        </option>
+                    </ng-container>
+                </select>
+
+            </div>
+            <input type="text" placeholder="Filter The Contacts English Name" id="CC-SearchInput" class="input-sm form-control h-50 w-25"
+                (keyup)="updateFilter()" [(ngModel)]='txtFilterEnglishName' />
+        </div>
+        <div class="table-responsive">
+            <ngx-datatable #myTable class="material expandable" [rows]="rows"
+                [columns]="[{ name: 'englishName' }, { name: 'telephoneNumber' }, { name: 'email' }]"
+                [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size"
+                (page)="setPage($event)">
+                <!-- Row Detail Template -->
+                <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left:60px; font-size:14px">
+                            <div>{{ row.name }}, {{ row.description }},{{row.tupleType}}</div>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <!-- Column Templates -->
+                <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                            title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="d-md-none">
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="englishName" [flexGrow]="2" [minWidth]="200">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">
+                            English Name</span>
+                    </ng-template>
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value }}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="email" *ngIf="!isMobile" [flexGrow]="2" class="d-sm-none d-md-block">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;"
+                            class="">Email</span>
+                    </ng-template>
+
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="telephoneNumber" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;">Telephone
+                            Number</span>
+                    </ng-template>
+
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-row="row" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;"> Actions
+                        </span>
+                    </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary"
+                            (click)="onSelectedItem(row,'Edit')"
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="fas fa-edit"></i></button>
+                        <button *ngIf="row.accountState == '0'" (click)="onSelectedItem(row,'modal-8')"
+                            class="btn btn-icon btn-rounded btn-outline-primary"
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                            <i class="fas fa-user-plus"></i></button>
+                        <button *ngIf="row.accountState == '1'" (click)="onSelectedItem(row,'modal-8')"
+                            class="btn btn-icon btn-rounded btn-outline-warning "
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                            <i class="fas fa-user-edit"></i></button>
+                        <button *ngIf="row.accountState == '1'" (click)="ConfirmDelete(row.id,row.englishName,2)"
+                            class="btn btn-icon btn-rounded btn-outline-warning "
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                            <i class="fas fa-user-minus"></i>
+                        </button>
+                        <button *ngIf="row.accountState == '1'" (click)="showUserDataFilter(row.id)"
+                            class="btn btn-icon btn-rounded btn-outline-success "
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                            <i class="fas fa-filter"></i>
+                        </button>
+
+                        <button (click)="ConfirmDelete(row.id,row.englishName,1)"
+                            class="btn btn-icon btn-rounded btn-outline-danger "
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </app-card>
+</div>
+<app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'">
+    <h3 class="theme-bg2">{{CUTitle}}</h3>
+    <div>
+        <form [formGroup]="infoForm" *ngIf='infoForm'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="userName">User Name:</label>
+                        <input class="form-control input-md" id="userName" type="text" placeholder="Enter userName"
+                            formControlName="userName"
+                            [ngClass]="{'is-invalid': !frmC.userName.valid && (frmC.userName.dirty || frmC.userName.touched || isSubmit)}">
+                        <label
+                            *ngIf="!frmC.userName.valid && (frmC.userName.dirty || frmC.userName.touched || isSubmit)"
+                            class="error jquery-validation-error small form-text invalid-feedback">Please
+                            enter a
+                            valid userName .</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="password">Password:</label>
+                        <input class="form-control input-md" id="password" type="text" placeholder="Enter password"
+                            formControlName="password"
+                            [ngClass]="{'is-invalid': !frmC.password.valid && (frmC.password.dirty || frmC.password.touched || isSubmit)}">
+                        <label
+                            *ngIf="!frmC.password.valid && (frmC.password.dirty || frmC.password.touched || isSubmit)"
+                            class="error jquery-validation-error small form-text invalid-feedback">
+                            enter a
+                            valid password .</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="conPassword">Confirm Password:</label>
+                        <input class="form-control input-md" id="conPassword" type="text"
+                            placeholder="Enter conPassword" formControlName="conPassword"
+                            [ngClass]="{'is-invalid': !frmC.conPassword.valid && (frmC.conPassword.dirty || frmC.conPassword.touched || isSubmit)}">
+                        <label
+                            *ngIf="!frmC.conPassword.valid && (frmC.conPassword.dirty || frmC.conPassword.touched || isSubmit)"
+                            class="error jquery-validation-error small form-text invalid-feedback">
+                            enter a
+                            valid confirm password .</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button" *ngIf="!isEdit"
+                (click)="createAcc($event)">Create Account</button>
+            <!-- <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button" *ngIf="isEdit" (click)="editPreDefinedData($event)">Save Edit</button> -->
+            <button class="btn btn-outline-danger d-inline mx-2" style="font-size: 120%;" type="button"
+                (click)="closeCreateModel($event)">Cancel</button>
+        </div>
+    </div>
+</app-animation-modal>

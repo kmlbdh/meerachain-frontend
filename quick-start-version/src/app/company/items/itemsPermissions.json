@@ -1,0 +1,343 @@
+{
+    "items": {
+        "filters": {
+            "categoryId": {
+                "filter": "all"
+            },
+            "supplierId": {
+                "filter": "all"
+            }
+        }
+    },
+    "orders": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        },
+        "editableModel": 1,
+        "showModel": 1
+    },
+    "performas": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    },
+    "shippingprocess": {
+        "filters": {
+            "supplierId": {
+                "filter": "18dc0877-4e72-4046-a57b-7412ecab85b0"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    },
+    "containerprocess": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    },
+    "customprocess": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    },
+    "reportsorder": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    },
+    "reportsitem01": {
+        "filters": {
+            "categoryId": {
+                "filter": "all"
+            },
+            "supplierId": {
+                "filter": "all"
+            }
+        }
+    },
+    "reportsitem02": {
+        "filters": {
+            "categoryId": {
+                "filter": "all"
+            },
+            "supplierId": {
+                "filter": "all"
+            }
+        }
+    },
+    "reportsitem03": {
+        "filters": {
+            "categoryId": {
+                "filter": "all"
+            },
+            "supplierId": {
+                "filter": "all"
+            }
+        }
+    },
+    "reportscontainer": {
+        "filters": {
+            "supplierId": {
+                "filter": "all"
+            },
+            "inlandShipperId": {
+                "filter": "all"
+            },
+            "customsAgentId": {
+                "filter": "all"
+            },
+            "forwarderId": {
+                "filter": "all"
+            },
+            "warehousesId": {
+                "filter": "all"
+            }
+        }
+    }
+}, {
+    "main": "id,supplierId,numberOfContainers,loadingPortId,orderCreationDate,containerTypeId,currencyId,shippingType,orderDescription,incotermsId,arrivalDateToPort,orderPriority,performaId,createDate,isCleared",
+    "orderGenerals": "orderId,orderRefrence,originOfGoods,exportCountryId,exportCountry,paymentTerms,readyDate,orderIsUrgent,transshipmentAllowed,netWeight,totalWeight,numberOfPackages,cubicVolume,destinationPortId,destinationPort,dischargePortId,dischargePort,warehousesId",
+    "orderShippings": "orderId,orderShippingsStatus,shippingCompanyRefrence,openingShippingOrderDate,shippingDate,forwarderId,shippingLine,foreignAgent,delayedContainerDays,bOLNo,vessel,shippingPrice,craneFees,deliveryCost,isDirectShipping,departureDate",
+    "orderCustoms": "orderId,customsAgentId,documentReceived,documentApproved,customsFileOpeningDate,customsFileNumber,agentPaymentDate,localCrossingId,localCrossing,inlandShipperId,inlandShipper,customesDeclarationNumber,customsPaymentDate,isCleared,isScanned",
+    "orderContainers": "id,orderId,containerNumber,customsAgentId,containerTypeId,inlandShipperId,delayedContainersDays,sealNumber,netWeight,totalWeight,goodsDescription,goodDangerous,actualArrival,exitDate,arrivalDateToCompany,arrivalTruckNumber,arrivalHourToCompany,supervisorGaurd,returnedDateToPort,isScanned,isCleared,scanningHour,scanByText,warehousesId,forwarderId",
+    "orderItems": "id,orderId,itemId,name,quantity,unitId,price,currencyId,note,totalPrice,dispatchedQuantity"
+}
+
+"new (id,supplierId,numberOfContainers,loadingPortId,orderCreationDate,containerTypeId,currencyId,shippingType,orderDescription,incotermsId,arrivalDateToPort,orderPriority,performaId,createDate,isCleared,
+new(orderGenerals.orderId, orderGenerals.orderRefrence, orderGenerals.originOfGoods, orderGenerals.exportCountryId, orderGenerals.exportCountry, orderGenerals.paymentTerms, orderGenerals.readyDate, orderGenerals.orderIsUrgent, orderGenerals.transshipmentAllowed, orderGenerals.netWeight, orderGenerals.totalWeight, orderGenerals.numberOfPackages, orderGenerals.cubicVolume, orderGenerals.destinationPortId, orderGenerals.destinationPort, orderGenerals.dischargePortId, orderGenerals.dischargePort, orderGenerals.warehousesId) as orderGenerals,
+new(orderShippings.orderId, orderShippings.orderShippingsStatus, orderShippings.shippingCompanyRefrence, orderShippings.openingShippingOrderDate, orderShippings.shippingDate, orderShippings.forwarderId, orderShippings.shippingLine, orderShippings.foreignAgent, orderShippings.delayedContainerDays, orderShippings.bOLNo, orderShippings.vessel, orderShippings.shippingPrice, orderShippings.craneFees, orderShippings.deliveryCost, orderShippings.isDirectShipping, orderShippings.departureDate) as orderShippings,
+new(orderCustoms.orderId, orderCustoms.customsAgentId, orderCustoms.documentReceived, orderCustoms.documentApproved, orderCustoms.customsFileOpeningDate, orderCustoms.customsFileNumber, orderCustoms.agentPaymentDate, orderCustoms.localCrossingId, orderCustoms.localCrossing, orderCustoms.inlandShipperId, orderCustoms.inlandShipper, orderCustoms.customesDeclarationNumber, orderCustoms.customsPaymentDate, orderCustoms.isCleared, orderCustoms.isScanned) as orderCustoms,
+orderContainers.Select(c => new(c.id, c.orderId, c.containerNumber, c.customsAgentId, c.containerTypeId, c.inlandShipperId, c.delayedContainersDays, c.sealNumber, c.netWeight, c.totalWeight, c.goodsDescription, c.goodDangerous, c.actualArrival, c.exitDate, c.arrivalDateToCompany, c.arrivalTruckNumber, c.arrivalHourToCompany, c.supervisorGaurd, c.returnedDateToPort, c.isScanned, c.isCleared, c.scanningHour, c.scanByText, c.warehousesId, c.forwarderId)) as orderContainers,
+    orderItems.Select(i => new(i.id, i.orderId, i.containerNumber, i.customsAgentId, i.containerTypeId, i.inlandShipperId, i.delayedContainersDays, i.sealNumber, i.netWeight, i.totalWeight, i.goodsDescription, i.goodDangerous, i.actualArrival, i.exitDate, i.arrivalDateToCompany, i.arrivalTruckNumber, i.arrivalHourToCompany, i.supervisorGaurd, i.returnedDateToPort, i.isScanned, i.isCleared, i.scanningHour, i.scanByText, i.warehousesId, i.forwarderId)) as orderItems)
+"
+
+{
+    "items": [{
+            "prop": "add",
+            "access": true,
+            "viewModelId": "16"
+        },
+        {
+            "prop": "edit",
+            "access": false,
+            "viewModelId": "16"
+        },
+        {
+            "prop": "show",
+            "access": true,
+            "viewModelId": "16"
+        }
+    ],
+    "orders": [{
+            "prop": "add",
+            "access": true,
+            "viewModelId": "20"
+        },
+        {
+            "prop": "edit",
+            "access": true,
+            "viewModelId": "14"
+        },
+        {
+            "prop": "show",
+            "access": true,
+            "viewModelId": "14"
+        },
+        {
+            "prop": "addContainer",
+            "access": false,
+            "viewModelId": ""
+        },
+        {
+            "prop": "deleteContainer",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "addItem",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "deleteItem",
+            "access": false,
+            "viewModelId": ""
+        }
+    ],
+    "customprocess": [{
+            "prop": "show",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "edit",
+            "access": true,
+            "viewModelId": ""
+        }
+    ],
+    "shippingprocess": [{
+            "prop": "show",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "edit",
+            "access": true,
+            "viewModelId": ""
+        }
+    ],
+    "containerprocess": [{
+            "prop": "show",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "edit",
+            "access": true,
+            "viewModelId": ""
+        }
+    ],
+    "reports": [{
+            "prop": "show",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "reportsorder",
+            "access": false,
+            "viewModelId": ""
+        },
+        {
+            "prop": "reportscontainer",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "reportsitem01",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "reportsitem02",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "reportsitem03",
+            "access": true,
+            "viewModelId": ""
+        }
+    ],
+    "performas": [{
+            "prop": "add",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "edit",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "createOrderFromPerforma",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "show",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "addContainer",
+            "access": false,
+            "viewModelId": ""
+        },
+        {
+            "prop": "deleteContainer",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "addItem",
+            "access": true,
+            "viewModelId": ""
+        },
+        {
+            "prop": "deleteItem",
+            "access": false,
+            "viewModelId": ""
+        }
+    ],
+}

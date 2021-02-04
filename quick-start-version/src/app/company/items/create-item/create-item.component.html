@@ -1,0 +1,180 @@
+<app-card cardClass="daily-sales" cardTitle="{{PGHead}}" *ngIf="frmType == 'a' || frmType == 'e'" IloadCard='{{cardLoad}}' [options]="false">
+    <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+        {{errorvalue}}
+    </div>
+    <form [formGroup]="infoForm" *ngIf='infoForm && fileds' class="row">
+        <div class="col-md-6">
+            <div class="form-group row" *ngIf="fileds['englishName'].show">
+                <label for="englishName" class="col-sm-3">English Name</label>
+                <div class="col-sm-9">
+                    <input type="text" [attr.disabled]="fileds['englishName'].editable" [ngClass]="{'is-invalid': !frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)}" class="form-control" id="englishName" formControlName='englishName'
+                        placeholder="englishName">
+                    <label *ngIf="!frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+                        English
+                        Name.</label>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['arabicName'].show">
+                <label for="arabicName" class="col-sm-3">Arabic Name</label>
+                <div class="col-sm-9">
+                    <input lang='ar' type="text" [attr.disabled]="fileds['arabicName'].editable" [ngClass]="{'is-invalid': !frmC.arabicName.valid && (frmC.arabicName.dirty || frmC.arabicName.touched || isSubmit)}" class="form-control" id="arabicName" formControlName='arabicName'
+                        placeholder="arabicName">
+
+                    <label *ngIf="!frmC.arabicName.valid && (frmC.arabicName.dirty || frmC.arabicName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+                        Arabic
+                        Name.</label></div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['hebrewName'].show">
+                <label for="hebrewName" class="col-sm-3">Hebrew Name</label>
+                <div class="col-sm-9">
+                    <input type="text" [attr.disabled]="fileds['hebrewName'].editable" [ngClass]="{'is-invalid': !frmC.hebrewName.valid && (frmC.hebrewName.dirty || frmC.hebrewName.touched || isSubmit)}" class="form-control" id="hebrewName" formControlName='hebrewName' placeholder="hebrewName">
+
+                    <label *ngIf="!frmC.hebrewName.valid && (frmC.hebrewName.dirty || frmC.hebrewName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+                        Hebrew
+                        Name.</label></div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['hScode'].show">
+                <label for="hScode" class="col-sm-3">HS Code</label>
+                <div class="col-sm-9">
+                    <input type="text" [attr.disabled]="fileds['hScode'].editable" [ngClass]="{'is-invalid': !frmC.hScode.valid && (frmC.hScode.dirty || frmC.hScode.touched || isSubmit)}" class="form-control" id="hScode" formControlName='hScode' placeholder="hScode">
+                    <label *ngIf="!frmC.hScode.valid && (frmC.hScode.dirty || frmC.hScode.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a
+                        valid HS Code.</label>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['description'].show">
+                <label for="description" class="col-sm-3">Description</label>
+                <div class="col-sm-9">
+                    <textarea type="text" [attr.disabled]="fileds['description'].editable" [ngClass]="{'is-invalid': !frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)}" class="form-control" id="description" formControlName='description'
+                        placeholder="description"></textarea>
+                    <label *ngIf="!frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a
+                        valid HS Code.</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row" *ngIf="fileds['customsRate'].show">
+                <label for="customsRate" class="col-sm-3">Customs Rate</label>
+                <div class="col-sm-9 input-group">
+                    <input type="text" [attr.disabled]="fileds['customsRate'].editable" [ngClass]="{'is-invalid': !frmC.customsRate.valid && (frmC.customsRate.dirty || frmC.customsRate.touched || isSubmit)}" class="form-control" formControlName="customsRate" aria-label="Amount (to the nearest dollar)">
+                    <label *ngIf="!frmC.customsRate.valid && (frmC.customsRate.dirty || frmC.customsRate.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+                        customs
+                        Rate.</label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['unitId'].show">
+                <label for="unitId" class="col-sm-3">Unit</label>
+                <div class="col-sm-9">
+                    <ng-select [ngClass]="'ng-select'" [disabled]="fileds['unitId'].editable" [options]="lstUnits" [allowClear]="true" formControlName="unitId">
+                    </ng-select>
+                    <label *ngIf="!frmC.unitId.valid && (frmC.unitId.dirty || frmC.unitId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please select a
+                        valid Unit.</label>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['categoryId'].show">
+                <label for="categoryId" class="col-sm-3">Categorie</label>
+                <div class="col-sm-9">
+                    <ng-select [ngClass]="'ng-select'" [disabled]="fileds['categoryId'].editable" [options]="lstCategories" [allowClear]="true" formControlName="categoryId">
+                    </ng-select><label *ngIf="!frmC.categoryId.valid && (frmC.categoryId.dirty || frmC.categoryId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback  d-block">Please select a
+                        valid
+                        Category.</label>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['lstSuppliers'].show">
+                <label for="lstSuppliers" class="col-sm-3">Suppliers</label>
+                <div class="col-sm-9">
+                    <ng-select [ngClass]="'ng-select'" [disabled]="fileds['lstSuppliers'].editable" [options]="lstSuppliers" [multiple]="true" formControlName="lstSuppliers">
+                    </ng-select><label *ngIf="!frmC.lstSuppliers.valid && (frmC.lstSuppliers.dirty || frmC.lstSuppliers.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please select a valid
+                        Suppliers.</label>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-center mt-2">
+            <button class="btn btn-outline-primary" *ngIf='!idEdit' (click)='addnew()' type="button"><i
+                    class="fas fa-plus"></i>Add</button>
+            <button class="btn btn-outline-primary" *ngIf='idEdit' (click)='saveEdit()' type="button"><i
+                    class="fas fa-plus"></i>Save Edit</button>
+        </div>
+    </form>
+</app-card>
+
+
+<app-card cardClass="daily-sales" cardTitle="{{PGHead}}" *ngIf="frmType == 's'" IloadCard='{{cardLoad}}' [options]="false">
+    <div class="row" *ngIf='showItem'>
+        <div class="col-md-6">
+            <div class="form-group row" *ngIf="fileds['englishName'].show">
+                <label for="englishName" class="col-sm-3">English Name</label>
+                <div class="col-sm-9">
+                    <p>{{showItem.englishName}}</p>
+                </div>
+
+            </div>
+            <div class="form-group row" *ngIf="fileds['arabicName'].show">
+                <label for="arabicName" class="col-sm-3">Arabic Name</label>
+                <div class="col-sm-9">
+                    <p>
+
+                        {{showItem.arabicName}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['hebrewName'].show">
+                <label for="hebrewName" class="col-sm-3">Hebrew Name</label>
+                <div class="col-sm-9">
+                    <p>
+
+                        {{showItem.hebrewName}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['hScode'].show">
+                <label for="hScode" class="col-sm-3">HS Code</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.hScode}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['description'].show">
+                <label for="description" class="col-sm-3">Description</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row" *ngIf="fileds['customsRate'].show">
+                <label for="customsRate" class="col-sm-3">Customs Rate</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.customsRate}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['unitId'].show">
+                <label for="unitId" class="col-sm-3">Unit</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.unitName}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['categoryId'].show">
+                <label for="categoryId" class="col-sm-3">Categorie</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.categoryName}}</p>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="fileds['lstSuppliers'].show">
+                <label for="lstSuppliers" class="col-sm-3">Suppliers</label>
+                <div class="col-sm-9">
+                    <p>
+                        {{showItem.lstSuppliersNames}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-center mt-2">
+            <button class="btn btn-outline-primary" (click)="close()" type="button"><i
+                    class="fas fa-plus"></i>Close</button>
+        </div>
+    </div>
+</app-card>

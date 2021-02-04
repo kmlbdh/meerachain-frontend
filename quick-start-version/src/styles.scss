@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "scss/variables";
+
+/* fonts-icon */
+
+@import "scss/fonts/fontawesome/scss/fontawesome";
+@import "scss/fonts/feather/iconfont";
+@import url("scss/fonts/datta/datta-icons.css");
+
+/** custom font icons - datta **/
+
+@import "scss/general";
+@import "scss/generic";
+@import "scss/mixins/function";
+
+/* important element */
+
+@import "scss/menu/menu-lite";
+@import "scss/widget/widget";
+
+/* basic elements */
+
+@import "scss/theme-elements/theme-elements";
+
+/* advance-other elements */
+
+@import "scss/other/other";
+
+/* third party modules style*/
+
+@import "scss/plugins/plugins";
+@import "scss/layout/layout";
+@import "scss/custom";
+@import '~@swimlane/ngx-datatable/index.scss';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+ng-select.small>div>div.single {
+    padding: 0px;
+    font-size: 140%;
+    padding-right: 15px;
+}
+
+$primary-color: #04a9f5;
+.card-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(256, 256, 256, 0.7);
+    z-index: 999;
+    i {
+        margin: 0 auto;
+        color: $primary-color;
+        font-size: 24px;
+        align-items: center;
+        display: flex;
+    }
+}

@@ -1,0 +1,39 @@
+<div class="col-sm-12">
+    <h4 *ngIf="PH">{{PH}}</h4>
+    <hr>
+    <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+        {{errorvalue}}
+    </div>
+    <form class="col-sm-12">
+        <h5 class="sub-title col-xl-12 pt-2">Group Name :</h5>
+        <div class=" col-xl-12">
+            <input type="text" class="form-control" name="groupInfo.name" [(ngModel)]="groupInfo.name" placeholder="name">
+        </div>
+        <h5 class="sub-title col-xl-12 pt-2">Group Description :</h5>
+        <div class=" col-xl-12">
+            <textarea rows="3" class="col-xl-12" name="groupInfo.description" [(ngModel)]="groupInfo.description" class="form-control" id='description' placeholder="description"></textarea>
+        </div>
+        <h5 class="sub-title col-xl-12 pt-2">Sections :</h5>
+        <div class="col-xl-12 row" *ngFor="let sec of lstRoleKeys">
+            <div class="col-sm-12 row" *ngIf="!disabledView">
+                <h6 class="sub-title col-xl-12 pt-2">{{sec}}:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-6 form-group row" *ngFor="let permission of groupInfo.policiesObject[sec]; let i = index" [ngStyle]="{'border-left': i % 2 ? '1px solid #000':''}">
+                    <div class="col-sm-3 checkbox checkbox-primary d-inline" [ngClass]="{'col-sm-8' : !permission['needmodel']}">
+                        <input type="checkbox" name="{{sec + permission['prop'] }}" id="{{sec + permission['prop']}}" [(ngModel)]="permission['access']">
+                        <label for="{{sec + permission['prop']}}" class="cr">{{permission['prop']}}</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <ng-select [ngClass]="'ng-select'" [options]="lstViews[sec]" [name]="'permission'+permission['prop']" [(ngModel)]="permission['viewModelId']" *ngIf="permission['needmodel']" [allowClear]="true">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-end mt-2">
+            <input type="button" value="Cancel" class="btn btn-outline-danger">
+            <input type="button" *ngIf="pageFor == 'add'" value="Create Model" (click)="addupdateUsersGroup()" class="btn btn btn-outline-success ">
+            <input type="button" *ngIf="pageFor == 'edit'" value="Edit Model" (click)="addupdateUsersGroup()" class="btn btn-outline-primary">
+        </div>
+    </form>
+</div>

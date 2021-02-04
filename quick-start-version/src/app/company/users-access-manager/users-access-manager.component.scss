@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    padding: 0.5rem 1rem;
+}
+
+.navbar>app-create-view-model {
+    width: 100%;
+}
+
+.tab-content {
+    display: none;
+}
+
+.btn-active {
+    color: #fff;
+    background: #04a9f5;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+table {
+    color: #000;
+}
+
+.wrap {
+    width: 100%;
+    display: table;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}

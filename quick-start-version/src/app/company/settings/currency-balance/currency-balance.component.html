@@ -1,0 +1,69 @@
+<div class="alert alert-danger" role="alert" *ngIf="!haveSystemCurrencyId">
+  Please first select system currency on the setup data!
+</div>
+
+<div *ngIf="haveSystemCurrencyId">
+  <div class="w-100 d-flex justify-content-end mt-2">
+    <button class="btn btn-outline-primary" (click)='openmodel()' type="button"><i class="fas fa-plus"></i>Add</button>
+  </div>
+  <table class="table table-hover mt-2">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of lstComapnyCurrencyBalance; let i = index">
+        <th scope="row">{{r.date | date: 'dd/MM/yyyy h:mm a'}}</th>
+        <td>
+          {{r.systemCurrencyName}}
+        </td>
+        <td>
+          {{r.rate}}
+        </td>
+        <td *ngIf="systemCurrencyId != r.systemCurrencyId">
+          <button (click)="deleteCompanyCurrencyBalance(r)" class="btn btn-icon btn-rounded btn-outline-danger"
+            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'">
+  <h3 class="theme-bg2">{{modelTitle}}</h3>
+  <div>
+    <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+      {{errorvalue}}
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label" for="name">To Currency:</label>
+          <ng-select class="" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[1]"
+            [(ngModel)]="newCurrencyBalance.systemCurrencyId">
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label" for="description">Rate:</label>
+          <input type="number" class="form-control input-md" [(ngModel)]="newCurrencyBalance.rate">
+
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button"
+        (click)="addNew($event)">Save</button>
+    </div>
+  </div>
+</app-animation-modal>

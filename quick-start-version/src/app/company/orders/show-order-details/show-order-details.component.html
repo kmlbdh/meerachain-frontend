@@ -1,0 +1,313 @@
+<app-card *ngIf="pageLoaded && !pageLoad" cardClass="daily-sales" cardTitle="{{PGHead}}" IloadCard='{{cardLoad}}' [options]="false">
+    <div class="row">
+        <div class="col-md-3" *ngIf="fileds['main']['supplierId'].show">
+            <h5 class="d-inline">Supplier : </h5>
+            <p class="d-inline">{{detailsObject.suplierName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['numberOfContainers'].show">
+            <h5 class="d-inline">Number Of Containers : </h5>
+            <p class="d-inline">{{detailsObject.numberOfContainers}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['loadingPortId'].show">
+            <h5 class="d-inline">Loading Port : </h5>
+            <p class="d-inline">{{detailsObject.loadingPortName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['orderCreationDate'].show">
+            <h5 class="d-inline">Order Creation Date : </h5>
+            <p class="d-inline">{{detailsObject.orderCreationDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['containerTypeId'].show">
+            <h5 class="d-inline">Container Type : </h5>
+            <p class="d-inline">{{detailsObject.containerTypeName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['currencyId'].show">
+            <h5 class="d-inline">Currency : </h5>
+            <p class="d-inline">{{detailsObject.currencyName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['shippingType'].show">
+            <h5 class="d-inline">Shipping Type : </h5>
+            <p class="d-inline">{{detailsObject.shippingType}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['orderDescription'].show">
+            <h5 class="d-inline">Order Description : </h5>
+            <p class="d-inline">{{detailsObject.orderDescription}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['incotermsId'].show">
+            <h5 class="d-inline">Incoterms : </h5>
+            <p class="d-inline">{{detailsObject.incotermsName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['arrivalDateToPort'].show">
+            <h5 class="d-inline">Arrival Date To Port : </h5>
+            <p class="d-inline">{{detailsObject.arrivalDateToPort | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['main']['orderPriority'].show">
+            <h5 class="d-inline">Priority : </h5>
+            <p class="d-inline">{{detailsObject.orderPriority}}</p>
+        </div>
+        <!-- <div class="col-md-3" *ngIf="PageFor == 1">
+            <label for="dispatchedContainers" class="col-form-label">dispatchedContainers</label>
+        </div>
+        <div class="col-md-3" *ngIf="PageFor == 1">
+            <label for="suspendingContainers" class="col-form-label">suspendingContainers</label>
+        </div> -->
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>General</h4>
+            <hr>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['orderRefrence'].show">
+            <h5 class="d-inline">orderRefrence : </h5>
+            <p class="d-inline" *ngIf="detailsObject.orderGenerals">{{detailsObject.orderGenerals.orderRefrence}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['originOfGoods'].show">
+            <h5 class="d-inline">originOfGoods : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.originOfGoods}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['exportCountryId'].show">
+            <h5 class="d-inline">Export Country : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.exportCountryName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['paymentTerms'].show">
+            <h5 class="d-inline">paymentTerms : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.paymentTerms}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['readyDate'].show">
+            <h5 class="d-inline">readyDate : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.readyDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['orderIsUrgent'].show">
+            <h5 class="d-inline">orderIsUrgent : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.orderIsUrgent | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['netWeight'].show">
+            <h5 class="d-inline">netWeight : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.netWeight}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['totalWeight'].show">
+            <h5 class="d-inline">totalWeight : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.totalWeight}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['numberOfPackages'].show">
+            <h5 class="d-inline">numberOfPackages : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.numberOfPackages}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['cubicVolume'].show">
+            <h5 class="d-inline">cubicVolume : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.cubicVolume}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['destinationPortId'].show">
+            <h5 class="d-inline">destinationPortName : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.destinationPortName | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['dischargePortId'].show">
+            <h5 class="d-inline">dischargePortId : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.dischargePortName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['warehousesId'].show">
+            <h5 class="d-inline">warehousesId : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.warehousesName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderGenerals']['transshipmentAllowed'].show">
+            <h5 class="d-inline">transshipmentAllowed : </h5>
+            <p class="d-inline">{{detailsObject.orderGenerals.transshipmentAllowed}}</p>
+        </div>
+    </div>
+
+
+
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>Shipping</h4>
+            <hr>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['shippingCompanyRefrence'].show">
+            <h5 class="d-inline">shippingCompanyRefrence : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.shippingCompanyRefrence}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['openingShippingOrderDate'].show">
+            <h5 class="d-inline">openingShippingOrderDate : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.openingShippingOrderDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['shippingDate'].show">
+            <h5 class="d-inline">shippingDate : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.shippingDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['forwarderId'].show">
+            <h5 class="d-inline">forwarderName : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.forwarderName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['shippingLine'].show">
+            <h5 class="d-inline">shippingLine : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.shippingLine}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['foreignAgent'].show">
+            <h5 class="d-inline">foreignAgent : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.foreignAgent}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['delayedContainerDays'].show">
+            <h5 class="d-inline">delayedContainerDays : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.delayedContainerDays}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['bOLNo'].show">
+            <h5 class="d-inline">bOLNo : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.bOLNo}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['vessel'].show">
+            <h5 class="d-inline">vessel : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.vessel}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['shippingPrice'].show">
+            <h5 class="d-inline">shippingPrice : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.shippingPrice}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['craneFees'].show">
+            <h5 class="d-inline">craneFees : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.craneFees}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['deliveryCost'].show">
+            <h5 class="d-inline">deliveryCost : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.deliveryCost}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderShippings']['isDirectShipping'].show">
+            <h5 class="d-inline">isDirectShipping : </h5>
+            <p class="d-inline">{{detailsObject.orderShippings.isDirectShipping}}</p>
+        </div>
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>Customs</h4>
+            <hr>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['customsAgentId'].show">
+            <h5 class="d-inline">customsAgentName : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.customsAgentName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['documentApproved'].show">
+            <h5 class="d-inline">documentApproved : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.documentApproved | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['documentReceived'].show">
+            <h5 class="d-inline">documentReceived : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.documentReceived | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['customsFileOpeningDate'].show">
+            <h5 class="d-inline">customsFileOpeningDate : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.customsFileOpeningDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['agentPaymentDate'].show">
+            <h5 class="d-inline">agentPaymentDate : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.agentPaymentDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['localCrossingId'].show">
+            <h5 class="d-inline">localCrossingName : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.localCrossingName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['inlandShipperId'].show">
+            <h5 class="d-inline">inlandShipperName : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.inlandShipperName}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['customesDeclarationNumber'].show">
+            <h5 class="d-inline">customesDeclarationNumber : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.customesDeclarationNumber}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['customsPaymentDate'].show">
+            <h5 class="d-inline">customsPaymentDate : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.customsPaymentDate | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-3" *ngIf="fileds['orderCustoms']['isCleared'].show">
+            <h5 class="d-inline">isCleared : </h5>
+            <p class="d-inline">{{detailsObject.orderCustoms.isCleared | date:'dd/MM/yyyy'}}</p>
+        </div>
+    </div>
+
+
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>Containers</h4>
+            <hr>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" *ngIf="fileds['orderContainers']['containerNumber'].show">Container Number</th>
+                    <th scope="col" *ngIf="fileds['orderContainers']['containerTypeId'].show">containerTypeName</th>
+                    <th *ngIf="fileds['orderContainers']['netWeight'].show">Net Weight</th>
+                    <th *ngIf="fileds['orderContainers']['totalWeight'].show">Total Weight</th>
+                    <th *ngIf="fileds['orderContainers']['goodsDescription'].show" style="width: 25%; text-align: center;">Goods Description
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="detailsObject.orderContainers">
+                <tr *ngFor="let w of detailsObject.orderContainers; let i = index">
+                    <td *ngIf="fileds['orderContainers']['containerNumber'].show">{{w.containerNumber}}</td>
+                    <td *ngIf="fileds['orderContainers']['containerTypeId'].show">{{w.containerTypeName}}</td>
+                    <td *ngIf="fileds['orderContainers']['netWeight'].show">{{w.netWeight}}</td>
+                    <td *ngIf="fileds['orderContainers']['totalWeight'].show">{{w.totalWeight}}</td>
+                    <td *ngIf="fileds['orderContainers']['goodsDescription'].show">{{w.goodsDescription}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>Items</h4>
+            <hr>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!-- ,,,,,,,dispatchedQuantity -->
+                    <th scope="col" *ngIf="fileds['orderItems']['name'].show">Name</th>
+                    <th *ngIf="fileds['orderItems']['unitId'].show">Unit</th>
+                    <th *ngIf="fileds['orderItems']['currencyId'].show">Currency</th>
+                    <th *ngIf="fileds['orderItems']['quantity'].show">Quantity</th>
+                    <th *ngIf="fileds['orderItems']['price'].show">Price</th>
+                    <th *ngIf="fileds['orderItems']['totalPrice'].show">Total Price</th>
+                    <th *ngIf="fileds['orderItems']['note'].show">Note</th>
+                    <!-- <th *ngIf="this.PageFor == 1">Dispatched</th> -->
+                    <!-- <th *ngIf="this.PageFor == 1">Suspending</th> -->
+                </tr>
+            </thead>
+            <tbody *ngIf="detailsObject.orderItems">
+                <tr *ngFor="let w of  detailsObject.orderItems; let rowIndex = index">
+                    <td *ngIf="fileds['orderItems']['name'].show">
+                        <span>{{w.name}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['unitId'].show">
+                        <span>{{w.unitName}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['currencyId'].show">
+                        <span>{{w.currencyName}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['quantity'].show">
+                        <span>{{w.quantity}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['price'].show">
+                        <span>{{w.price}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['totalPrice'].show">
+                        <span>{{w.totalPrice ? w.totalPrice:0}}</span>
+                    </td>
+                    <td *ngIf="fileds['orderItems']['note'].show">
+                        <span>{{w.note}}</span>
+                    </td>
+                    <!-- <td *ngIf="this.PageFor == 1">
+                        <span>{{w.dispatchedQuantity}}</span>
+                    </td>
+                    <td *ngIf="this.PageFor == 1 ">
+                        <span>{{(w.quantity ? w.quantity : 0 ) - (w.dispatchedQuantity ? w.dispatchedQuantity:0)}}</span>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-loader" *ngIf="pageLoad"><i class="pct-loader1 anim-rotate"></i></div>
+</app-card>

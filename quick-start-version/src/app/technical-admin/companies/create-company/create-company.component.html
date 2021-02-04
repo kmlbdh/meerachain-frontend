@@ -1,0 +1,266 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{PGHead}}" IloadCard='{{cardLoad}}'>
+            <wizard #wizard class="arc-wizard" navBarLayout="large-filled-symbols" [navigationMode]="'semi-strict'">
+                <wizard-step stepTitle="Profile" navigationSymbol="&#xf0b1;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900" [canExit]="infoForm.valid">
+                    <div class="row">
+                        <form class="editForm" novalidate [formGroup]="infoForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="contactNumber">Contact Number</label>
+                                        <input class="form-control input-md" id="contactNumber" name="text" type="text" placeholder="Enter contactNumber" formControlName="contactNumber" [ngClass]="{'is-invalid': !frmC.contactNumber.valid && (frmC.contactNumber.dirty || frmC.contactNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.contactNumber.valid && (frmC.contactNumber.dirty || frmC.contactNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid contactNumber .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="englishName">English Name</label>
+                                        <input class="form-control input-md" id="englishName" name="text" type="text" placeholder="Enter englishName" formControlName="englishName" [ngClass]="{'is-invalid': !frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid English Name .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="website">website</label>
+                                        <input class="form-control input-md" id="website" name="text" type="text" placeholder="Enter website" formControlName="website" [ngClass]="{'is-invalid': !frmC.website.valid && (frmC.website.dirty || frmC.website.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.website.valid && (frmC.website.dirty || frmC.website.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid website .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="telephoneNumber">Telephone Number</label>
+                                        <input class="form-control input-md" id="telephoneNumber" name="text" type="text" placeholder="Enter telephoneNumber" formControlName="telephoneNumber" [ngClass]="{'is-invalid': !frmC.telephoneNumber.valid && (frmC.telephoneNumber.dirty || frmC.telephoneNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.telephoneNumber.valid && (frmC.telephoneNumber.dirty || frmC.telephoneNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Telephone Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="otherTelephoneNumber">Other Telephone
+                                            Number</label>
+                                        <input class="form-control input-md" id="otherTelephoneNumber" name="text" type="text" placeholder="Enter otherTelephoneNumber" formControlName="otherTelephoneNumber" [ngClass]="{'is-invalid': !frmC.otherTelephoneNumber.valid && (frmC.otherTelephoneNumber.dirty || frmC.otherTelephoneNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.otherTelephoneNumber.valid && (frmC.otherTelephoneNumber.dirty || frmC.otherTelephoneNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Other Telephone Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="localName">Local Name</label>
+                                        <input class="form-control input-md" id="localName" name="text" type="text" placeholder="Enter localName" formControlName="localName" [ngClass]="{'is-invalid': !frmC.localName.valid && (frmC.localName.dirty || frmC.localName.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.localName.valid && (frmC.localName.dirty || frmC.localName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Local Name .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="address">address</label>
+                                        <input class="form-control input-md" id="address" name="text" type="text" placeholder="Enter address" formControlName="address" [ngClass]="{'is-invalid': !frmC.address.valid && (frmC.address.dirty || frmC.address.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.address.valid && (frmC.address.dirty || frmC.address.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid address .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="taxNumber">Tax Number</label>
+                                        <input class="form-control input-md" id="taxNumber" name="text" type="text" placeholder="Enter taxNumber" formControlName="taxNumber" [ngClass]="{'is-invalid': !frmC.taxNumber.valid && (frmC.taxNumber.dirty || frmC.taxNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.taxNumber.valid && (frmC.taxNumber.dirty || frmC.taxNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Tax Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="email">email</label>
+                                        <input class="form-control input-md" id="email" name="text" type="text" placeholder="Enter email" formControlName="email" [ngClass]="{'is-invalid': !frmC.email.valid && (frmC.email.dirty || frmC.email.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.email.valid && (frmC.email.dirty || frmC.email.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid email .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="faxNumber">Fax Number</label>
+                                        <input class="form-control input-md" id="faxNumber" name="text" type="text" placeholder="Enter faxNumber" formControlName="faxNumber" [ngClass]="{'is-invalid': !frmC.faxNumber.valid && (frmC.faxNumber.dirty || frmC.faxNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.faxNumber.valid && (frmC.faxNumber.dirty || frmC.faxNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Fax Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="contactPerson">Contact Person</label>
+                                        <input class="form-control input-md" id="contactPerson" name="text" type="text" placeholder="Enter contactPerson" formControlName="contactPerson" [ngClass]="{'is-invalid': !frmC.contactPerson.valid && (frmC.contactPerson.dirty || frmC.contactPerson.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.contactPerson.valid && (frmC.contactPerson.dirty || frmC.contactPerson.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Contact Person .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="bankDetails">Bank Details</label>
+                                        <input class="form-control input-md" id="bankDetails" name="text" type="text" placeholder="Enter bankDetails" formControlName="bankDetails" [ngClass]="{'is-invalid': !frmC.bankDetails.valid && (frmC.bankDetails.dirty || frmC.bankDetails.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.bankDetails.valid && (frmC.bankDetails.dirty || frmC.bankDetails.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Bank Details .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="note">note</label>
+                                        <input class="form-control input-md" id="note" name="text" type="text" placeholder="Enter note" formControlName="note" [ngClass]="{'is-invalid': !frmC.note.valid && (frmC.note.dirty || frmC.note.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.note.valid && (frmC.note.dirty || frmC.note.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid note .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="type">Type</label>
+                                        <select class="form-control input-md" formControlName="userType">
+                                            <option value="1">Import Company</option>
+                                            <option value="3">Custom Agent Company</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="button" uiSref="work" class="btn btn-primary btn-raised" (click)="isSubmit=true;" nextStep>
+                                    Continue <span style="margin-left:10px;"><i
+                                            class="feather icon-chevron-right"></i></span></button>
+                            </div>
+                        </form>
+                    </div>
+                </wizard-step>
+                <wizard-step stepTitle="Account" navigationSymbol="&#xf085;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900" [canExit]="infoForm1.valid">
+                    <div class="row">
+                        <form class="editForm w-100" novalidate [formGroup]="infoForm1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="userName">UserName</label>
+                                        <input class="form-control input-md" id="userName" name="text" type="text" placeholder="Enter userName" formControlName="userName" [ngClass]="{'is-invalid': !frmC1.userName.valid && (frmC1.userName.dirty || frmC1.userName.touched || isSubmit1)}">
+                                        <label *ngIf="!frmC1.userName.valid && (frmC1.userName.dirty || frmC1.userName.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid userName .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="frmType != 'e'">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="password">password</label>
+                                        <input class="form-control input-md" id="password" name="text" type="text" placeholder="Enter password" formControlName="password" [ngClass]="{'is-invalid': !frmC1.password.valid && (frmC1.password.dirty || frmC1.password.touched || isSubmit1)}">
+                                        <label *ngIf="!frmC1.password.valid && (frmC1.password.dirty || frmC1.password.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid password .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="frmType != 'e'">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="ConPassword">Confirm password</label>
+                                        <input class="form-control input-md" id="ConPassword" name="text" type="text" placeholder="Enter ConPassword" formControlName="ConPassword" [ngClass]="{'is-invalid': !frmC1.ConPassword.valid && (frmC1.ConPassword.dirty || frmC1.ConPassword.touched || isSubmit1)}">
+                                        <label *ngIf="!frmC1.ConPassword.valid && (frmC1.ConPassword.dirty || frmC1.ConPassword.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Confirm password .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="Supplier">Count Supplier</label>
+                                            <input [attr.disabled]="frmC1.TFSupplier.value == true ? null : 'disabled'" class="form-control input-md" id="Supplier" name="text" type="text" placeholder="Enter Supplier" formControlName="Supplier" [ngClass]="{'is-invalid': !frmC1.Supplier.valid && (frmC1.Supplier.dirty || frmC1.Supplier.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.Supplier.valid && (frmC1.Supplier.dirty || frmC1.Supplier.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Confirm password .</label>
+                                            <input formControlName="TFSupplier" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                            <label class="cr mt-1" for="checkbox-p-1">Allow Create Supplier Accounts</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="Forwarder">Count Forwarder</label>
+                                            <input [attr.disabled]="frmC1.TFForwarder.value == true ? null : 'disabled'" class="form-control input-md" id="Forwarder" name="text" type="text" placeholder="Enter Forwarder" formControlName="Forwarder" [ngClass]="{'is-invalid': !frmC1.Forwarder.valid && (frmC1.Forwarder.dirty || frmC1.Forwarder.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.Forwarder.valid && (frmC1.Forwarder.dirty || frmC1.Forwarder.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Confirm password .</label>
+                                            <input formControlName="TFForwarder" id="checkbox-p-2" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                            <label class="cr mt-1" for="checkbox-p-2">Allow Create Forwarder Accounts</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="InlandShipper">Count InlandShipper</label>
+                                            <input [attr.disabled]="frmC1.TFInlandShipper.value == true ? null : 'disabled'" class="form-control input-md" id="InlandShipper" name="text" type="text" placeholder="Enter InlandShipper" formControlName="InlandShipper" [ngClass]="{'is-invalid': !frmC1.InlandShipper.valid && (frmC1.InlandShipper.dirty || frmC1.InlandShipper.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.InlandShipper.valid && (frmC1.InlandShipper.dirty || frmC1.InlandShipper.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Confirm password .</label>
+                                            <input formControlName="TFInlandShipper" id="checkbox-p-3" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                            <label class="cr mt-1" for="checkbox-p-3">Allow Create InlandShipper Accounts</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="CustomAgent">Count CustomAgent</label>
+                                            <input [attr.disabled]="frmC1.TFCustomAgent.value == true ? null : 'disabled'" class="form-control input-md" id="CustomAgent" name="text" type="text" placeholder="Enter CustomAgent" formControlName="CustomAgent" [ngClass]="{'is-invalid': !frmC1.CustomAgent.valid && (frmC1.CustomAgent.dirty || frmC1.CustomAgent.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.CustomAgent.valid && (frmC1.CustomAgent.dirty || frmC1.CustomAgent.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Confirm password .</label>
+                                            <input formControlName="TFCustomAgent" id="checkbox-p-4" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                            <label class="cr mt-1" for="checkbox-p-4">Allow Create CustomAgent Accounts</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="Employee">Count Employee</label>
+                                            <input [attr.disabled]="frmC1.TFEmployee.value == true ? null : 'disabled'" class="form-control input-md" id="Employee" name="text" type="text" placeholder="Enter Employee" formControlName="Employee" [ngClass]="{'is-invalid': !frmC1.Employee.valid && (frmC1.Employee.dirty || frmC1.Employee.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.Employee.valid && (frmC1.Employee.dirty || frmC1.Employee.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Confirm password .</label>
+                                            <input formControlName="TFEmployee" id="checkbox-p-5" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                                            <label class="cr mt-1" for="checkbox-p-5">Allow Create Employee Accounts</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 centered-content">
+                                <div class="btn-group mt-10">
+                                    <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="isSubmit1=true;" nextStep>Continue</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </wizard-step>
+                <wizard-step stepTitle="Completed" navigationSymbol="&#xf00c;" navigationSymbolFontFamily="Font Awesome\ 5 Free">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5>Confirm Message</h5>
+                        </div>
+                        <div class="col-sm-12 centered-content">
+                            <div class="btn-group mt-10">
+                                <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+                                <button type="button" class="btn btn-success btn-sm" *ngIf="frmType != 'e'" (click)="save()" resetWizard>Add</button>
+                                <button type="button" class="btn btn-success btn-sm" *ngIf="frmType == 'e'" (click)="saveEdit()" resetWizard>Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </wizard-step>
+            </wizard>
+
+
+        </app-card>
+    </div>
+</div>

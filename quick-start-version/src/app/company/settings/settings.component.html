@@ -1,0 +1,26 @@
+<div class="col-sm-12">
+    <h5 class="mt-4">Settings</h5>
+    <hr>
+    <ngb-tabset type="pills">
+        <ngb-tab title="Account ">
+            <ng-template ngbTabContent>
+                <app-settings-account></app-settings-account>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="System " class="mb-3" *ngIf="IsImpostorCompany">
+            <ng-template ngbTabContent>
+                <app-settings-system></app-settings-system>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Setup Data" class="mb-3" *ngIf="IsImpostorCompany">
+            <ng-template ngbTabContent>
+                <app-settings-company-setup-data></app-settings-company-setup-data>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Currency Balance" class="mb-3" *ngIf="IsImpostorCompany">
+            <ng-template ngbTabContent>
+                <app-currency-balance></app-currency-balance>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

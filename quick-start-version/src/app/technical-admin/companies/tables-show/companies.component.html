@@ -1,0 +1,102 @@
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Companies" [options]="false">
+        <div class="row d-flex align-items-center">
+            <div class="col-9">
+                <button class="btn btn-outline-primary" type="button" [routerLink]="['cu']"><i
+                        class="fas fa-plus"></i>Create Comapany</button>
+
+            </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </app-card>
+</div>
+<div class="col-sm-12">
+    <app-card cardTitle="Responsive" IloadCard='{{cardLoad}}'>
+        <div class="d-flex justify-content-between pb-1 mb-1">
+            <div class="form-inline">
+                <span>Size :</span>
+                <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='pageSize' (change)='updateSize()'>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+
+            </div>
+            <div class="d-flex">
+                <input type="text" placeholder="Comapany Name" class="input-sm form-control  mx-1" (keyup)="updateFilter()" [(ngModel)]='txtFilterEnglishName' />
+
+                <select class="form-control input-md mx-1" [(ngModel)]='typeChangeFilter' (change)="updateFilter()">
+                    <option value="1">Import Company</option>
+                    <option value="3">Custom Agent Company</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <ngx-datatable #myTable class="material expandable" [rows]="rows" [columns]="[{ name: 'englishName' }, { name: 'userName' }, { name: 'normalizedEmail' }]" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [externalPaging]="true"
+                [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+                <!-- Row Detail Template -->
+                <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left:60px; font-size:14px">
+                            <div>{{ row.englishName }}, {{ row.normalizedEmail }}</div>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <!-- Column Templates -->
+                <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="d-md-none">
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="userName" [flexGrow]="2" [minWidth]="200">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">User
+                            Name</span>
+                    </ng-template>
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value }}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="englishName" *ngIf="!isMobile" [flexGrow]="1" class="d-sm-none d-md-block">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">English Name</span>
+                    </ng-template>
+
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="normalizedEmail" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;">Email</span>
+                    </ng-template>
+
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-row="row" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;"> Actions
+                        </span>
+                    </ng-template>
+
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary" (click)="onSelectedCompany(row.id,'Edit')" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="feather icon-thumbs-up"></i></button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </app-card>
+</div>

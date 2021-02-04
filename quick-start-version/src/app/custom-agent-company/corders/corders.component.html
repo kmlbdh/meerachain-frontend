@@ -1,0 +1,76 @@
+<div class="row">
+    <app-card cardTitle="Search Box" class="col-xl-3 col-lg-12" cardClass="task-board-left">
+        <div class="">
+            <p>Company Filter:</p>
+            <ng-select [ngClass]="'ng-select'" [options]="lstContacts" [multiple]="true" [(formControl)]="importorscompanies">
+            </ng-select>
+        </div>
+        <div class="task-right">
+            <div style="height: 500px; background-color: white;"></div>
+        </div>
+    </app-card>
+
+    <div class="col-xl-9 col-lg-12 filter-bar invoice-list">
+        <nav class="navbar m-b-30 p-10 d-flex justify-content-center">
+            <div class="nav-item nav-grid">
+                <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+        </nav>
+        <div class="row" style="position: relative;">
+            <div class="col-md-6 col-sm-12" *ngFor="let o of lstOrders | paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems }">
+                <app-card [hidHeader]="true" cardClass="{{lstPriorityColors[o.orderPriority].cardClass}}">
+                    <div class="mb-3">
+                        <h5 class="d-inline-block m-b-10">{{o.companyName}} - {{o.supplierName}}</h5>
+                        <div class="dropdown-secondary float-right" ngbDropdown>
+                            <a class="task-due" [routerLink]="['../ordernotes']" [queryParams]="{i:o.id}">Notes</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled">
+                                <li>Order #: &nbsp;{{o.id}}</li>
+                                <li>Craeted : <span class="text-semibold">{{o.orderCreationDate | date:"MM/dd/yyyy"}}</span></li>
+                                <li><span class="text-semibold">{{o.currencyName}}</span></li>
+                                <li><span class="text-semibold">{{o.incotermsName}},{{o.loadingPortName}}</span></li>
+                                <li><span class="text-semibold">{{o.orderDescription }},{{o.numberOfContainers}}*{{o.containerTypeName}}</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled text-right">
+                                <li><span class="text-semibold">{{o.forwarderName }}</span></li>
+                                <li><span class="text-semibold">{{o.customsAgentName}},{{o.CFN}}</span></li>
+                                <li><span class="text-semibold">{{o.warehousesName}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <div class="task-list-table">
+                            <p class="task-due"><strong> Arrival Due : </strong><strong class="label " [ngClass]="lstPriorityColors[o.orderPriority].due">
+                          {{o.arrivalDateToPort | date:"MM/dd/yyyy"}} </strong></p>
+                        </div>
+                        <div class="task-board m-0 float-right">
+                            <a [routerLink]="['cu/'+o.id]" style=" width: 37px;" [ngClass]="lstPriorityColors[o.orderPriority].btn" class="btn"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </div>
+                </app-card>
+
+            </div>
+            <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+
+
+
+        </div>
+
+    </div>
+    <div class="col-xl-9 col-lg-12 offset-xl-3 filter-bar invoice-list ">
+        <nav class="navbar m-b-30 p-10 d-flex justify-content-center">
+            <div class="nav-item nav-grid">
+                <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+        </nav>
+    </div>
+</div>

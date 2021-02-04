@@ -1,0 +1,175 @@
+<!--  -->
+<nav class="navbar col-sm-12 my-4 p-3">
+    <div class="nav-item nav-grid col-lg-8">
+        <button *ngFor='let b of FfilterOptions' class="btn btn-outlet-primary" (click)="beforeChange(b.value)" [ngClass]="{'btn-active': b.value == TopSearchObj.ShippingStatus.value}">{{b.label}} <span class="badge badge-light">{{counters[b.value]}}</span></button>
+    </div>
+    <div class="col-lg-4">
+        <input type="text" class="form-control float-right" id="spc-search-order-process" placeholder="Search..."
+        [formControl]="txtSearchFilter">
+    </div>
+</nav>
+
+<app-card [hidHeader]="true" class="mt-5">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead *ngIf="TopSearchObj.ShippingStatus.value == 0">
+                <!-- Supplier 	 Arrival Date to Port	Incoterms 	Loading Port 	Description -->
+                <th>Supplier</th>
+                <th>Arrival Date to Port</th>
+                <th>Incoterms</th>
+                <th>Loading Port</th>
+                <th style="width: 15%;">forworder</th>
+                <th style="width: 15%;">delay day</th>
+                <th>shipping date</th>
+                <th>Description</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ShippingStatus.value == 0">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index " [ngClass]="o.classRow" (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.arrivalDateToPort" type="date" [ngModel]="o.arrivalDateToPort " (ngModelChange)="onArrivalDateToPortChanged(i,o.arrivalDateToPort)" class="form-control">
+                    </td>
+                    <td>
+                        <p *ngIf="o.incoterms"> {{o.incoterms.name}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.loadingPort"> {{o.loadingPort.name}} </p>
+
+                    </td>
+                    <td>
+                        <ng-select class="small" [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.orderShippings" [(ngModel)]="o.orderShippings.forwarderId" (ngModelChange)="rowChangeDetiction(i)" [ngClass]=" 'ng-select' " [allowClear]="true " [options]="forwarders"></ng-select>
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.orderShippings" type="text" [(ngModel)]="o.orderShippings.delayedContainerDays" (blur)="rowChangeDetiction(i)" class="form-control">
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.orderShippings" type="date" [(ngModel)]="o.orderShippings.shippingDate" (change)="onShippingDateChanged(i,o.orderShippings.shippingDate)" class="form-control ">
+                    </td>
+                    <td>{{o.orderDescription}}|
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>
+                    </td>
+                </tr>
+            </tbody>
+
+
+
+            <thead *ngIf="TopSearchObj.ShippingStatus.value == 1">
+                <!-- Supplier 	 Arrival Date to Port	Incoterms 	Loading Port 	Description -->
+                <th>Supplier</th>
+                <th>Arrival Date to Port</th>
+                <th>Incoterms</th>
+                <th>Loading Port</th>
+                <th>Forworder</th>
+                <th>Departure Date</th>
+                <th>Description</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ShippingStatus.value == 1">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index " [ngClass]="o.classRow" (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.arrivalDateToPort" type="date" [(ngModel)]="o.arrivalDateToPort" (change)="onArrivalDateToPortChanged(i,o.arrivalDateToPort)" class="form-control">
+                    </td>
+                    <td>
+                        <p *ngIf="o.incoterms"> {{o.incoterms.name}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.loadingPort"> {{o.loadingPort.name}} </p>
+
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings.forworder"> {{o.orderShippings.forworder.name}} </p>
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.orderShippings" type="date" [(ngModel)]="o.orderShippings.departureDate" (change)="onDepartureDateChanged(i,o.orderShippings.departureDate)" class="form-control ">
+                    </td>
+                    <td>{{o.orderDescription}} |
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>
+                    </td>
+                </tr>
+            </tbody>
+
+
+            <thead *ngIf="TopSearchObj.ShippingStatus.value == 2">
+                <!-- Supplier 	 Arrival Date to Port	Incoterms 	Loading Port 	Description -->
+                <th>Supplier</th>
+                <th>Arrival Date to Port</th>
+                <th>Incoterms</th>
+                <th>Loading Port</th>
+                <th>Forworder</th>
+                <th>Departure Date</th>
+                <th>Description</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ShippingStatus.value == 2">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index " [ngClass]="o.classRow" (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.arrivalDateToPort" type="date" [ngModel]="o.arrivalDateToPort" (change)="onArrivalDateToPortChanged(i,o.arrivalDateToPort)" class="form-control">
+                    </td>
+                    <td>
+                        <p *ngIf="o.incoterms"> {{o.incoterms.name}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.loadingPort"> {{o.loadingPort.name}} </p>
+
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings.forworder"> {{o.orderShippings.forworder.name}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings"></p> {{o.orderShippings.departureDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td>{{o.orderDescription}} |
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>
+                    </td>
+                </tr>
+            </tbody>
+
+            <thead *ngIf="TopSearchObj.ShippingStatus.value == 3">
+                <!-- Supplier 	 Arrival Date to Port	Incoterms 	Loading Port 	Description -->
+                <th>Supplier</th>
+                <th>Arrival Date to Port</th>
+                <th>Incoterms</th>
+                <th>Loading Port</th>
+                <th>Departure Date</th>
+                <th>Description</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ShippingStatus.value == 3">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index " [ngClass]="o.classRow" (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <input [disabled]="!AllowToEdit ? 'disabled':null" *ngIf="o.arrivalDateToPort" type="date" [ngModel]="o.arrivalDateToPort" (change)="onArrivalDateToPortChanged(i,o.arrivalDateToPort)" class="form-control">
+                    </td>
+                    <td>
+                        <p *ngIf="o.incoterms"> {{o.incoterms.name}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.loadingPort"> {{o.loadingPort.name}} </p>
+
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings"></p> {{o.orderShippings.departureDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td>{{o.orderDescription}} |
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+</app-card>
+<nav class="navbar col-sm-12 d-flex justify-content-center">
+    <div class="nav-item nav-grid">
+        <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</nav>

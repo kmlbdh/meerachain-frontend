@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-between pb-1 mb-1">
+    <div class="form-inline">
+        <span>Size :</span>
+        <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='pageSize' (change)='updateSize()'>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="25">25</option>
+            <option value="200">200</option>
+        </select>
+
+
+        <span>Category :</span>
+        <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='CatId' (change)='updateSize()'>
+            <option value="-1" >All</option>
+            <ng-container *ngFor="let s of lstCategory">
+                <option value="{{s.value}}">
+                    {{s.label}}
+                </option>
+            </ng-container>
+        </select>
+
+    </div>
+    <input type="text" placeholder="Filter The Contacts English Name" class=" input-sm form-control h-50 w-25" (keyup)="updateFilter()" [(ngModel)]='txtFilterEnglishName' />
+</div>
+<div class="table-responsive">
+    <div class="card-loader" *ngIf="cardLoad"><i class="pct-loader1 anim-rotate"></i></div>
+    <ngx-datatable #myTable class="material expandable" [rows]="rows" [columns]="[{ name: 'englishName' }, { name: 'arabicName' }, { name: 'catid' }, { name: 'hScode' }]" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+        [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+        <!-- Row Detail Template -->
+        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:60px; font-size:14px">
+                    <div>{{ row.name }}, {{ row.description }},{{row.tupleType}}</div>
+                </div>
+            </ng-template>
+        </ngx-datatable-row-detail>
+
+        <!-- Column Templates -->
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="d-md-none">
+                </a>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column *ngIf="fileds['englishName'].show" name="englishName" [flexGrow]="2" [minWidth]="200">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">
+                    English Name</span>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="arabicName" *ngIf="!isMobile && fileds['arabicName'].show" [flexGrow]="1">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;">Arabic Name</span>
+            </ng-template>
+
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                <span class="d-sm-none d-md-block">{{ value }}</span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="categoryName" *ngIf="!isMobile && fileds['categoryId'].show" [flexGrow]="2" class="d-sm-none d-md-block">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">categoryName</span>
+            </ng-template>
+
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="d-sm-none d-md-block">{{ value }}</span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="hScode" *ngIf="!isMobile && fileds['hScode'].show" [flexGrow]="2" class="d-sm-none d-md-block">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">hScode</span>
+            </ng-template>
+
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="d-sm-none d-md-block">{{ value }}</span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" *ngIf="!isMobile" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-header-template>
+                <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;"> Actions
+                </span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <button class="btn btn-icon btn-rounded btn-outline-primary" *ngIf="canEditItem" (click)="onSelectedItem(row,'Edit')" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                        class="fas fa-edit"></i></button>
+                <button class="btn btn-icon btn-rounded btn-outline-primary" (click)="onSelectedItem(row,'Show')" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i class="fas fa-eye"></i></button>
+                <!-- <button *ngIf="row.accountState == '1'" (click)="onSelectedItem(row,'modal-8')" class="btn btn-icon btn-rounded btn-outline-warning " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                    <i class="fas fa-user-edit"></i></button>
+                <button *ngIf="row.accountState == '1'" (click)="ConfirmDelete(row.id,row.englishName,2)" class="btn btn-icon btn-rounded btn-outline-warning " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                    <i class="fas fa-user-minus"></i>
+                </button>
+                <button (click)="ConfirmDelete(row.id,row.englishName,1)" class="btn btn-icon btn-rounded btn-outline-danger " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                    <i class="fas fa-trash-alt"></i>
+                </button> -->
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+    <form class="editForm" novalidate [formGroup]="infoForm">
+        <h4>Account Info</h4>
+        <hr>
+        <div class="row" *ngIf="infoForm">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="password">Password</label>
+                    <input class="form-control input-md" id="password" name="text" type="password" placeholder="Enter password" formControlName="password" [ngClass]="{'is-invalid': !frmC.password.valid && (frmC.password.dirty || frmC.password.touched || isSubmit)}">
+                    <label *ngIf="!frmC.password.valid && (frmC.password.dirty || frmC.password.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                        enter a
+                        valid password .</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="conPassword">Confirm Password:</label>
+                    <input class="form-control input-md" id="conPassword" type="password" placeholder="Enter conPassword" formControlName="conPassword" [ngClass]="{'is-invalid': !frmC.conPassword.valid && (frmC.conPassword.dirty || frmC.conPassword.touched || isSubmit)}">
+                    <label *ngIf="!frmC.conPassword.valid && (frmC.conPassword.dirty || frmC.conPassword.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">
+                        enter a
+                        valid confirm password .</label>
+                </div>
+            </div>
+
+        </div>
+
+        <h4>Profile Picture</h4>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text upload" id="btnUpload">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <form action="..http://localhost:58991/api//upload" method="post" enctype="multipart/form-data">
+                            <input type="file" (change)="fileChange($event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        </form>
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-end">
+            <button class="btn btn-outline-primary" (click)="uploadNewPicture()" type="button">Save Changes</button>
+
+        </div>
+    </form>
+</div>

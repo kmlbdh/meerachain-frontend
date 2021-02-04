@@ -1,0 +1,380 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <app-card cardTitle="{{PGHead}}" IloadCard='{{cardLoad}}'>
+            <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+                {{errorvalue}}
+            </div>
+            <wizard #wizard class="arc-wizard" navBarLayout="large-filled-symbols" [navigationMode]="'semi-strict'">
+                <!-- -->
+                <wizard-step stepTitle="Profile" navigationSymbol="&#xf0b1;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900" [canExit]="infoForm.valid">
+                    <div class="row">
+                        <form class="editForm" novalidate [formGroup]="infoForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="contactNumber">Contact Number</label>
+                                        <input class="form-control input-md" id="contactNumber" name="text" type="text" placeholder="Enter contactNumber" formControlName="contactNumber" [ngClass]="{'is-invalid': !frmC.contactNumber.valid && (frmC.contactNumber.dirty || frmC.contactNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.contactNumber.valid && (frmC.contactNumber.dirty || frmC.contactNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid contactNumber .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="englishName">English Name</label>
+                                        <input class="form-control input-md" id="englishName" name="text" type="text" placeholder="Enter englishName" formControlName="englishName" [ngClass]="{'is-invalid': !frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.englishName.valid && (frmC.englishName.dirty || frmC.englishName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid English Name .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="website">website</label>
+                                        <input class="form-control input-md" id="website" name="text" type="text" placeholder="Enter website" formControlName="website" [ngClass]="{'is-invalid': !frmC.website.valid && (frmC.website.dirty || frmC.website.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.website.valid && (frmC.website.dirty || frmC.website.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid website .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="telephoneNumber">Telephone Number</label>
+                                        <input class="form-control input-md" id="telephoneNumber" name="text" type="text" placeholder="Enter telephoneNumber" formControlName="telephoneNumber" [ngClass]="{'is-invalid': !frmC.telephoneNumber.valid && (frmC.telephoneNumber.dirty || frmC.telephoneNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.telephoneNumber.valid && (frmC.telephoneNumber.dirty || frmC.telephoneNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Telephone Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="otherTelephoneNumber">Other Telephone
+                                            Number</label>
+                                        <input class="form-control input-md" id="otherTelephoneNumber" name="text" type="text" placeholder="Enter otherTelephoneNumber" formControlName="otherTelephoneNumber" [ngClass]="{'is-invalid': !frmC.otherTelephoneNumber.valid && (frmC.otherTelephoneNumber.dirty || frmC.otherTelephoneNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.otherTelephoneNumber.valid && (frmC.otherTelephoneNumber.dirty || frmC.otherTelephoneNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Other Telephone Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="localName">Local Name</label>
+                                        <input class="form-control input-md" id="localName" name="text" type="text" placeholder="Enter localName" formControlName="localName" [ngClass]="{'is-invalid': !frmC.localName.valid && (frmC.localName.dirty || frmC.localName.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.localName.valid && (frmC.localName.dirty || frmC.localName.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Local Name .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="address">address</label>
+                                        <input class="form-control input-md" id="address" name="text" type="text" placeholder="Enter address" formControlName="address" [ngClass]="{'is-invalid': !frmC.address.valid && (frmC.address.dirty || frmC.address.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.address.valid && (frmC.address.dirty || frmC.address.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid address .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="taxNumber">Tax Number</label>
+                                        <input class="form-control input-md" id="taxNumber" name="text" type="text" placeholder="Enter taxNumber" formControlName="taxNumber" [ngClass]="{'is-invalid': !frmC.taxNumber.valid && (frmC.taxNumber.dirty || frmC.taxNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.taxNumber.valid && (frmC.taxNumber.dirty || frmC.taxNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Tax Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="email">email</label>
+                                        <input class="form-control input-md" id="email" name="text" type="text" placeholder="Enter email" formControlName="email" [ngClass]="{'is-invalid': !frmC.email.valid && (frmC.email.dirty || frmC.email.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.email.valid && (frmC.email.dirty || frmC.email.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid email .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="faxNumber">Fax Number</label>
+                                        <input class="form-control input-md" id="faxNumber" name="text" type="text" placeholder="Enter faxNumber" formControlName="faxNumber" [ngClass]="{'is-invalid': !frmC.faxNumber.valid && (frmC.faxNumber.dirty || frmC.faxNumber.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.faxNumber.valid && (frmC.faxNumber.dirty || frmC.faxNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Fax Number .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="contactPerson">Contact Person</label>
+                                        <input class="form-control input-md" id="contactPerson" name="text" type="text" placeholder="Enter contactPerson" formControlName="contactPerson" [ngClass]="{'is-invalid': !frmC.contactPerson.valid && (frmC.contactPerson.dirty || frmC.contactPerson.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.contactPerson.valid && (frmC.contactPerson.dirty || frmC.contactPerson.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Contact Person .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="bankDetails">Bank Details</label>
+                                        <input class="form-control input-md" id="bankDetails" name="text" type="text" placeholder="Enter bankDetails" formControlName="bankDetails" [ngClass]="{'is-invalid': !frmC.bankDetails.valid && (frmC.bankDetails.dirty || frmC.bankDetails.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.bankDetails.valid && (frmC.bankDetails.dirty || frmC.bankDetails.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Bank Details .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="note">note</label>
+                                        <input class="form-control input-md" id="note" name="text" type="text" placeholder="Enter note" formControlName="note" [ngClass]="{'is-invalid': !frmC.note.valid && (frmC.note.dirty || frmC.note.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.note.valid && (frmC.note.dirty || frmC.note.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid note .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="Types">Types</label>
+                                        <ng-select [ngClass]="'ng-select'" [options]="subTypes" [multiple]="true" formControlName="subTypeRoles">
+                                        </ng-select>
+                                        <label *ngIf="!frmC.subTypeRoles.valid && (frmC.subTypeRoles.dirty || frmC.subTypeRoles.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid Contacts type .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="frmC.subTypeRoles && frmC.subTypeRoles.value">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="currencyId">Selected Mapper</label>
+                                        <ng-select [ngClass]="'ng-select'" [allowClear]="true" [options]="lstCompaniesBasedTypes[frmC.subTypeRoles.value[0]]" formControlName="relatedAuthId"></ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="button" uiSref="work" class="btn btn-primary btn-raised" (click)="isSubmit=true;" nextStep>
+                                    Continue <span style="margin-left:10px;"><i
+                                            class="feather icon-chevron-right"></i></span></button>
+                            </div>
+                        </form>
+                    </div>
+                </wizard-step>
+                <wizard-step *ngIf='infoForm1' stepTitle="Supplier Info" navigationSymbol="&#xf085;" navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900" [canExit]="infoForm1.valid">
+                    <div class="row">
+                        <form class="editForm w-100" novalidate [formGroup]="infoForm1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="containerTypeId">containerTypeId</label>
+                                        <ng-select formControlName="containerTypeId" [ngClass]="'ng-select'" (opened)="loadOptions(tupleTypes['Container Type'])" (change)='simpleOption(i)' [allowClear]="true" [options]="Options[tupleTypes['Container Type']]"></ng-select>
+                                        <label *ngIf="!frmC1.containerTypeId.valid && (frmC1.containerTypeId.dirty || frmC1.containerTypeId.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid containerTypeId .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="shippingType">shippingType</label>
+                                        <ng-select [ngClass]="'ng-select'" [options]="shippingTypes" [allowClear]="true" formControlName="shippingType"></ng-select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="incotermsId">incotermsId</label>
+                                        <ng-select formControlName="incotermsId" [ngClass]="'ng-select'" (opened)="loadOptions(tupleTypes['Incoterm'])" (change)='simpleOption(i)' [allowClear]="true" [options]="Options[tupleTypes['Incoterm']]"></ng-select>
+                                        <label *ngIf="!frmC1.incotermsId.valid && (frmC1.incotermsId.dirty || frmC1.incotermsId.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid incotermsId .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary d-inline">
+                                            <label class="form-control-label" for="preparationDays">Count
+                                                preparationDays</label>
+                                            <input class="form-control input-md" id="preparationDays" name="text" type="text" placeholder="Enter preparationDays" formControlName="preparationDays" [ngClass]="{'is-invalid': !frmC1.preparationDays.valid && (frmC1.preparationDays.dirty || frmC1.preparationDays.touched || isSubmit1)}">
+                                            <label *ngIf="!frmC1.preparationDays.valid && (frmC1.preparationDays.dirty || frmC1.preparationDays.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                                enter a valid Confirm password .</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="currencyId">currencyId</label>
+                                        <ng-select formControlName="currencyId" [ngClass]="'ng-select'" (opened)="loadOptions(tupleTypes['Currency'])" (change)='simpleOption(i)' [allowClear]="true" [options]="Options[tupleTypes['Currency']]"></ng-select>
+                                        <label *ngIf="!frmC1.currencyId.valid && (frmC1.currencyId.dirty || frmC1.currencyId.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid currencyId .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="goodsDescription">goodsDescription</label>
+                                        <input class="form-control input-md" id="goodsDescription" name="text" type="text" placeholder="Enter goodsDescription" formControlName="goodsDescription" [ngClass]="{'is-invalid': !frmC1.goodsDescription.valid && (frmC1.goodsDescription.dirty || frmC1.goodsDescription.touched || isSubmit1)}">
+                                        <label *ngIf="!frmC1.goodsDescription.valid && (frmC1.goodsDescription.dirty || frmC1.goodsDescription.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid goodsDescription .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="portId">Loading Port</label>
+                                        <ng-select formControlName="portId" [ngClass]="'ng-select'" (opened)="loadOptions(tupleTypes['Loading Port'])" (change)='simpleOption(i)' [allowClear]="true" [options]="Options[tupleTypes['Loading Port']]"></ng-select>
+                                        <label *ngIf="!frmC1.portId.valid && (frmC1.portId.dirty || frmC1.portId.touched || isSubmit1)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid portId .</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--  -->
+                                <div class=" col-md-12">
+                                    <app-selection-table-items (ItemsBelogToSupllierChange)='ItemsBelogToSupllierChange($event)' [supId]='frmC1.supId.value'></app-selection-table-items>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 centered-content mt-2">
+                                <div class="btn-group mt-10">
+                                    <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="isSubmit1=true;" nextStep>Continue</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </wizard-step>
+                <wizard-step *ngIf='infoForm2 ' stepTitle="inland shipper payment contract" navigationSymbol="&#xf085;"
+                navigationSymbolFontFamily="Font Awesome\ 5 Free" [style.font-weight]="900"
+                [canExit]="infoForm2.valid && allContainersvalid">
+                <div class="row">
+                    <form class="editForm" novalidate [formGroup]="infoForm2">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="contractDate">date of contract</label>
+                                    <input formControlName="contractDate" type="date" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="currencyId">payment currency</label>
+                                    <ng-select [ngClass]="'ng-select'" formControlName="currencyId"
+                                        (opened)="loadOptions(tupleTypes['Currency'])" (change)='simpleOption(i);'
+                                        [allowClear]="true" [options]="Options[tupleTypes['Currency']]"
+                                       >
+                                    </ng-select>
+                                    <!-- <label
+                                        *ngIf="!frmC2.currencyId.valid && (frmC2.currencyId.dirty || frmC2.currencyId.touched || isSubmit2)"
+                                        class="error jquery-validation-error small form-text invalid-feedback">Please
+                                        enter a
+                                        valid currency type .</label>  -->
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="scanningRate">scanning rate</label>
+                                    <input formControlName="scanningRate" class="form-control input-md" name="text"
+                                        type="text" placeholder="scanning rate" type="number" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="dangerousRate">dangerous goods
+                                        rate</label>
+                                    <input formControlName="dangerousRate" class="form-control input-md" name="text"
+                                        type="text" placeholder="dangerous goods rate" type="number" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="note">note</label>
+                                    <input class="form-control input-md" id="note" name="text" type="text"
+                                        placeholder="Enter note" formControlName="note">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <button (click)="addnewrow(rowIndex,true) " class="btn btn-success mt-5" type="button ">
+                        <i class="fas fa-plus "></i>
+                        add new container rate
+                    </button>
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th>warehouse</th>
+                                <th> Container type</th>
+                                <th>discharge Port</th>
+                                <th>Rate</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let container of containersForRate; let rowIndex = index">
+                                <td>
+                                    <ng-select *ngIf="lstWarehouses" [ngClass]="'ng-select'" [allowClear]="true"
+                                        [(ngModel)]="container.warehouseId" [options]="lstWarehouses" (change)="checkContainers();"></ng-select>
+                                </td>
+                                <td>
+
+                                    <ng-select [ngClass]="'ng-select'"
+                                        (opened)="loadOptions(tupleTypes['Container Type'])"
+                                        (change)='simpleOption(i)' [allowClear]="true"
+                                        [options]="Options[tupleTypes['Container Type']]"
+                                        [(ngModel)]="container.containerTypeId"(change)="checkContainers();"></ng-select>
+                                </td>
+                                <td>
+                                    <ng-select [ngClass]="'ng-select'"
+                                        (opened)="loadOptions(tupleTypes['Discharge Destination Port'])"
+                                        (change)='simpleOption(i)' [allowClear]="true"
+                                        [options]="Options[tupleTypes['Discharge Destination Port']]"
+                                        [(ngModel)]="container.dischargePortId"(change)="checkContainers();"></ng-select>
+
+                                </td>
+                                <td>
+                                    <input class="form-control input-md" name="text" type="number" min="0"
+                                        placeholder="rate" [(ngModel)]="container.rate"(change)="checkContainers();">
+                                </td>
+                                <td>
+                                    <button (click)="ConfirmDelete(rowIndex);"
+                                        class="btn btn-icon btn-rounded btn-danger "
+                                        style="max-width: 35px; height: 34px; padding: 6px 9px; " type="button ">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="containersForRate.length==0" style="text-align: center;margin-left: 35%;
+                    padding: 20px;">No container rate added yet ...</div>
+
+                    <div class="col-sm-12 centered-content mt-2">
+                        <div class="col-sm-12" *ngIf="!allContainersvalid">
+                            <label  style="color: red;">all container fields must be filled</label>
+                        </div>
+                        <div class="btn-group mt-10">
+                            <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="checkContainers();isSubmit2=true;"
+                                nextStep>Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+                <wizard-step stepTitle="Completed" navigationSymbol="&#xf00c;" navigationSymbolFontFamily="Font Awesome\ 5 Free">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5>Confirm Message</h5>
+                        </div>
+                        <div class="col-sm-12 centered-content">
+                            <div class="btn-group mt-10">
+                                <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+                                <button type="button" class="btn btn-success btn-sm" *ngIf="frmType != 'e'" (click)="save()" resetWizard>Add</button>
+                                <button type="button" class="btn btn-success btn-sm" *ngIf="frmType == 'e'" (click)="saveEdit()" resetWizard>Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </wizard-step>
+            </wizard>
+
+
+        </app-card>
+    </div>
+</div>

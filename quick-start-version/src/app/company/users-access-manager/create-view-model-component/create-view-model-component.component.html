@@ -1,0 +1,37 @@
+<div class="col-sm-12">
+    <h4 *ngIf="PH">{{PH}}</h4>
+    <hr>
+    <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+        {{errorvalue}}
+    </div>
+    <form [formGroup]="infoForm" *ngIf="infoForm">
+        <h5 class="sub-title col-xl-12 pt-2">Model Name :</h5>
+        <div class=" col-xl-12">
+            <input type="text" [ngClass]="{'is-invalid': !frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)}" class="form-control" id="name" formControlName='name' placeholder="name">
+            <label *ngIf="!frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid
+              Model Name.</label>
+        </div>
+        <div class="my-2 col-xl-12 form-row" *ngFor="let props of propsData[viewModelId]; let i = index">
+            <h5 class="sub-title col-xl-12 pt-2 d-flex justify-content-between">
+                {{propsData[viewModelId][i]['Header']}} :
+                <div class="checkbox checkbox-primary d-inline">
+                    <input type="checkbox" name="{{'allProp'+propsData[viewModelId][i]['key']}}" id="{{'allProp'+propsData[viewModelId][i]['key']}}" [formControlName]="'allProp'+propsData[viewModelId][i]['key']">
+                    <label for="{{'allProp'+propsData[viewModelId][i]['key']}}" class="cr">All</label>
+                </div>
+            </h5>
+            <tag-input class="col-xl-12" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" [formControlName]="propsData[viewModelId][i]['key']">
+                <tag-input-dropdown [autocompleteItems]="propsData[viewModelId][i]['props']" [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true">
+                </tag-input-dropdown>
+            </tag-input>
+        </div>
+        <div class="col-xl-12">
+            <h5 class="sub-title col-xl-12 pt-2">Model Description :</h5>
+            <textarea rows="3" class="col-xl-12" [ngClass]="{'is-invalid': !frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)}" class="form-control" formControlName="description" id='description' placeholder="description"></textarea>
+        </div>
+        <div class="w-100 d-flex justify-content-end mt-2">
+            <input type="button" value="Cancel" class="btn btn-outline-danger">
+            <input type="button" *ngIf="pageFor == 'add'" value="Create Model" (click)="addupdateViewModels()" class="btn btn btn-outline-success ">
+            <input type="button" *ngIf="pageFor == 'edit'" value="Edit Model" (click)="addupdateViewModels()" class="btn btn-outline-primary">
+        </div>
+    </form>
+</div>

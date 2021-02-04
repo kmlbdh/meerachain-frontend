@@ -1,0 +1,25 @@
+<div class="container-fluid w-100">
+    <form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+        <div class="col-sm-12 row">
+            <div class="col-md-4 form-group">
+                <label for="isScanned" class="col-form-label">isScanned </label>
+                <input type="date" formControlName="isScanned" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.isScanned.valid && (frmC.isScanned.dirty || frmC.isScanned.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                  Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="scanningHour" class="col-form-label">scanningHour</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.scanningHour.valid && (frmC.scanningHour.dirty || frmC.scanningHour.touched || isSubmit)}" class="form-control" id="scanningHour" formControlName='scanningHour' placeholder="scanningHour">
+                <label *ngIf="!frmC.scanningHour.valid && (frmC.scanningHour.dirty || frmC.scanningHour.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                  Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="scanByText" class="col-form-label ">scanByText</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.scanByText.valid && (frmC.scanByText.dirty || frmC.scanByText.touched || isSubmit)}" class="form-control" id="scanByText" formControlName='scanByText' placeholder="scanByText">
+                <label *ngIf="!frmC.scanByText.valid && (frmC.scanByText.dirty || frmC.scanByText.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                  Name.</label>
+            </div>
+
+        </div>
+    </form>
+</div>

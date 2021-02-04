@@ -1,0 +1,353 @@
+<div class="row">
+    <app-card cardTitle="Search Box" class="col-xl-3 col-lg-12" cardClass="task-board-left">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control add_task_todo" placeholder="Search here..." required="">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-icon btn-msg-send" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="task-right">
+            <div class="task-right-header-status" (click)="isCompleteStatus = !isCompleteStatus"
+                [attr.aria-expanded]="!isCompleteStatus" aria-controls="completeStatus">
+                <span class="f-w-400">Search Based Supplier</span>
+                <i class="fas fa-caret-down float-right m-t-5"></i>
+            </div>
+            <div id="completeStatus" [ngbCollapse]="isCompleteStatus" class="taskboard-right-progress">
+                <ng-select [ngClass]="'ng-select'" [(ngModel)]='lstSupIds' [options]="lstSuppliers" [multiple]="true">
+                </ng-select>
+                <div class="w-100 mt-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-icon btn-outline-danger" (click)="clearLeft('supIds')"><i
+                            class="fas fa-minus-circle"></i></button>
+                    <button type="button" class="btn btn-icon btn-outline-primary" (click)="leftSearch('supIds')"><i
+                            class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <!-- assign users -->
+            <div class="task-right-header-users" (click)="CDS = !CDS" [attr.aria-expanded]="!CDS"
+                aria-controls="assignUsers">
+                <span class="f-w-400" data-toggle="collapse">Creating Date Search</span>
+                <i class="fas fa-caret-down float-right m-t-5"></i>
+            </div>
+            <div id="assignUsers" [ngbCollapse]="CDS" class="user-box assign-user taskboard-right-users">
+                <span class="f-w-400">From Date:</span>
+                <ic-datepicker [inputTemplate]="CDSS"></ic-datepicker>
+                <ng-template #CDSS let-inputValue="getInputValue()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="CDSSV" [value]="inputValue" type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <span class="f-w-400">To Date:</span>
+                <ic-datepicker [inputTemplate]="CDSE"></ic-datepicker>
+                <ng-template #CDSE let-inputValue="getInputValue()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="CDSEV" [value]="inputValue" type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="w-100 mt-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-icon noradios btn-outline-danger"
+                        (click)="clearLeft('CDSSV','CDSEV')"><i class="fas fa-minus-circle"></i></button>
+                    <button type="button" class="btn btn-icon noradios btn-outline-primary"
+                        (click)="leftSearch('CDS','CDSSV','CDSEV')"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <!-- assign users -->
+            <div class="task-right-header-users" (click)="ADS = !ADS" [attr.aria-expanded]="!ADS"
+                aria-controls="assignUsers">
+                <span class="f-w-400" data-toggle="collapse">Arival Date Search</span>
+                <i class="fas fa-caret-down float-right m-t-5"></i>
+            </div>
+            <div id="assignUsers" [ngbCollapse]="ADS" class="user-box assign-user taskboard-right-users">
+                <span class="f-w-400">From Date:</span>
+                <ic-datepicker [inputTemplate]="ADDS"></ic-datepicker>
+                <ng-template #ADDS let-inputValue="getInputValue()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="ADDSV" [value]="inputValue" type="text" class="form-control"
+                                (blur)="frmDate('ADDSV')">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <span class="f-w-400">To Date:</span>
+                <ic-datepicker [inputTemplate]="ADDE"></ic-datepicker>
+                <ng-template #ADDE let-inputValue="getInputValue()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="ADDEV" [value]="inputValue" type="text" class="form-control"
+                                (blur)="frmDate('ADDEV')">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="w-100 mt-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-icon noradios btn-outline-danger"
+                        (click)="clearLeft('ADDSV','ADDEV')"><i class="fas fa-minus-circle"></i></button>
+                    <button type="button" class="btn btn-icon noradios btn-outline-primary"
+                        (click)="leftSearch('ADS','ADDSV','ADDEV')"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <!-- revision -->
+            <div class="task-right-header-revision" (click)="isRevision = !isRevision"
+                [attr.aria-expanded]="!isRevision" aria-controls="revision">
+                <span class="f-w-400" data-toggle="collapse">Order Tags Search</span>
+                <i class="fas fa-caret-down float-right m-t-5"></i>
+            </div>
+            <div id="revision" [ngbCollapse]="isRevision" class="taskboard-right-revision user-box">
+                <div class="media">
+                    <div class="media-left">
+                        <a class="btn btn-outline-primary btn-icon" href="javascript:" role="button"><i
+                                class="fas fa-cogs"></i>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="chat-header f-w-400 mb-1">Drop the IE specific hacks for temporal inputs</div>
+                        <p class="chat-header  text-muted">4 minutes ago</p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <a class="btn btn-outline-danger btn-icon" href="javascript:" role="button"><i
+                                class="fas fa-share-alt"></i>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="chat-header f-w-400 mb-1">Have Carousel ignore keyboard events</div>
+                        <p class="chat-header text-muted">12 Dec,2015</p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <a class="btn btn-outline-danger btn-icon" href="javascript:" role="button"><i
+                                class="fas fa-font"></i>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="chat-header f-w-400 mb-1">Add full font overrides for popovers and tooltips</div>
+                        <p class="chat-header text-muted">2 month ago</p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <a class="btn btn-outline-success btn-icon" href="javascript:" role="button"><i
+                                class="fas fa-mobile-alt"></i>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="chat-header">Responsive Asssignment</div>
+                        <p class="chat-header  text-muted">6 month ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-card>
+
+    <div class="col-xl-9 col-lg-12 filter-bar invoice-list">
+        <nav class="navbar m-b-30 p-10">
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link text-secondary" href="javascript:">Filter: <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" ngbDropdown
+                    [style.opacity]="TopSearchObj.ArrivalSearchBy.value != -1 || TopSearchObj.PrioritySearchBy.value != -1 ? 0.5 : ''">
+                    <a class="nav-link text-secondary pointer" ngbDropdownToggle id="bydate"><i
+                            class="far fa-clock mx-2"></i>{{TopSearchObj.CreatingSearchBy.label}}</a>
+                    <div ngbDropdownMenu aria-labelledby="bydate"
+                        [style.opacity]="TopSearchObj.ArrivalSearchBy.value != -1 || TopSearchObj.PrioritySearchBy.value != -1 ? 0 : ''">
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = -1;TopSearchObj.CreatingSearchBy.label='Creating Date'">Creating
+                            Date</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = 1;TopSearchObj.CreatingSearchBy.label='Today'">Today</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = 2;TopSearchObj.CreatingSearchBy.label='Yesterday'">Yesterday</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = 3;TopSearchObj.CreatingSearchBy.label='This week'">This
+                            week</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = 4;TopSearchObj.CreatingSearchBy.label='This month'">This
+                            month</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.CreatingSearchBy.value = 5;TopSearchObj.CreatingSearchBy.label='This year'">This
+                            year</a>
+                    </div>
+                </li>
+                <li class="nav-item" ngbDropdown
+                    [style.opacity]="TopSearchObj.CreatingSearchBy.value != -1 || TopSearchObj.PrioritySearchBy.value != -1 ? 0.5 : '' ">
+                    <a class="nav-link text-secondary pointer" ngbDropdownToggle id="bydate"><i
+                            class="far fa-clock mx-2"></i>{{TopSearchObj.ArrivalSearchBy.label}}</a>
+                    <div ngbDropdownMenu aria-labelledby="bydate"
+                        [style.opacity]="TopSearchObj.CreatingSearchBy.value != -1 || TopSearchObj.PrioritySearchBy.value != -1 ? 0 : ''">
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = -1;TopSearchObj.ArrivalSearchBy.label='Arrival Date'">Arrival
+                            Date</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 1;TopSearchObj.ArrivalSearchBy.label='Today'">Today</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 2;TopSearchObj.ArrivalSearchBy.label='Tomorrow'">Tomorrow</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 3;TopSearchObj.ArrivalSearchBy.label='This week'">This
+                            week</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 4;TopSearchObj.ArrivalSearchBy.label='Next week'">Next
+                            week</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 5;TopSearchObj.ArrivalSearchBy.label='This month'">This
+                            month</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.ArrivalSearchBy.value = 6;TopSearchObj.ArrivalSearchBy.label='Next month'">Next
+                            month</a>
+                    </div>
+                </li>
+                <!--  -->
+                <li class="nav-item" ngbDropdown
+                    [style.opacity]="TopSearchObj.ArrivalSearchBy.value != -1 || TopSearchObj.CreatingSearchBy.value != -1 ? 0.5 : '' ">
+                    <a class="nav-link text-secondary pointer" ngbDropdownToggle id="bydate"><i
+                            class="fas fa-chart-line mx-2"></i>{{TopSearchObj.PrioritySearchBy.label}}</a>
+                    <div ngbDropdownMenu aria-labelledby="bydate"
+                        [style.opacity]="TopSearchObj.ArrivalSearchBy.value != -1 || TopSearchObj.CreatingSearchBy.value != -1 ? 0 : ''">
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.PrioritySearchBy.value = -1;TopSearchObj.PrioritySearchBy.label='Priority'">Priority</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.PrioritySearchBy.value = 0;TopSearchObj.PrioritySearchBy.label='Low'">Low</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.PrioritySearchBy.value = 1;TopSearchObj.PrioritySearchBy.label='Mid'">Mid</a>
+                        <a class="dropdown-item pointer"
+                            (click)="TopSearchObj.PrioritySearchBy.value = 2;TopSearchObj.PrioritySearchBy.label='High'">High</a>
+                    </div>
+                </li>
+                <li class="nav-item" ngbDropdown>
+                    <button type="button" class="btn btn-icon btn-primary fontsize" (click)="searchTop()"><i
+                            class="fas fa-search"></i></button>
+                    <button type="button" class="btn btn-icon btn-danger fontsize" (click)="clearTop()"><i
+                            class="fas fa-minus-circle"></i></button>
+                </li>
+            </ul>
+            <div class="nav-item nav-grid">
+                <button type="button" [routerLink]="['cu']" class="btn btn-primary btn-icon fontsize"
+                    [placement]="'top'" ngbTooltip="Add New">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button type="button" *ngIf='!is_deleted' (click)="IsDeletedSwitch()"
+                    class="btn btn-danger btn-icon fontsize" [placement]="'top'" ngbTooltip="Recycle Bin">
+                    <i class="fas fa-recycle"></i>
+                </button>
+                <button type="button" *ngIf='is_deleted' (click)="IsDeletedSwitch()"
+                    class="btn btn-danger btn-icon fontsize" [placement]="'top'" ngbTooltip="Home">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-icon fontsize" [placement]="'top'"
+                    ngbTooltip="Cleared Orders">
+                    <i class="fas fa-low-vision"></i>
+                </button>
+            </div>
+        </nav>
+
+        <nav class="navbar m-b-30 p-10 d-flex justify-content-center">
+            <div class="nav-item nav-grid">
+                <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)"
+                    (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false"
+                    responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+        </nav>
+
+        <div class="row" style="position: relative;">
+            <div class="col-md-6 col-sm-12"
+                *ngFor="let o of lstOrders | paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems }">
+                <app-card [hidHeader]="true" cardClass="{{lstPriorityColors[o.orderPriority].cardClass}}">
+                    <div class="mb-3">
+                        <h5 class="d-inline-block m-b-10">{{o.suplierName}}</h5>
+                        <div class="dropdown-secondary float-right" ngbDropdown>
+                            <a class="task-due" [routerLink]="['../ordernotes']" [queryParams]="{i:o.id}">Notes</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled">
+                                <li>Order #: &nbsp;{{o.id}}</li>
+                                <li>Craeted : <span class="text-semibold">{{o.orderCreationDate |
+                                        date:"MM/dd/yyyy"}}</span></li>
+                                <li><span class="text-semibold">{{o.currencyName}}</span></li>
+                                <li><span class="text-semibold">{{o.incotermsName}},{{o.loadingPortName}}</span></li>
+                                <li><span class="text-semibold">{{o.orderDescription
+                                        }},{{o.numberOfContainers}}*{{o.containerTypeName}}</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled text-right">
+                                <li><span class="text-semibold">{{o.forwarderName }}</span></li>
+                                <li><span class="text-semibold">{{o.customsAgentName}},{{o.CFN}}</span></li>
+                                <li><span class="text-semibold">{{o.warehousesName}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <div class="task-list-table">
+                            <p class="task-due"><strong> Arrival Due : </strong><strong class="label "
+                                    [ngClass]="lstPriorityColors[o.orderPriority].due">
+                                    {{o.arrivalDateToPort | date:"MM/dd/yyyy"}} </strong></p>
+                        </div>
+                        <div class="task-board m-0 float-right">
+                            <a [routerLink]="['details']" [queryParams]="{i:o.id}"
+                                [ngClass]="lstPriorityColors[o.orderPriority].btn" class="btn"><i
+                                    class="fas fa-eye m-0"></i></a>
+                            <a *ngIf="!is_deleted" [routerLink]="['cu']" style=" width: 37px;"
+                                [queryParams]="{t:'e',i:o.id}" [ngClass]="lstPriorityColors[o.orderPriority].btn"
+                                class="btn"><i class="fas fa-edit"></i></a>
+                                
+                            <div class="dropdown-secondary d-inline" ngbDropdown>
+                                <button class="btn" ngbDropdownToggle [ngClass]="lstPriorityColors[o.orderPriority].btn"
+                                    type="button"><i class="fas fa-bars"></i></button>
+                                <div ngbDropdownMenu>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item pointer" *ngIf="is_deleted"
+                                        (click)="ConfirmDelete(o.id,false)"><i class="fas fa-edit"></i> restore
+                                        Order</a>
+                                    <a class="dropdown-item pointer" *ngIf="!is_deleted"
+                                        (click)="ConfirmDelete(o.id)"><i class="fas fa-trash"></i> Remove
+                                        Order</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </app-card>
+
+            </div>
+            <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+
+
+
+        </div>
+    </div>
+    <div class="col-xl-9 col-lg-12 offset-xl-3 filter-bar invoice-list ">
+        <nav class="navbar m-b-30 p-10 d-flex justify-content-center">
+            <div class="nav-item nav-grid">
+                <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)"
+                    (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false"
+                    responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+        </nav>
+    </div>
+</div>

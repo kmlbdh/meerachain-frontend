@@ -1,0 +1,165 @@
+<div class="container-fluid">
+    <form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+        <div class="col-sm-12 row" *ngIf="!processMode">
+            <div class="col-md-12">
+                <h4>Container info</h4>
+                <hr>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="containerNumber" class="col-form-label">Container Number</label>
+                <input type="text" maxlength="11" [ngClass]="{'is-invalid': !frmC.containerNumber.valid && (frmC.containerNumber.dirty || frmC.containerNumber.touched || isSubmit)}" class="form-control" id="containerNumber" formControlName='containerNumber' placeholder="containerNumber">
+                <label *ngIf="!frmC.containerNumber.valid && (frmC.containerNumber.dirty || frmC.containerNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid Container
+                Number.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="delayedContainersDays" class="col-form-label">delayedContainersDays</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.delayedContainersDays.valid && (frmC.delayedContainersDays.dirty || frmC.delayedContainersDays.touched || isSubmit)}" class="form-control" id="delayedContainersDays" formControlName='delayedContainersDays'
+                    placeholder="delayedContainersDays">
+                <label *ngIf="!frmC.delayedContainersDays.valid && (frmC.delayedContainersDays.dirty || frmC.delayedContainersDays.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="netWeight" class="col-form-label">netWeight</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.netWeight.valid && (frmC.netWeight.dirty || frmC.netWeight.touched || isSubmit)}" class="form-control" id="netWeight" formControlName='netWeight' placeholder="netWeight">
+                <label *ngIf="!frmC.netWeight.valid && (frmC.netWeight.dirty || frmC.netWeight.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="goodsDescription" class="col-form-label">goodsDescription</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.goodsDescription.valid && (frmC.goodsDescription.dirty || frmC.goodsDescription.touched || isSubmit)}" class="form-control" id="goodsDescription" formControlName='goodsDescription' placeholder="goodsDescription">
+                <label *ngIf="!frmC.goodsDescription.valid && (frmC.goodsDescription.dirty || frmC.goodsDescription.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="containerTypeId" class="col-form-label">Container Type</label>
+                <ng-select formControlName="containerTypeId" [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Container Type']]"></ng-select>
+                <label *ngIf="!frmC.containerTypeId.valid && (frmC.containerTypeId.dirty || frmC.containerTypeId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                containerTypeId.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="inlandShipperId" class="col-form-label">maininlandShipperId</label>
+                <ng-select formControlName="inlandShipperId" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstInlandShippers"></ng-select>
+                <label *ngIf="!frmC.inlandShipperId.valid && (frmC.inlandShipperId.dirty || frmC.inlandShipperId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                inlandShipperId.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="sealNumber" class="col-form-label">sealNumber</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.sealNumber.valid && (frmC.sealNumber.dirty || frmC.sealNumber.touched || isSubmit)}" class="form-control" id="sealNumber" formControlName='sealNumber' placeholder="sealNumber">
+                <label *ngIf="!frmC.sealNumber.valid && (frmC.sealNumber.dirty || frmC.sealNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                Name.</label>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="totalWeight" class="col-form-label">totalWeight</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.totalWeight.valid && (frmC.totalWeight.dirty || frmC.totalWeight.touched || isSubmit)}" class="form-control" id="totalWeight" formControlName='totalWeight' placeholder="totalWeight">
+                <label *ngIf="!frmC.totalWeight.valid && (frmC.totalWeight.dirty || frmC.totalWeight.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                Name.</label>
+            </div>
+            <div class="col-md-4 form-group  pt-5">
+                <div class="checkbox checkbox-primary d-inline">
+                    <input formControlName="goodDangerous" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+                    <label class="cr mt-1" for="checkbox-p-1">goodDangerous</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 row" *ngIf="showEditProp && !processMode">
+            <div class="col-md-12">
+                <h4>Scanning Info</h4>
+                <hr>
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="isScanned" class="col-form-label">isScanned</label>
+                <input type="date" formControlName="isScanned" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.isScanned.valid && (frmC.isScanned.dirty || frmC.isScanned.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="scanningHour" class="col-form-label">scanningHour</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.scanningHour.valid && (frmC.scanningHour.dirty || frmC.scanningHour.touched || isSubmit)}" class="form-control" id="scanningHour" formControlName='scanningHour' placeholder="scanningHour">
+                <label *ngIf="!frmC.scanningHour.valid && (frmC.scanningHour.dirty || frmC.scanningHour.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="scanByText" class="col-form-label">scanByText</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.scanByText.valid && (frmC.scanByText.dirty || frmC.scanByText.touched || isSubmit)}" class="form-control" id="scanByText" formControlName='scanByText' placeholder="scanByText">
+                <label *ngIf="!frmC.scanByText.valid && (frmC.scanByText.dirty || frmC.scanByText.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+        </div>
+        <div class="col-sm-12 row" *ngIf="showEditProp">
+            <div class="col-md-12">
+                <h4>Process Info</h4>
+                <hr>
+            </div>
+
+            <div class="col-md-3 form-group" *ngIf="!processMode">
+                <label for="returnedDateToPort" class="col-form-label">returnedDateToPort</label>
+
+                <input type="date" formControlName="returnedDateToPort" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.returnedDateToPort.valid && (frmC.returnedDateToPort.dirty || frmC.returnedDateToPort.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="arrivalDateToCompany" class="col-form-label">arrivalDateToCompany</label>
+
+                <input type="date" formControlName="arrivalDateToCompany" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.arrivalDateToCompany.valid && (frmC.arrivalDateToCompany.dirty || frmC.arrivalDateToCompany.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+
+            <div class="col-md-3 form-group">
+                <label for="arrivalTruckNumber" class="col-form-label">arrivalTruckNumber</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.arrivalTruckNumber.valid && (frmC.arrivalTruckNumber.dirty || frmC.arrivalTruckNumber.touched || isSubmit)}" class="form-control" id="arrivalTruckNumber" formControlName='arrivalTruckNumber' placeholder="arrivalTruckNumber">
+                <label *ngIf="!frmC.arrivalTruckNumber.valid && (frmC.arrivalTruckNumber.dirty || frmC.arrivalTruckNumber.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="arrivalHourToCompany" class="col-form-label">arrivalHourToCompany</label>
+                <input type="text" [ngClass]="{'is-invalid': !frmC.arrivalHourToCompany.valid && (frmC.arrivalHourToCompany.dirty || frmC.arrivalHourToCompany.touched || isSubmit)}" class="form-control" id="arrivalHourToCompany" formControlName='arrivalHourToCompany'
+                    placeholder="arrivalHourToCompany">
+                <label *ngIf="!frmC.arrivalHourToCompany.valid && (frmC.arrivalHourToCompany.dirty || frmC.arrivalHourToCompany.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="supervisorGaurd" class="col-form-label">supervisorGaurd</label>
+                <ng-select formControlName="supervisorGaurd" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstEmployees"></ng-select>
+                <label *ngIf="!frmC.supervisorGaurd.valid && (frmC.supervisorGaurd.dirty || frmC.supervisorGaurd.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group" *ngIf="!processMode">
+                <label for="exitDate" class="col-form-label">Exit Date from Port</label>
+                <input type="date" formControlName="exitDate" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.exitDate.valid && (frmC.exitDate.dirty || frmC.exitDate.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group" *ngIf="!processMode">
+                <label for="actualArrival" class="col-form-label">Arrival Date To Port</label>
+                <input type="date" formControlName="actualArrival" class="form-control" placeholder="Order Creation Date">
+                <label *ngIf="!frmC.actualArrival.valid && (frmC.actualArrival.dirty || frmC.actualArrival.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="warehousesId" class="col-form-label">Warehouse</label>
+                <ng-select formControlName="warehousesId" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstWarehouses"></ng-select>
+                <label *ngIf="!frmC.warehousesId.valid && (frmC.warehousesId.dirty || frmC.warehousesId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid English
+                    Name.</label>
+            </div>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center">
+            <button class="btn btn-primary" (click)='addnewcontainer()' *ngIf="!showEditProp" type="button"><i
+                    class="fas fa-plus"></i>Add</button>
+            <button class="btn btn-primary" (click)='editnewcontainer()' *ngIf="showEditProp" type="button"><i
+                    class="fas fa-plus"></i>Edit</button>
+        </div>
+    </form>
+</div>

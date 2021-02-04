@@ -1,0 +1,46 @@
+<div class="container-fluid mx-0 px-0">
+    <div class="row" *ngIf="showNavigation">
+        <nav class="navbar px-0 col-md-12">
+            <div class="nav-item nav-grid">
+                <!-- <button class="btn btn-outlet-primary" (click)="topSelected = 0" [ngClass]="{'btn-active': topSelected == 0}">Users Management</button> -->
+                <button class="btn btn-outlet-primary" (click)="topSelected = 1;changeView()" [ngClass]="{'btn-active':  topSelected == 1}">Views Models</button>
+                <button class="btn btn-outlet-primary" (click)="topSelected = 2;changeView()" [ngClass]="{'btn-active':  topSelected == 2}">Users Groups</button>
+            </div>
+        </nav>
+
+        <div class="col-md-12 px-0 pt-4 row" *ngIf="topSelected == 1">
+            <div class="col-md-2 px-2">
+                <div class="navbar">
+                    <div class="col-md-12 text-center">
+                        <p>Views Sections</p>
+                        <hr>
+                    </div>
+                    <button *ngFor='let b of FfilterOptions' class="btn btn-outlet-primary col-md-12" (click)="beforeChange(b.value)" [ngClass]="{'btn-active': b.value == TopSearchObj.value}">{{b.label}}</button>
+                </div>
+            </div>
+            <div class="navbar col-md-10 px-2">
+                <!-- <div style="width:100%;float:right;"> -->
+                <router-outlet></router-outlet>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="col-md-12 px-0 pt-4 row" *ngIf="topSelected == 2">
+            <div class="col-md-2 px-2">
+                <div class="navbar">
+                    <div class="col-md-12 text-center">
+                        <p>Groups</p>
+                        <hr>
+                    </div>
+                    <button *ngFor='let b of groupSections' class="btn btn-outlet-primary col-md-12" (click)="beforeChangeGroup(b.value)" [ngClass]="{'btn-active': b.value == TopSearchObj.value}">{{b.label}}</button>
+                </div>
+            </div>
+            <div class="navbar col-md-10 px-2">
+                <div style="width:100%;float:left;">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet *ngIf="!showNavigation"></router-outlet>
+</div>

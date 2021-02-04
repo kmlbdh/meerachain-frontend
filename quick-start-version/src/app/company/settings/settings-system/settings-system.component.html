@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <app-card class="col-sm-6" [hidHeader]='true' *ngFor="let trp of tripleData; let i = index" IloadCard='{{cardLoad[i]}}'>
+            <h4 class="ng-tns-c19-35 ng-star-inserted">{{trp}}</h4>
+            <hr>
+            <div class="col-sm-12 form-group row w-100">
+                <h6 class="col-form-label font-screen-resize">Select New {{trp}}</h6>
+                <ng-select class="" [ngClass]="'ng-select'" (opened)='loadOptions(i)' (change)='simpleOption(i)' [allowClear]="true" [options]="Options[i]" [(ngModel)]="selectedItem[i]">
+                </ng-select>
+                <div class="mt-1 w-100 text-right">
+                    <button class="m-0" type="button" (click)='addNew(i,selectedItem[i])' class="btn btn-outline-info"> Add !</button>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row w-100" *ngIf='lstTypeBased[i] && lstTypeBased[i].length != 0'>
+                <h6 class="col-sm-2 col-form-label font-screen-resize">Selected</h6>
+                <div *ngFor="let itm of lstTypeBased[i]; let l = index">
+                    <button class="btn btn-glow-secondary btn-secondary hov" (click)='deleteBelongType(i,itm.originId)' title="btn btn-glow-secondary btn-secondary" type="button">{{itm.name}} <i
+                            class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+            <div *ngIf="lstTypeBased[i] == undefined ||lstTypeBased[i].length == 0">
+                <div class="">
+                    <div class="btn btn-glow-info btn-info hov" title="btn btn-glow-info btn-info">Default All</div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

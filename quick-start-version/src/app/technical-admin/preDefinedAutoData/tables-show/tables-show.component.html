@@ -1,0 +1,160 @@
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="PreDefined Data" [options]="false">
+        <div class="row d-flex align-items-center">
+            <div class="col-9">
+                <button class="btn btn-outline-primary md-trigger" type="button" data-modal="modal-8" (click)="openCreateModel('modal-8')"><i class="fas fa-plus"></i>Create Item</button>
+                <app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'">
+                    <h3 class="theme-bg2">{{CUTitle}}</h3>
+                    <div>
+                        <form [formGroup]="infoForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="name">Name:</label>
+                                        <input class="form-control input-md" id="name" name="text" type="text" placeholder="Enter name" formControlName="name" [ngClass]="{'is-invalid': !frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid name .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="description">Description:</label>
+                                        <input class="form-control input-md" id="description" description="text" type="text" placeholder="Enter description" formControlName="description" [ngClass]="{'is-invalid': !frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)}">
+                                        <label *ngIf="!frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+                                            enter a
+                                            valid description .</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="tupleType">Type:</label>
+                                        <select class="form-control input-md" id="tupleType" formControlName="tupleType" [ngClass]="{'is-invalid': !frmC.tupleType.valid && (frmC.tupleType.dirty || frmC.tupleType.touched || isSubmit)}">
+                                            <ng-container *ngFor="let trp of tripleData; let i = index">
+                                                <option *ngIf='i != 7 && i != 8' value="{{i}}">
+                                                    {{trp}}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                        <label *ngIf="!frmC.tupleType.valid && (frmC.tupleType.dirty || frmC.tupleType.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">
+                                            Please select a valid Type .</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button" *ngIf="!isEdit" (click)="addNewPreDefinedData($event)">Create Item</button>
+                            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button" *ngIf="isEdit" (click)="editPreDefinedData($event)">Save Edit</button>
+                            <button class="btn btn-outline-danger d-inline mx-2" style="font-size: 120%;" type="button" (click)="closeCreateModel($event)">Close Item</button>
+                        </div>
+                    </div>
+                </app-animation-modal>
+            </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </app-card>
+</div>
+
+<div class="col-sm-12">
+    <app-card cardTitle="PreDefined Data Table" IloadCard='{{cardLoad}}'>
+        <div class="d-flex justify-content-between pb-1 mb-1">
+            <div class="form-inline">
+                <span>Size :</span>
+                <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='pageSize' (change)='updateSize()'>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+
+
+                <span>Type :</span>
+                <select class=" custom-select mx-3 d-inline form-control input-sm" [(ngModel)]='Type' (change)='updateSize()'>
+                    <option value="-1">All</option>
+                    <ng-container *ngFor="let trp of tripleData; let i = index">
+                        <option *ngIf='i != 7 && i != 8' value="{{i}}">
+                            {{trp}}
+                        </option>
+                    </ng-container>
+                </select>
+
+            </div>
+            <input type="text" placeholder="Type to filter the PreDefined Data Name" class=" input-sm form-control h-50 w-25" (keyup)="updateFilter()" [(ngModel)]='txtFilterEnglishName' />
+        </div>
+        <div class="table-responsive">
+            <ngx-datatable #myTable class="material expandable" [rows]="rows" [columns]="[ { name: 'id' }, { name: 'name' },{ name: 'description' },{ name: 'tupleType' }]" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [externalPaging]="true"
+                [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+                <!-- Row Detail Template -->
+                <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left:60px; font-size:14px">
+                            <div>{{ row.name }}, {{ row.description }},{{row.tupleType}}</div>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <!-- Column Templates -->
+                <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="d-md-none">
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="id" [flexGrow]="2" [minWidth]="200">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">
+                            #</span>
+                    </ng-template>
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value }}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="name" *ngIf="!isMobile" [flexGrow]="2" class="d-sm-none d-md-block">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;" class="">Name</span>
+                    </ng-template>
+
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="description" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;">Description</span>
+                    </ng-template>
+
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ value }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="tupleType" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;">Type</span>
+                    </ng-template>
+
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <span class="d-sm-none d-md-block">{{ tripleData[value] }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" *ngIf="!isMobile" [flexGrow]="1">
+                    <ng-template let-row="row" ngx-datatable-header-template>
+                        <span class="d-sm-none d-md-block" style="font-size: medium; font-weight: bold;"> Actions
+                        </span>
+                    </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary" (click)="onSelectedItem(row,'Edit')" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary" style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="feather icon-thumbs-up"></i></button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </app-card>
+</div>

@@ -1,0 +1,78 @@
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Warehouses" [options]="false">
+        <div class="row d-flex align-items-center">
+            <div class="col-9">
+                <button class="btn btn-outline-primary" type="button" (click)="openmodel({})"><i
+            class="fas fa-plus"></i>Create Warehouse</button>
+                <!-- <button class="btn btn-outline-primary md-trigger" type="button"><i class="fas fa-plus"></i>Create Item</button> -->
+
+            </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </app-card>
+</div>
+
+<div class="col-md-12">
+    <app-card cardClass="daily-sales" cardTitle="Warehouses Table" IloadCard='{{cardLoad}}'>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let w of lstWarehouses; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{w.name}}</td>
+                    <td>{{w.description}}</td>
+                    <td>
+                        <button (click)="openmodel(w,'a')" class="btn btn-icon btn-rounded btn-outline-primary " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </app-card>
+</div>
+
+<app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'">
+    <h3 class="theme-bg2">{{CUTitle}}</h3>
+    <div>
+        <div class="col-sm-12 alert alert-danger" role="alert" *ngIf="errorvalue">
+            {{errorvalue}}
+        </div>
+        <form [formGroup]="infoForm" *ngIf='infoForm'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="name">Name:</label>
+                        <input class="form-control input-md" id="name" type="text" placeholder="Enter name" formControlName="name" [ngClass]="{'is-invalid': !frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)}">
+                        <label *ngIf="!frmC.name.valid && (frmC.name.dirty || frmC.name.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">Please
+              enter a
+              valid name .</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="description">Description:</label>
+                        <textarea class="form-control input-md" id="description" placeholder="Enter description" formControlName="description" [ngClass]="{'is-invalid': !frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)}"></textarea>
+                        <label *ngIf="!frmC.description.valid && (frmC.description.dirty || frmC.description.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback">
+              enter a
+              valid description .</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" *ngIf="!EditMode" type="button" (click)="createWH($event)">Create New</button>
+            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" *ngIf="EditMode" type="button" (click)="editWH($event)">Edit New</button>
+            <button class="btn btn-outline-danger d-inline mx-2" style="font-size: 120%;" type="button" (click)="closeCreateModel($event)">Cancel</button>
+        </div>
+    </div>
+</app-animation-modal>

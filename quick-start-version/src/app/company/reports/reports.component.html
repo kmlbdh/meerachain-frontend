@@ -1,0 +1,96 @@
+<app-card [hidHeader]="true" class="mt-5" *ngIf="PageFor == 0">
+    <div class="container row">
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('order')" *ngIf="orderIsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Orders</h5>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="feather icon-file-text f-30 text-white"></i>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-white mr-4">
+                                <h6 class="text-white mb-2">This Month</h6>
+                                <span class="d-block mb-2">$ 2018</span>
+                                <span>+175 (22.5%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('container')" *ngIf="containerIsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Containers</h5>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="feather icon-file-text f-30 text-white"></i>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-white mr-4">
+                                <h6 class="text-white mb-2">This Month</h6>
+                                <span class="d-block mb-2">$ 2018</span>
+                                <span>+175 (22.5%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- asd -->
+        </div>
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('item-filter-page')" *ngIf="anyItemIsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Items</h5>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="feather icon-file-text f-30 text-white"></i>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-white mr-4">
+                                <h6 class="text-white mb-2">This Month</h6>
+                                <span class="d-block mb-2">$ 2018</span>
+                                <span>+175 (22.5%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-card>
+
+<app-card [hidHeader]="true" class="mt-5" *ngIf="PageFor == 1">
+    <div class="container row">
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('item01')" *ngIf="item01IsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Normal Report</h5>
+                    <div class="row align-items-center justify-content-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('item02')" *ngIf="item02IsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Unit Grouping</h5>
+                    <div class="row align-items-center justify-content-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-4 click" (click)="moveReport('item03')" *ngIf="item03IsAutharizated">
+            <div class="card theme-bg card-Revenue">
+                <div class="card-block hover">
+                    <h5 class="text-white">Supplier Grouping</h5>
+                    <div class="row align-items-center justify-content-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-card>

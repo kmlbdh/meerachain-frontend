@@ -1,0 +1,99 @@
+<app-card [hidHeader]="true" class="m-0 p-0">
+    <div class="container-fluied row">
+        <div class="col-sm-12">
+            <div class="d-flex justify-content-between">
+                <h3 style="color:#143845;">Filters</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="col-sm-12 row px-2">
+            <div class="my-2 col-xl-12 form-row">
+                <h5 class="sub-title col-xl-3 pt-2">Is Cleared:</h5>
+                <ng-select class="col-xl-9" [(ngModel)]="searchModel.isCleared" [ngClass]="'ng-select'" [allowClear]="true" [options]="[{label:'No',value:0},{label:'Yes',value:1}]">
+                </ng-select>
+            </div>
+
+            <div class="my-2 form-row col-xl-12">
+                <h5 class="sub-title col-xl-3 pt-2">Arrival to Company:</h5>
+                <h5 class="sub-title pt-2" style="width: 65px; display: inline-block;">From:</h5>
+                <input type="date" [(ngModel)]="searchModel.fromAD" class="form-control col-xl-3 pt-2" placeholder="Arrival to port from">
+                <div class="col-xl-2"></div>
+                <h5 class="sub-title pl-2 pt-2" style="width: 60px; display: inline-block;">To:</h5>
+                <input type="date" [(ngModel)]="searchModel.toAD" class="form-control col-xl-3 pt-2" placeholder="Arrival to port to">
+            </div>
+            <div class="my-2 col-xl-12 form-row">
+                <h5 class="sub-title col-sm-6 col-xl-3 pt-2">Search By Text:</h5>
+                <input type="text" [(ngModel)]="searchModel.strSearch" class="col-sm-9 form-control">
+            </div>
+            <div class="col-md-12 d-flex justify-content-end">
+                <button class="btn btn-outline-primary" type="button" (click)="search()" style="font-size: 120%;"><i
+            class="fab fa-searchengin" style="font-size: 120%;"></i>
+          Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-100">
+        <hr />
+        <h4>Search Result :</h4>
+        <hr />
+    </div>
+
+    <div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Supplier</th>
+                        <th>Forworder</th>
+                        <th>Custom Agent</th>
+                        <th>Warehouse</th>
+                        <th>Estimated Arrival</th>
+                        <th>Description</th>
+                        <th>Currency</th>
+                        <th>Incoterms</th>
+                        <th>Custom File Number</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let o of lstOrder | paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems }" (click)="dbclickRow(o.id)">
+                        <td>
+                            <h6 class="mb-1">#{{o.id}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="mb-1">{{o.suplierName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="mb-1">{{o.forwarderName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="mb-1">{{o.customsAgentName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="mb-1">{{o.warehousesName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="m-b-0">{{o.arrivalDateToPort | date:'yyyy-MM-dd'}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="m-b-0">{{o.orderDescription }},{{o.numberOfContainers}}*{{o.containerTypeName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="m-b-0">{{o.currencyName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="m-b-0">{{o.incotermsName}}</h6>
+                        </td>
+                        <td>
+                            <h6 class="m-b-0">{{o.CFN}}</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
+        </div>
+    </div>
+
+</app-card>

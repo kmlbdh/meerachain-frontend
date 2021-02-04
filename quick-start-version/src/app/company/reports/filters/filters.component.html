@@ -1,0 +1,125 @@
+<app-card [hidHeader]="true" class="m-0 p-0">
+    <div class="container-fluied row">
+        <div class="col-sm-12">
+            <div class="d-flex justify-content-between">
+                <h3 style="color:#143845;">Filters</h3>
+                <div style="color:#143845;" class="px-2"><i class="fab fa-searchengin" style="font-size: 200%;"></i>
+                </div>
+            </div>
+            <hr>
+            <form [formGroup]="infoForm" *ngIf='infoForm' class="loader-block">
+                <div class="row">
+                    <div class="col-sm-12 my-2 col-xl-6 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Suppliers:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="supplier" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [autocompleteItems]="suppliers" [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true">
+                            </tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Categories:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="category" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true" [autocompleteItems]="category">
+                            </tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Warehouses:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="warehouse" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true" [autocompleteItems]="warehouses"></tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Is Cleared:</h5>
+                        <ng-select class="col-sm-12 col-xl-9" formControlName="iscleared" [ngClass]="'ng-select'" [allowClear]="true" [options]="[{label:'No',value:0},{label:'Yes',value:1}]">
+                        </ng-select>
+                    </div>
+                    <div class="col-sm-12 my-2 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-2 pt-2">Arrival to port:</h5>
+                        <h5 class="sub-title pt-2" style="width: 65px; display: inline-block;">From:</h5>
+                        <input type="date" formControlName="arrivalDateToPortFrom" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Arrival to port from">
+                        <div class="col-xl-2"></div>
+                        <h5 class="sub-title pl-2 pt-2" style="width: 60px; display: inline-block;">To:</h5>
+                        <input type="date" formControlName="arrivalDateToPortTo" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Arrival to port to">
+                    </div>
+                    <div class="col-sm-12 my-2 form-row" *ngIf="this.frmC.arrivalDateToCompanyFrom">
+                        <h5 class="sub-title col-sm-12 col-xl-2 pt-2">Arrival to Company:</h5>
+                        <h5 class="sub-title pt-2" style="width: 65px; display: inline-block;">From:</h5>
+                        <input type="date" formControlName="arrivalDateToCompanyFrom" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Arrival to port from">
+                        <div class="col-xl-2"></div>
+                        <h5 class="sub-title pl-2 pt-2" style="width: 60px; display: inline-block;">To:</h5>
+                        <input type="date" formControlName="arrivalDateToCompanyTo" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Arrival to port to">
+                    </div>
+                    <div class="col-sm-12 my-2 form-row" *ngIf="frmC.iscleared.value == '1'">
+                        <h5 class="sub-title col-sm-12 col-xl-2 pt-2">Clear Date:</h5>
+                        <h5 class="sub-title pt-2" style="width: 65px; display: inline-block;">From:</h5>
+                        <input type="date" formControlName="clearDateFrom" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Clear Date From">
+                        <div class="col-xl-2"></div>
+                        <h5 class="sub-title pl-2 pt-2" style="width: 60px; display: inline-block;">To:</h5>
+                        <input type="date" formControlName="clearDateTo" class="form-control col-sm-12 col-xl-3 pt-2" placeholder="Clear Date To">
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row" *ngIf="this.frmC.customAgent">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Custom Agents:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="customAgent" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true" [autocompleteItems]="customAgents"></tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row" *ngIf="this.frmC.forworder">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Forworders:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="forworder" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]='true' [focusFirstElement]="true" [autocompleteItems]="forworders"></tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-6 form-row" *ngIf="this.frmC.inlandshipper">
+                        <h5 class="sub-title col-sm-12 col-xl-3 pt-2">Inland Shippers:</h5>
+                        <tag-input class="col-sm-12 col-xl-9" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="inlandshipper" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'label'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true" [autocompleteItems]="inlandShippers"></tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 my-2 col-xl-12 form-row">
+                        <h5 class="sub-title col-sm-12 col-xl-1 pt-2">Columns:</h5>
+                        <tag-input class="col-sm-12 col-xl-11" [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select Name +'" formControlName="columns" [onlyFromAutocomplete]="true">
+                            <tag-input-dropdown [displayBy]="'display'" [identifyBy]="'value'" [showDropdownIfEmpty]="true" [focusFirstElement]="true" [autocompleteItems]="columnsFilter"></tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                        <button class="btn btn-outline-primary" type="button" (click)="filterReport()" style="font-size: 120%;"><i class="fab fa-searchengin" style="font-size: 120%;"></i>Load
+                            !</button>
+                    </div>
+                </div>
+                <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+            </form>
+        </div>
+        <div class="w-100">
+            <hr />
+        </div>
+
+        <div class="loader-block col-sm-12 mt-5">
+            <div class="w-100">
+                <div class="w-100 d-flex justify-content-between">
+                    <h3 style="color:#143845;">Data</h3>
+                    <div style="color:#143845;" class="px-2">
+                        <span class="badge badge-light" style="font-size: 120%;"> {{rowsCounter}} Results</span>
+                        <button class="btn btn-outline-primary" type="button" (click)="initExcel()">Export Excel</button>
+                        <button class="btn btn-outline-primary" type="button" (click)="initDoc()">Generate PDF</button>
+                        <!-- <i class="fas fa-file-invoice-dollar" style="font-size: 240%;"></i> -->
+                    </div>
+                </div>
+                <div class="w-100">
+                    <hr>
+                </div>
+            </div>
+            <ngx-datatable style="height: 1000px;" class="material" [rows]="lstRows" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" (sort)="onSort($event)">
+                <ngx-datatable-column style="font-weight: bold;" *ngFor="let col of this.frmC.columns.value" [prop]="col.value" name="{{col.display}}" [width]="col.colWidth">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+
+                        <strong *ngIf="col.value != 'arrivalDateToPort' && col.value != 'isCleared' && col.value != 'arrivalDateToCompany' && col.value != 'returnedDateToPort'&& col.value != 'exitDate'">{{ row[col.value] }}</strong>
+                        <strong *ngIf="col.value == 'arrivalDateToPort' || col.value == 'isCleared' || col.value == 'arrivalDateToCompany' || col.value == 'returnedDateToPort'|| col.value == 'exitDate'">{{ row[col.value] | date:'dd/MM/yyyy'}}</strong>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+            <div class="card-loader" *ngIf="loadCard1"><i class="pct-loader1 anim-rotate"></i></div>
+        </div>
+    </div>
+</app-card>
+<!-- |date:'yyyy-MM-dd'  -->

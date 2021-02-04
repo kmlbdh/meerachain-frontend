@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-sm-4 form-row my-1">
+        <h6 class="col-md-4 col-form-label">Custom Agent</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="contactLookups[3]"
+            [(ngModel)]="model.customAgentId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Inland Shipper</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="contactLookups[2]"
+            [(ngModel)]="model.inlandShipperId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Warehouse</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstWarehouse"
+            [(ngModel)]="model.warehouseId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Distination Port</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[8]"
+            [(ngModel)]="model.destinationPortId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Discharge Port</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[8]"
+            [(ngModel)]="model.dischargePortId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Local Crossing</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[0]"
+            [(ngModel)]="model.localCrossingId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Origin Of Goods</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[5]"
+            [(ngModel)]="model.originOfGoodsId">
+        </ng-select>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">Export Country</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[5]"
+            [(ngModel)]="model.exportCountryId">
+        </ng-select>
+    </div>
+    <div class="col-sm-12">
+        <hr>
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">System Vat</h6>
+        <input type="number" class="form-control col-md-7" [(ngModel)]="model.systemVat">
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">System Extra Fees</h6>
+        <input type="number" class="form-control col-md-7" [(ngModel)]="model.extraFees">
+    </div>
+    <div class="col-sm-4 form-row  my-1">
+        <h6 class="col-md-4 col-form-label">System Currency</h6>
+        <ng-select class="col-md-7" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[1]"
+            [(ngModel)]="model.systemCurrencyId">
+        </ng-select>
+    </div>
+    <div class="col-sm-12">
+        <hr>
+    </div>
+
+    <div class="col-sm-12 form-row  my-1">
+        <div class="col-sm-12">
+            <div class="col-sm-12 form-group row w-100">
+                <h6 class="col-form-label font-screen-resize">Free Traid Countires</h6>
+                <ng-select class="" [ngClass]="'ng-select'" [allowClear]="true" [options]="predefinedDataLookups[5]"
+                    [(ngModel)]="selectedNewFreeTrade">
+                </ng-select>
+                <div class="mt-1 w-100 text-right">
+                    <button class="m-0" type="button" (click)='addNewFreeTradeCompany(selectedNewFreeTrade)'
+                        class="btn btn-outline-info"> Add !</button>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row w-100" *ngIf='lstFreeTraidCountries.length != 0'>
+                <h6 class="col-sm-2 col-form-label font-screen-resize">Selected</h6>
+                <div *ngFor="let itm of lstFreeTraidCountries; let i = index">
+                    <button class="btn btn-glow-secondary btn-secondary hov" (click)='deleteFreeTradeCountry(i)'
+                        title="btn btn-glow-secondary btn-secondary" type="button">{{itm.country.name}} <i
+                            class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+            <div *ngIf="lstFreeTraidCountries.length == 0">
+                <div class="">
+                    <div class="btn btn-glow-info btn-info hov" title="btn btn-glow-info btn-info">Default All</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="w-100 d-flex justify-content-end mt-2">
+    <button class="btn btn-outline-primary" (click)='save()' type="button"><i class="fas fa-plus"></i>Save</button>
+</div>

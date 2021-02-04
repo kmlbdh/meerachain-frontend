@@ -1,0 +1,89 @@
+<app-card cardClass="daily-sales" [hidHeader]="true">
+    <div class="row d-flex align-items-center">
+        <div class="col-9">
+            <button class="btn btn-outline-primary" *ngIf="canCreate" type="button" (click)="createPerforma()"><i
+                    class="fas fa-plus"></i>Create Performa</button>
+        </div>
+    </div>
+    <div class="progress m-t-30" style="height: 7px;">
+        <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</app-card>
+<app-card [hidHeader]="true" class="mt-5">
+    <div class="table-responsive my-2">
+        <table class="table table-hover">
+            <thead>
+                <th></th>
+                <th>#</th>
+                <th>Supplier</th>
+                <th>Incoterms</th>
+                <th>Order Refrence</th>
+                <th>Order Description</th>
+                <th>Containers</th>
+                <th># of Containers</th>
+                <th># of Dispatched</th>
+                <th>Total Quantity</th>
+                <th>Actions
+                </th>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let o of lstPerformas| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index ">
+                    <tr [ngClass]="{'open-tr': lstPerformasOrders[o.id+''] && lstPerformasOrders[o.id+'']['expand']}">
+                        <td style="color: #2199E8; cursor: pointer;" *ngIf="!lstPerformasOrders[o.id+''] || !lstPerformasOrders[o.id+'']['expand']" (click)="loadSinglePerformaOrders(o.id)"><i class="fas fa-arrow-right"></i></td>
+                        <td style="color: #1DDEC5; cursor: pointer;" *ngIf="lstPerformasOrders[o.id+''] && lstPerformasOrders[o.id+'']['expand']" (click)="loadSinglePerformaOrders(o.id)"><i class="fas fa-arrow-down"></i></td>
+                        <td>{{o.id}}</td>
+                        <td>{{o.supplierName}}</td>
+                        <td>{{o.incotermsName}}</td>
+                        <td>{{o.orderRefrence}}</td>
+                        <td>{{o.orderDescription}}</td>
+                        <td>{{o.containerTypeName}}</td>
+                        <td>{{o.numberOfContainers}}</td>
+                        <td>{{o.dispatchedContainers}}</td>
+                        <td>{{o.totalQuantityItems}}</td>
+                        <td>
+                            <button [routerLink]="['cu']" *ngIf="canEditPerforma" [queryParams]="{t:'e',i:o.id}" class="btn btn-icon btn-outline-primary " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button [routerLink]="['../orders/cu']" *ngIf="canCreateOrderFromPerforma" [queryParams]="{t:'a',pid:o.id}" class="btn btn-outline-primary" style="height: 34px; padding: 6px 9px;" type="button">
+                                Create Order
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="lstPerformasOrders[o.id+''] && lstPerformasOrders[o.id+'']['expand']" class="border:none">
+                        <td colspan="10">
+                            <div class="card-loader" *ngIf="lstPerformasOrders[o.id+'']['load']"><i class="pct-loader1 anim-rotate"></i></div>
+                            <tr *ngIf="(lstPerformasOrders[o.id+'']['orders'] && lstPerformasOrders[o.id+'']['orders'].length > 0); else NoData">
+                                <th>#</th>
+                                <th>Arrival Date to Port</th>
+                                <th>Created Date</th>
+                                <th>Container & Goods</th>
+                                <th>Customs File NO</th>
+                                <th class="w-25">Forwarder</th>
+                                <th># Dispatched</th>
+                            </tr>
+                            <tr class="w-100" *ngFor="let r of lstPerformasOrders[o.id+'']['orders']" (dblclick)="openPerformaOrder(r.id)">
+                                <td>{{r.id}}</td>
+                                <td>{{r.arrivalDateToPort | date:'yyyy-MM-dd'}}</td>
+                                <td>{{r.orderCreationDate | date:'yyyy-MM-dd'}}</td>
+                                <td>{{r.containerandgoods}}</td>
+                                <td>{{r.customsFileNumber}}</td>
+                                <td>{{r.englishName}}</td>
+                                <td>{{r.numberOfContainers}}</td>
+                            </tr>
+                            <ng-template style="position: absolute;width: 95%;" #NoData>We not have any order belong to this proforma...
+                            </ng-template>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+</app-card>
+<nav class="navbar col-sm-12 d-flex justify-content-center">
+    <div class="nav-item nav-grid">
+        <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</nav>

@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h4>{{TopSearchObj.label}}</h4>
+    </div>
+    <div>
+        <!-- (click)="createModelView()"  -->
+        <button class="btn btn-outlet-primary" [ngClass]="{'btn-active': TopSearchObj.create}">Create New View
+            --</button>
+    </div>
+</div>
+<hr class="w-100">
+<app-create-view-model-component class="w-100 my-3 mx-2" [viewModelId]="TopSearchObj.value" [pageFor]="cvmFor">
+</app-create-view-model-component>
+<hr class="w-100">
+
+<div class="w-100 d-flex justify-content-between">
+    <table class="table table-hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Model Name</th>
+                <th scope="col">Model Description</th>
+                <th scope="col">Model Properties</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let w of lstModels; let i = index">
+                <th scope="row">{{w.id}}</th>
+                <td>{{w.name}}</td>
+                <td>{{w.description}}</td>
+                <td>
+                    <div style="white-space: pre-line;">{{w.filterObject}}</div>
+                </td>
+                <td>
+                    <button (click)="editViewMode(i)" class="btn btn-icon btn-rounded btn-outline-primary " style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

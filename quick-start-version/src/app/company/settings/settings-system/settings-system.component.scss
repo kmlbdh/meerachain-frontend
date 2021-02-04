@@ -1,0 +1,17 @@
+ng-select.ng-select>div>div.single {
+    background-color: #1cb4e6;
+}
+
+.fas {
+    display: none;
+}
+
+.hov:hover>.fas {
+    display: inline;
+}
+
+@media(max-width:1568px){
+    .font-screen-resize{
+        font-size: 80%;
+    }
+}

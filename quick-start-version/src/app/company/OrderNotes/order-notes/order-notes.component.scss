@@ -1,0 +1,60 @@
+$primary-color: #04a9f5;
+.card-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(256, 256, 256, 0.7);
+    z-index: 999;
+    i {
+        margin: 0 auto;
+        color: $primary-color;
+        font-size: 24px;
+        align-items: center;
+        display: flex;
+    }
+}
+
+.table {
+    color: black;
+}
+
+tr {
+    position: relative;
+}
+
+body {
+    color: black;
+}
+
+.open-tr {
+    background-color: rgba(4, 169, 245, 0.05);
+}
+
+.bold {
+    font-weight: bold;
+    color: red;
+}
+
+.blackText>* {
+    color: black;
+}
+
+.moresize {
+    font-size: 110%;
+}
+
+.media:hover>.media-body>.content {
+    background-color: #e0f2f5;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.task-board-left>* {
+    color: black;
+}

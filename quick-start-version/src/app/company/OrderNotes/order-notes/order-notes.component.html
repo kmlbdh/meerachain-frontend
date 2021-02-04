@@ -1,0 +1,258 @@
+<!-- revision -->
+<div class="task-right-header-revision" (click)="isRevision = !isRevision" [attr.aria-expanded]="!isRevision" aria-controls="revision">
+    <span class="f-w-400" data-toggle="collapse">Order Details</span>
+    <i class="fas fa-caret-down float-right m-t-5"></i>
+</div>
+
+<app-card [hidHeader]="'true'" id="revision" class="col-lg-12" cardClass="task-board-left" [ngbCollapse]="isRevision">
+    <div class="col-sm-12 row">
+        <div class="col-md-3 form-group">
+            <label for="supplierId" class="col-form-label">Supplier :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.supplierName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="numberOfContainers" class="col-form-label">Number Of Containers :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.numberOfContainers}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="loadingPortId" class="col-form-label">Loading Port :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.loadingPortName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderCreationDate" class="col-form-label">Order Creation Date :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.orderCreationDate}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="containerTypeId" class="col-form-label">Container Type :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.containerTypeName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="currencyId" class="col-form-label">Currency :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.currencyName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="shippingType" class="col-form-label">Shipping Type :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.shippingTypeName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderDescription" class="col-form-label">Order Description :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.orderDescription}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="incotermsId" class="col-form-label">Incoterms :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.incotermsName}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="arrivalDateToPort" class="col-form-label">Arrival Date To Port :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.arrivalDateToPort}}</p>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="orderPriority" class="col-form-label">Priority :</label>
+            <p class="d-inline" style="margin-left:7px;">{{OrderDetails.orderPriorityName}}</p>
+        </div>
+
+    </div>
+</app-card>
+
+
+
+<app-card [hidHeader]="'true'" class="col-lg-12" cardClass="task-board-left">
+    <div class="d-flex justify-content-between">
+        <div class="row">
+            <button *ngFor="let btn of lstNotesTypes" class="btn" (click)="clickNoteType(btn.value)" [ngClass]="[btn.isActive ? btn.activeColor : btn.disActiveColor]" type="button">
+                {{btn.label}}
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-info" (click)="goToOrder()" type="button">
+                Go To Order
+            </button>
+        </div>
+    </div>
+</app-card>
+
+
+
+<app-card [hidHeader]="'true'" class="col-lg-12" cardClass="task-board-left" *ngIf="chagneTrackViewTable && !noteToHistoryId" IloadCard='{{loadCard}}'>
+    <hr class="w-100">
+    <div class="card-block p-1 blackText" *ngFor="let o of lstNotes| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index ">
+        <div class="media friendlist-box">
+            <!-- <div class="mr-3 photo-table"><img style="width: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQcpXuSZZtapn63CqRKn9PunHQGhH5PAwFeBA&usqp=CAU" alt=""></div> -->
+            <div class="mr-3 photo-table"><i class="fas fa-circle text-c-green f-10 mr-2"></i></div>
+            <div class="w-100">
+                <h5>Change From : <a>{{o.fromContactName}} #{{o.id}}</a></h5>
+                <div class="w-100 d-flex justify-content-between">
+                    <p class="moresize m-0">{{o.changeOn}}</p>
+                    <span class="f-12 float-right moresize">{{o.createdAt | date:'yyyy-MM-dd | h:mm:ss a'}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 p-4" *ngIf="lstNoteChanges[o.id+''] && lstNoteChanges[o.id+'']['expand']">
+            <ul class="">
+                <ng-container *ngFor="let key of keysOrderChanges">
+                    <li *ngFor="let change of lstNoteChanges[o.id+''][key+'Changes']" [innerHTML]="change.text">
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="w-100 d-flex justify-content-end">
+            <a style="color: #2199E8; cursor: pointer;" *ngIf="!lstNoteChanges[o.id+''] || !lstNoteChanges[o.id+'']['expand']" (click)="fetchChanges(o.id)">
+                More <i class="fas fa-arrow-right"></i></a>
+            <a style="color: rgb(222, 29, 61); cursor: pointer;" *ngIf="lstNoteChanges[o.id+''] && lstNoteChanges[o.id+'']['expand']" (click)="fetchChanges(o.id)">
+                Less <i class="fas fa-arrow-up"></i></a>
+        </div>
+        <hr class="w-100" style="border:1px solid #3F4D67">
+    </div>
+    <div class="nav-item nav-grid w-100 d-flex justify-content-end">
+        <pagination-controls id="notespaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</app-card>
+
+<app-card [customHeader]="true" blockClass="task-comment" [options]="false" *ngIf="!chagneTrackViewTable && !noteToHistoryId" IloadCard='{{loadCard}}'>
+    <div class="app-card-header">
+        <h5 class="card-header-text"><i class="fas fa-plus m-r-5"></i> Notes</h5>
+        <button type="button" class="btn btn-icon btn-primary float-right m-0" [routerLink]="['cu']" [queryParams]="{'i':orderId}"><i
+                class="fas fa-plus"></i></button>
+    </div>
+    <ul class="media-list p-0">
+        <li class="media" *ngFor="let note of lstNotes| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index ">
+            <div class="media-left mr-3">
+                <a>
+                    <img class="media-object img-radius comment-img" [src]="'./attachment/' + note.userpicture" alt=" ">
+                </a>
+            </div>
+            <div class="media-body">
+
+                <div class="d-flex justify-content-between">
+                    <h6 class="media-heading txt-primary">{{note.fromContactName}} </h6>
+
+                    <h6>
+                        <button type="button" class="btn btn-outline-success " style="padding: 3px;" *ngIf="note.allowToMakeAssign && note.type != 1 && note.type != 3" (click)="MakeNoteAsDone(note.id)">Make As Done</button>
+                        <button type="button" class="btn btn-outline-danger " style="padding: 3px;" *ngIf="note.allowToMakeUndoDone && note.type != 1 && note.type != 3" (click)="UndoDone(note.id)">Undo Done</button>
+                        <span class="label label-success " *ngIf="note.doneByName"> done by: {{note.doneByName}}</span>
+                        <strong>{{note.createdAt | dateAgo}} </strong> |
+                        <span class="f-12 m-l-5">{{note.createdAt | date:'yyyy-MM-dd,h:mm a'}}</span>
+                    </h6>
+                </div>
+
+                <div [innerHTML]="note.content" class="w-100 content" *ngIf="!note.editable"></div>
+                <app-tinymce class="col-sm-12" [(ngModel)]="note.content" #tinymce='tinymce' *ngIf="note.editable">
+                </app-tinymce>
+
+                <div class="m-t-10 m-b-25 d-flex justify-content-end" *ngIf="note.editable && note.allowToEdit">
+                    <button class="btn btn-outline-primary" (click)="updateNote(note.id)">Edit</button>
+                </div>
+
+                <div class="m-t-10 m-b-25" *ngIf="!note.editable">
+                    <span><a class="m-r-10 text-secondary" (click)="openCloseReplay(note.id,true)">Reply</a></span>
+                    <span *ngIf="note.allowToEdit" (click)="note.editable = true"><a
+                            class="m-r-10 text-secondary">Edit</a> </span>
+
+                    <strong class="m-r-10 text-primary cursor" *ngIf="note.updatedAt" (click)="openHistory(note.id)">
+                        History </strong>
+
+                </div>
+                <div class="m-b-25" *ngIf="!note.editable">
+                    <ul>
+                        <li *ngFor="let attach of note.attachments">{{attach.name}} <a [href]="attach.url" target="_blank"><i class="fas fa-download f-18 mx-5" ></i></a> </li>
+                    </ul>
+
+                </div>
+                <hr style="border:1px solid #3F4D67">
+                <div class="media mt-2" *ngFor="let subn of note.lstReplays">
+                    <a class="media-left mr-3">
+                        <img class="media-object img-radius comment-img" [src]="'./attachment/' + subn.userpicture" alt=" ">
+                    </a>
+                    <div class="media-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="media-heading txt-primary">{{subn.fromContactName}} </h6>
+
+                            <h6>
+                                <strong>{{subn.createdAt | dateAgo}} </strong> |
+                                <span class="f-12 m-l-5">{{subn.createdAt | date:'yyyy-MM-dd,h:mm:ss a'}}</span>
+                            </h6>
+                        </div>
+
+
+                        <div [innerHTML]="subn.content" class="w-100 content" *ngIf="!subn.editable"></div>
+                        <app-tinymce class="col-sm-12" [(ngModel)]="subn.content" #tinymce='tinymce' *ngIf="subn.editable">
+                        </app-tinymce>
+
+                        <div class="m-t-10 m-b-25 d-flex justify-content-end" *ngIf="subn.editable && subn.allowToEdit">
+                            <button class="btn btn-outline-primary" (click)="updateNote(subn.id,true)">Edit</button>
+                        </div>
+
+                        <div class="m-t-10 m-b-25" *ngIf="!subn.editable">
+                            <span *ngIf="subn.allowToEdit" (click)="subn.editable = true"><a
+                                    class="m-r-10 text-secondary">Edit</a>
+                            </span>
+                            <strong class="m-r-10 text-primary cursor" *ngIf="subn.updatedAt" (click)="openHistory(subn.id)"> History </strong>
+
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+
+                <div class="media mt-2" *ngIf="note.active_replay">
+                    <a class="media-left mr-3">
+                        <img class="media-object img-radius comment-img" [src]="myUserPicture" alt=" ">
+                    </a>
+                    <div class="media-body">
+                        <h6 class="media-heading txt-primary">New Replay</h6>
+                        <p>
+                            <app-tinymce class="col-sm-12" [(ngModel)]="replayText" #tinymce='tinymce'></app-tinymce>
+                        </p>
+                        <div class="m-t-10 m-b-25 d-flex justify-content-end">
+                            <button class="btn btn-outline-danger" (click)="note.active_replay = false; replayText=''">Cancel</button>
+                            <button class="btn btn-outline-primary" (click)="makeReplay(note.id)">Replay</button>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+    <div class="nav-item nav-grid w-100 d-flex justify-content-end">
+        <pagination-controls id="notespaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</app-card>
+
+
+
+
+<app-card [hidHeader]="'true'" class="col-lg-12" cardClass="task-board-left" *ngIf="noteToHistoryId" IloadCard='{{loadCard}}'>
+    <div class="card" *ngIf="noteHistoryContent">
+        <div class="card-block">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto">
+                    <img class="img-fluid rounded-circle" style="width:70px;" src="assets/images/user/avatar-2.jpg" alt="dashboard-user">
+                </div>
+                <div class="col">
+                    <h5>{{noteHistoryContent.latestvalue.userName}}</h5>
+                </div>
+            </div>
+            <ul class="task-list">
+                <li>
+                    <i class="task-icon bg-c-green"></i>
+                    <h6><span class="float-right">{{noteHistoryContent.latestvalue.createdAt | date:'yyyy-MM-dd | h:mm:ss a'}}</span>
+                    </h6>
+                    <div [innerHTML]="noteHistoryContent.latestvalue.content" class="mt-2"></div>
+                </li>
+                <li *ngFor="let ch of noteHistoryContent.lstChanges">
+                    <i class="task-icon bg-c-green"></i>
+                    <h6><span class="float-right">{{ch.createdAt| date:'yyyy-MM-dd | h:mm:ss a'}}</span></h6>
+                    <div [innerHTML]="ch.content" class="mt-2"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn btn-outline-danger" (click)="noteToHistoryId = undefined">Cancel</button>
+
+</app-card>

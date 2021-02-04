@@ -1,0 +1,35 @@
+<router-outlet>
+    <app-spinner></app-spinner>
+</router-outlet>
+
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+
+
+<app-animation-modal [modalID]="'addEditSysHelper'" [modalClass]="'md-effect-8'">
+    <h3 class="theme-bg2">Helper</h3>
+    <div>
+        <form [formGroup]="infoForm" *ngIf='infoForm'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Header:</label>
+                        <input class="form-control input-md" type="text" placeholder="Enter name" formControlName="helpHeader" *ngIf="canEdit">
+                        <p *ngIf="!canEdit">{{this.infoForm.controls.helpHeader.value}}</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Description:</label>
+                        <textarea class="form-control input-md" placeholder="Enter description" formControlName="helpDescription" *ngIf="canEdit"></textarea>
+                        <p *ngIf="!canEdit">{{this.infoForm.controls.helpDescription.value}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-primary d-inline mx-2" style="font-size: 120%;" type="button" (click)="editWH($event)">Save</button>
+            <button class="btn btn-outline-danger d-inline mx-2" style="font-size: 120%;" type="button" (click)="closeCreateModel($event)">Cancel</button>
+        </div>
+    </div>
+</app-animation-modal>

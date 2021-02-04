@@ -1,0 +1,266 @@
+<div class="col-sm-12">
+    <h3>{{userInfo.name}} Filters</h3>
+    <hr>
+    <div class="col-sm-12">
+        <div class="col-sm-12 mb-5">
+            <h5 class="d-inline col-md-2 pt-2">Group Belong :</h5>
+            <ng-select [ngClass]="'ng-select'" class="col-md-10" [options]="autoData.usersGroups" [(ngModel)]="filterRow.userGroupId" [allowClear]="true">
+            </ng-select>
+        </div>
+
+        <div class="col-xl-12 row">
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Items Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Category Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.categories" [(ngModel)]="itemsFilter['categoryId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="itemsFilter['supplierId']">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Orders Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="ordersFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="ordersFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="ordersFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="ordersFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="ordersFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Performa Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="performasFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="performasFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Shipping Process Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="shippingprocessFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="shippingprocessFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="shippingprocessFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="shippingprocessFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="shippingprocessFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">ContainerProcess Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="containerprocessFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="containerprocessFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="containerprocessFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="containerprocessFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="containerprocessFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Custom Process Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="customprocessFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="customprocessFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="customprocessFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="customprocessFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="customprocessFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Reports Order Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="reportsorderFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="reportsorderFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="reportsorderFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="reportsorderFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="reportsorderFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Reports Item 01 Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Category Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.categories" [(ngModel)]="reportsitem01Filter['categoryId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="reportsitem01Filter['supplierId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Reports Item 02 Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Category Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.categories" [(ngModel)]="reportsitem02Filter['categoryId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="reportsitem02Filter['supplierId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Reports Item 03 Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Category Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.categories" [(ngModel)]="reportsitem03Filter['categoryId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="reportsitem03Filter['supplierId']">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group row">
+                <h6 class="sub col-xl-12 pt-2">Reports Container Page Filter Based:</h6>
+                <hr class="col-sm-12">
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Suppliers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.suppliers" [(ngModel)]="reportscontainerFilter['supplierId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Forworders Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.forworders" [(ngModel)]="reportscontainerFilter['forwarderId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Inland Shippers Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.inlandShippers" [(ngModel)]="reportscontainerFilter['inlandShipperId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Custom Agents Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.customAgents" [(ngModel)]="reportscontainerFilter['customsAgentId']">
+                    </ng-select>
+                </div>
+                <div class="col-sm-12 d-inline mb-1">
+                    <label class="cr col-md-2">Warehouses Filter :</label>
+                    <ng-select [ngClass]="'ng-select'" class="col-md-10" [multiple]="true" [options]="autoData.warehouses" [(ngModel)]="reportscontainerFilter['warehousesId']">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 d-flex justify-content-center mt-2">
+            <input type="button" value="Save Model" (click)="save()" class="btn btn-outline-primary">
+        </div>
+    </div>
+</div>

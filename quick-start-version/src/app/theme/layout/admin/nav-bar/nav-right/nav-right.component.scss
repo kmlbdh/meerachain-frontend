@@ -1,0 +1,4 @@
+$primary-color: #04a9f5;
+.notification .notread {
+    background: transparentize($primary-color, 0.9);
+}

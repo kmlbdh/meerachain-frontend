@@ -1,0 +1,86 @@
+<form [formGroup]="infoForm" *ngIf='infoForm' class="row">
+    <div class="col-md-3 form-group" *ngIf="fileds['shippingCompanyRefrence'].show">
+        <label for="shippingCompanyRefrence" class="col-form-label">shipping company refrence</label>
+        <input type="text" [attr.disabled]="fileds['shippingCompanyRefrence'].editable"
+            [ngClass]="{'is-invalid': !frmC.shippingCompanyRefrence.valid && (frmC.shippingCompanyRefrence.dirty || frmC.shippingCompanyRefrence.touched || isSubmit)}"
+            class="form-control" id="s-shippingCompanyRefrence" formControlName='shippingCompanyRefrence'
+            placeholder="shipping company refrence">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['openingShippingOrderDate'].show">
+        <label for="openingShippingOrderDate" class="col-form-label">opening shipping order date</label>
+        <input type="date" [attr.disabled]="fileds['openingShippingOrderDate'].editable" id="s-openingShippingOrderDate"
+            formControlName="openingShippingOrderDate" class="form-control" placeholder="Order Creation Date">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['departureDate'].show">
+        <label for="departureDate" class="col-form-label">departure date</label>
+        <input type="date" [attr.disabled]="fileds['departureDate'].editable" formControlName="departureDate" id="s-departureDate"
+            class="form-control" placeholder="Order Creation Date">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['shippingDate'].show">
+        <label for="shippingDate" class="col-form-label">shipping date</label>
+        <input type="date" [attr.disabled]="fileds['shippingDate'].editable" formControlName="shippingDate"  id="s-shippingDate"
+            class="form-control" placeholder="Order Creation Date">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['forwarderId'].show">
+        <label for="forwarderId" class="col-form-label">forwarder</label>
+        <ng-select formControlName="forwarderId" [attr.disabled]="fileds['forwarderId'].editable"
+            [ngClass]="'ng-select'" (change)='simpleOption(i)' [allowClear]="true" [options]="lstForworders">
+        </ng-select>
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['shippingLine'].show">
+        <label for="shippingLine" class="col-form-label">shipping line</label>
+        <input type="text" [attr.disabled]="fileds['shippingLine'].editable"
+            [ngClass]="{'is-invalid': !frmC.shippingLine.valid && (frmC.shippingLine.dirty || frmC.shippingLine.touched || isSubmit)}"
+            class="form-control" id="s-shippingLine" formControlName='shippingLine' placeholder="shipping line">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['foreignAgent'].show">
+        <label for="foreignAgent" class="col-form-label">foreign agent</label>
+        <input type="text" [attr.disabled]="fileds['foreignAgent'].editable"
+            [ngClass]="{'is-invalid': !frmC.foreignAgent.valid && (frmC.foreignAgent.dirty || frmC.foreignAgent.touched || isSubmit)}"
+            class="form-control" id="s-foreignAgent" formControlName='foreignAgent' placeholder="foreign agent">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['delayedContainerDays'].show">
+        <label for="delayedContainerDays" class="col-form-label">delayed container days</label>
+        <input type="text" [attr.disabled]="fileds['delayedContainerDays'].editable"
+            [ngClass]="{'is-invalid': !frmC.delayedContainerDays.valid && (frmC.delayedContainerDays.dirty || frmC.delayedContainerDays.touched || isSubmit)}"
+            class="form-control" id="s-delayedContainerDays" formControlName='delayedContainerDays'
+            placeholder="delayed container days">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['bOLNo'].show">
+        <label for="bOLNo" class="col-form-label">bOLNo</label>
+        <input type="text" [attr.disabled]="fileds['bOLNo'].editable"
+            [ngClass]="{'is-invalid': !frmC.bOLNo.valid && (frmC.bOLNo.dirty || frmC.bOLNo.touched || isSubmit)}"
+            class="form-control" id="s-bOLNo" formControlName='bOLNo' placeholder="bOLNo">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['vessel'].show">
+        <label for="vessel" class="col-form-label">vessel</label>
+        <input type="text" [attr.disabled]="fileds['vessel'].editable"
+            [ngClass]="{'is-invalid': !frmC.vessel.valid && (frmC.vessel.dirty || frmC.vessel.touched || isSubmit)}"
+            class="form-control" id="s-vessel" formControlName='vessel' placeholder="vessel">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['shippingPrice'].show">
+        <label for="shippingPrice" class="col-form-label">shipping price</label>
+        <input type="text" [attr.disabled]="fileds['forwarderId'].editable"
+            [ngClass]="{'is-invalid': !frmC.shippingPrice.valid && (frmC.shippingPrice.dirty || frmC.shippingPrice.touched || isSubmit)}"
+            class="form-control" id="s-shippingPrice" formControlName='shippingPrice' placeholder="shipping price">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['craneFees'].show">
+        <label for="craneFees" class="col-form-label">crane fees</label>
+        <input type="text" [attr.disabled]="fileds['forwarderId'].editable"
+            [ngClass]="{'is-invalid': !frmC.craneFees.valid && (frmC.craneFees.dirty || frmC.craneFees.touched || isSubmit)}"
+            class="form-control" id="s-craneFees" formControlName='craneFees' placeholder="crane fees">
+    </div>
+    <div class="col-md-3 form-group" *ngIf="fileds['deliveryCost'].show">
+        <label for="deliveryCost" class="col-form-label">delivery cost</label>
+        <input type="text" [attr.disabled]="fileds['forwarderId'].editable"
+            [ngClass]="{'is-invalid': !frmC.deliveryCost.valid && (frmC.deliveryCost.dirty || frmC.deliveryCost.touched || isSubmit)}"
+            class="form-control" id="s-deliveryCost" formControlName='deliveryCost' placeholder="delivery cost">
+    </div>
+    <div class="col-md-3 form-group  pt-5" *ngIf="fileds['isDirectShipping'].show">
+        <div class="checkbox checkbox-primary d-inline">
+            <input formControlName="isDirectShipping" id="checkbox-p-1" name="checkbox-p-1 ml-1 mt-1" type="checkbox">
+            <label class="cr mt-1" for="checkbox-p-1">is direct shipping</label>
+        </div>
+    </div>
+    <!-- {{ setinitDates('openingShippingOrderDate', 'shippingDate') }} -->
+</form>

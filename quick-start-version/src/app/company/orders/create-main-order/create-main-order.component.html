@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-end" *ngIf="PageFor == 0 && idEdit">
+    <button class="btn btn-outline-primary" class="btn btn-outline-primary" [routerLink]="['../../ordernotes']" [queryParams]="{i:frmC.id.value}" type="button">Notes</button>
+    <button class="btn btn-outline-primary" class="btn btn-outline-primary" [routerLink]="['../../ordernotes/cu']" [queryParams]="{i:frmC.id.value}" type="button">Add New Note</button>
+
+</div>
+<app-card cardClass="daily-sales" cardTitle="{{PGHead}}" IloadCard='{{cardLoad}}' [options]="false">
+    <form [formGroup]="infoForm" *ngIf='infoForm && !cardLoad && fileds' class="row">
+        <div class="col-md-3 form-group" *ngIf="fileds['supplierId'].show">
+            <label for="supplierId" class="col-form-label">Supplier</label>
+            <ng-select [disabled]="fileds['supplierId'].editable" formControlName="supplierId" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstSuppliers"></ng-select>
+            <label *ngIf="!frmC.supplierId.valid && (frmC.supplierId.dirty || frmC.supplierId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Supplier.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['numberOfContainers'].show">
+            <label for="numberOfContainers" class="col-form-label">Number of containers</label>
+            <input type="number" min="0"  [attr.disabled]="fileds['numberOfContainers'].editable" [ngClass]="{'is-invalid': !frmC.numberOfContainers.valid && (frmC.numberOfContainers.dirty || frmC.numberOfContainers.touched || isSubmit)}" class="form-control" id="m-numberOfContainers"
+                formControlName='numberOfContainers' placeholder="number of containers">
+            <label *ngIf="!frmC.numberOfContainers.valid && (frmC.numberOfContainers.dirty || frmC.numberOfContainers.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Number Of Containers.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="PageFor == 1">
+            <label for="dispatchedContainers" class="col-form-label">Dispatched containers</label>
+            <input type="text" [attr.disabled]="'disabled'" class="form-control" id="m-dispatchedContainers" formControlName='dispatchedContainers' placeholder="dispatchedContainers">	            
+            <input type="text" [attr.disabled]="'disabled'" class="form-control" id="m-dispatchedContainers" formControlName='dispatchedContainers' placeholder="dispatched containers">
+        </div>
+        <div class="col-md-3 form-group" *ngIf="PageFor == 1">
+            <label for="suspendingContainers" class="col-form-label">Suspending containers</label>
+            <input type="text" [attr.disabled]="'disabled'" class="form-control" id="m-suspendingContainers" formControlName='suspendingContainers' placeholder="suspending containers">        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['loadingPortId'].show">
+            <label for="loadingPortId" class="col-form-label">Loading Port</label>
+            <ng-select [disabled]="fileds['loadingPortId'].editable" formControlName="loadingPortId" [ngClass]="'ng-select'" [options]="Options[tupleTypes['Loading Port']]">
+            </ng-select>
+            <label *ngIf="!frmC.loadingPortId.valid && (frmC.loadingPortId.dirty || frmC.loadingPortId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Loading Port.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['orderCreationDate'].show">
+            <label for="orderCreationDate" class="col-form-label">Order Creation Date</label>
+            <input [attr.disabled]="fileds['orderCreationDate'].editable" type="date" formControlName="orderCreationDate" class="form-control" placeholder="Order Creation Date" id="m-orderCreationDate">
+            <label *ngIf="!frmC.orderCreationDate.valid && (frmC.orderCreationDate.dirty || frmC.orderCreationDate.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Order Creation Date.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['containerTypeId'].show">
+            <label for="containerTypeId" class="col-form-label">Container Type</label>
+            <ng-select [disabled]="fileds['containerTypeId'].editable" formControlName="containerTypeId" [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Container Type']]"></ng-select>
+            <label *ngIf="!frmC.containerTypeId.valid && (frmC.containerTypeId.dirty || frmC.containerTypeId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Container Type.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['currencyId'].show">
+            <label for="currencyId" class="col-form-label">Currency</label>
+            <ng-select [disabled]="fileds['currencyId'].editable" formControlName="currencyId" [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Currency']]"></ng-select>
+            <label *ngIf="!frmC.currencyId.valid && (frmC.currencyId.dirty || frmC.currencyId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block d-block">Please enter a
+                valid Currency.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['shippingType'].show">
+            <label for="shippingType" class="col-form-label">Shipping Type</label>
+            <ng-select [ngClass]="'ng-select'" [disabled]="fileds['shippingType'].editable" [options]="lstShippingTypes" [allowClear]="true" formControlName="shippingType">
+            </ng-select>
+            <label *ngIf="!frmC.shippingType.valid && (frmC.shippingType.dirty || frmC.shippingType.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Shipping Type.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['orderDescription'].show">
+            <label for="orderDescription" class="col-form-label">Order Description</label>
+            <input type="text" [attr.disabled]="fileds['orderDescription'].editable" [ngClass]="{'is-invalid': !frmC.orderDescription.valid && (frmC.orderDescription.dirty || frmC.orderDescription.touched || isSubmit)}" class="form-control" id="m-orderDescription"
+                formControlName='orderDescription' placeholder="order description">
+            <label *ngIf="!frmC.orderDescription.valid && (frmC.orderDescription.dirty || frmC.orderDescription.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Order Description.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['incotermsId'].show">
+            <label for="incotermsId" class="col-form-label">Incoterms</label>
+            <ng-select formControlName="incotermsId" [disabled]="fileds['incotermsId'].editable" [ngClass]="'ng-select'" [allowClear]="true" [options]="Options[tupleTypes['Incoterm']]"></ng-select>
+            <label *ngIf="!frmC.incotermsId.valid && (frmC.incotermsId.dirty || frmC.incotermsId.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Incoterms.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['arrivalDateToPort'].show">
+            <label for="arrivalDateToPort" class="col-form-label">Arrival Date To Port</label>
+            <input type="date" [attr.disabled]="fileds['arrivalDateToPort'].editable" formControlName="arrivalDateToPort" class="form-control" placeholder="Order Creation Date" id="m-arrivalDateToPort">
+
+            <label *ngIf="!frmC.arrivalDateToPort.valid && (frmC.arrivalDateToPort.dirty || frmC.arrivalDateToPort.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Arrival Date To Port.</label>
+        </div>
+        <div class="col-md-3 form-group" *ngIf="fileds['orderPriority'].show">
+            <label for="orderPriority" class="col-form-label">Priority</label>
+            <ng-select formControlName="orderPriority" [disabled]="fileds['orderPriority'].editable" [ngClass]="'ng-select'" [allowClear]="true" [options]="lstOrderPriority"></ng-select>
+            <label *ngIf="!frmC.orderPriority.valid && (frmC.orderPriority.dirty || frmC.orderPriority.touched || isSubmit)" class="error jquery-validation-error small form-text invalid-feedback d-block">Please enter a valid
+                Priority.</label>
+        </div>
+
+    </form>
+</app-card>
+<ngb-tabset type="pills">
+    <ngb-tab title="General" class="mb-3  " style="font-size: 97%;
+    font-weight: bold;">
+        <ng-template ngbTabContent>
+            <app-create-general-order *ngIf="reqCached" (formGeneralValues)="formGeneralValues = $event">
+            </app-create-general-order>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Shipping" *ngIf="PageFor == 0">
+        <ng-template ngbTabContent>
+            <app-create-shipping-order *ngIf="reqCached" (formShuppingValues)="formShuppingValues = $event">
+            </app-create-shipping-order>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Customs" *ngIf="PageFor == 0" >
+        <ng-template ngbTabContent>
+            <app-create-customs-order *ngIf="reqCached" (formCustomValues)="formCustomValues = $event">
+            </app-create-customs-order>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Containers {{containerCounter}}" *ngIf="PageFor == 0">
+        <ng-template ngbTabContent>
+            <app-create-containers-order *ngIf="reqCached" (formContainerValues)="formContainerValues = $event">
+            </app-create-containers-order>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Items {{itemCounter}}" >
+
+        <ng-template ngbTabContent>
+            <app-create-items-order *ngIf="reqCached" [supId]='frmC.supplierId.value' (formContainerValues)="formContainerValues = $event"></app-create-items-order>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
+<app-card [hidHeader]="true">
+    <div class="w-100 d-flex justify-content-center mt-2">
+        <button class="btn btn-outline-danger" [routerLink]="['/impostorcompany/orders']" type="button"><i
+                class="fas fa-times"></i>Cancle</button>
+        <button class="btn btn-outline-primary" *ngIf='!idEdit' [ngClass]="lightButton"  (click)='addnew()' type="button"><i class="fas fa-plus"></i>Add</button>
+        <button  *ngIf='idEdit' [ngClass]="lightButton" class="btn btn-outline-primary" (click)='saveEdit()' type="button"><i class="fas fa-plus"></i>Save Edit</button>
+    </div>
+</app-card>

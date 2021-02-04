@@ -1,0 +1,12 @@
+.click {
+    cursor: pointer;
+}
+
+.hover {
+    transition: 1s all;
+    &:hover {
+        box-shadow: 0 0 35px rgba(29, 207, 218, 0.8);
+        -webkit-transition: 500ms;
+        transition: 500ms;
+    }
+}

@@ -1,0 +1,602 @@
+<nav class="navbar col-sm-12 my-4 p-3">
+    <div class="nav-item nav-grid col-lg-8">
+        <button *ngFor='let b of FfilterOptions' class="btn btn-outlet-primary" (click)="beforeChange(b.value)"
+            [ngClass]="{'btn-active': b.value == TopSearchObj.ContainerStatus.value}">{{b.label}} <span
+                class="badge badge-light">{{counters[b.value]}}</span></button>
+    </div>
+    <div class="col-lg-4">
+        <input type="text" class="form-control float-right" id="copc-search-order-process" placeholder="Search..."
+            [formControl]="txtSearchFilter">
+    </div>
+</nav>
+<app-card [hidHeader]="true" class="mt-5">
+    <div class="table-responsive" style="min-height: 300px;">
+        <div *ngIf="TopSearchObj.ContainerStatus.value == 5">
+            <div class="btn btn-outlet-primary" (click)="changePaymentAction(1);"
+                [ngClass]="{'btn-active': paymentActions==1}">
+                <span class="badge badge-light">{{counters[5]}}</span>
+                not payed trucks
+            </div>
+
+            <div class="btn btn-outlet-primary" (click)="changePaymentAction(2);getTruckPayments();"
+                [ngClass]="{'btn-active': paymentActions==2}">
+                payment history
+            </div>
+            <div class="btn btn-outlet-primary" (click)="changePaymentAction(3)"
+                [ngClass]="{'btn-active': paymentActions==3}">
+                add truck payment
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 0">
+                <!--  	Supplier 	Containers No. 	Description 	Forwarder 	Actual Arrival -->
+                <th>#</th>
+                <th>Supplier</th>
+                <th>Estimated Arrival</th>
+                <th>Container No</th>
+                <th>Description</th>
+                <th>Forwarder</th>
+                <th>Actual Arrival</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 0">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index"
+                    (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.orderContainers[0]'>
+                        #{{o.orderContainers[0].orderId}}
+                    </td>
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <input *ngIf="o.arrivalDateToPort" [disabled]="!AllowToEdit ? 'disabled':null" type="date"
+                            [(ngModel)]="o.arrivalDateToPort"
+                            (change)="onArrivalDateToPortChanged(i,o.arrivalDateToPort)" class="form-control">
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                            {{o.orderContainers[0].containerNumber}} </p>
+                    </td>
+                    <td>{{o.orderDescription}} |
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                        <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings && o.orderShippings.forwarder"> {{o.orderShippings.forwarder.name}}
+                        </p>
+                    </td>
+                    <td>
+                        <input *ngIf="o.orderContainers && o.orderContainers[0]"
+                            [disabled]="!AllowToEdit ? 'disabled':null" type="date"
+                            [(ngModel)]="o.orderContainers[0].actualArrival"
+                            (change)="onActualArrivalChanged(i,o.orderContainers[0].actualArrival)"
+                            class="form-control ">
+                    </td>
+                </tr>
+            </tbody>
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 1">
+                <!--  	Actual Arrival 	Supplier 	Containers No. 	Description 	Forwarder 	Inland Shipper 	Exit Date  -->
+                <th>#</th>
+                <th>Actual Arrival</th>
+                <th>Supplier</th>
+                <th>Container No</th>
+                <th>Description</th>
+                <th>Forwarder</th>
+                <th>Inland Shipper</th>
+                <th>Exit Date</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 1">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index "
+                    (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.orderContainers[0]'>
+                        #{{o.orderContainers[0].orderId}}
+                    </td>
+                    <td>
+                        {{o.orderContainers[0].actualArrival | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                            {{o.orderContainers[0].containerNumber}} </p>
+                    </td>
+                    <td>
+                        <p>{{o.orderDescription}} </p>|
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                        <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings && o.orderShippings.forwarder"> {{o.orderShippings.forwarder.name}}
+                        </p>
+                    </td>
+                    <td>
+                        <ng-select [disabled]="!AllowToEdit ? 'disabled':null"
+                            [(ngModel)]="o.orderContainers[0].inlandShipperId" (ngModelChange)="rowChangeDetiction(i)"
+                            [ngClass]="'ng-select'" [allowClear]="true" [options]="inlandShippers"></ng-select>
+                    </td>
+                    <td>
+                        <input *ngIf="o.orderContainers && o.orderContainers[0]"
+                            [disabled]="!AllowToEdit ? 'disabled':null"
+                            [attr.disabled]="o.orderContainers[0].inlandShipperId == null ? '' : null" type="date"
+                            [(ngModel)]="o.orderContainers[0].exitDate"
+                            (change)="onExitDateChanged(i,o.orderContainers[0].exitDate)" class="form-control ">
+                    </td>
+                </tr>
+            </tbody>
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 2">
+                <!--  	Exit Date 	Supplier 	Container No. 	Description 	Forwarder 	Inland Shipper  -->
+                <th>#</th>
+                <th>Exit Date</th>
+                <th>Supplier</th>
+                <th>Container No</th>
+                <th>Description</th>
+                <th>Forwarder</th>
+                <th>Inland Shipper</th>
+                <th>Arrival To Company</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 2">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index "
+                    (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.orderContainers[0]'>
+                        #{{o.orderContainers[0].orderId}}
+                    </td>
+                    <td>
+                        {{o.orderContainers[0].exitDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td *ngIf='o.suplier'>
+                        {{o.suplier.name}}
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                            {{o.orderContainers[0].containerNumber}} </p>
+                    </td>
+                    <td>
+                        <p>{{o.orderDescription}}</p>|
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                        <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings && o.orderShippings.forwarder"> {{o.orderShippings.forwarder.name}}
+                        </p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0].inlandShipper">
+                            {{o.orderContainers[0].inlandShipper.name}} </p>
+                    </td>
+                    <td>
+                        <input *ngIf="o.orderContainers && o.orderContainers[0]"
+                            [disabled]="!AllowToEdit ? 'disabled':null" type="date"
+                            [(ngModel)]="o.orderContainers[0].arrivalDateToCompany"
+                            (change)="onArrivalDateToCompanyChanged(i,o.orderContainers[0].arrivalDateToCompany)"
+                            class="form-control ">
+                    </td>
+                    <td>
+                        <button class="btn btn-icon btn-rounded btn-outline-primary" (click)="openmodel(i)"
+                            style="max-width: 35px; height: 34px; padding: 6px 9px;" type="button"><i
+                                class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 3 || TopSearchObj.ContainerStatus.value == 4">
+                <!--  	Exit Date 	Supplier 	Container No. 	Description 	Forwarder 	Inland Shipper  -->
+                <th>#</th>
+                <th>Arrival To Company</th>
+                <th>Supplier</th>
+                <th>Container No</th>
+                <th>Description</th>
+                <th>Forwarder</th>
+                <th>Inland Shipper</th>
+                <th>Returned To Port</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 3 || TopSearchObj.ContainerStatus.value == 4">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index "
+                    (dblclick)="dbclickRow(o.id)">
+                    <td *ngIf='o.orderContainers[0]'>
+                        #{{o.orderContainers[0].orderId}}
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers  && o.orderContainers[0]">
+                            {{o.orderContainers[0].arrivalDateToCompany | date:'MM/dd/yyyy'}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf='o.suplier'> {{o.suplier.name}} </p>
+
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                            {{o.orderContainers[0].containerNumber}} </p>
+                    </td>
+                    <td>
+                        <p>{{o.orderDescription}} </p>|
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                        <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderShippings && o.orderShippings.forwarder"> {{o.orderShippings.forwarder.name}}
+                        </p>
+                    </td>
+                    <td>
+                        <p
+                            *ngIf="o.orderContainers && o.orderContainers.length > 0 &&  o.orderContainers[0].inlandShipper">
+                            {{o.orderContainers[0].inlandShipper.name}} </p>
+                    </td>
+                    <td>
+                        <input *ngIf="o.orderContainers && o.orderContainers[0]"
+                            [disabled]="!AllowToEdit ? 'disabled':null" type="date"
+                            [(ngModel)]="o.orderContainers[0].returnedDateToPort"
+                            (change)="onReturnedDateToPortChanged(i,o.orderContainers[0].returnedDateToPort)"
+                            class="form-control ">
+                    </td>
+                </tr>
+            </tbody>
+
+            <!-- start---- truck payment -->
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==1">
+                <!--  	Exit Date 	Supplier 	Container No. 	Description 	Forwarder 	Inland Shipper  -->
+                <th>#</th>
+                <th>Arrival To Company</th>
+                <th>Container No</th>
+                <th>Supplier</th>
+                <th>Discharge port</th>
+                <th>Description</th>
+                <th>Warehouse</th>
+                <th>Inland Shipper</th>
+                <th>Returned To Port</th>
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==1">
+                <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index "
+                    (dblclick)="dbclickRow(o.id)" (click)="paymentActions=3">
+
+                    <td *ngIf='o.orderContainers[0]'>
+                        #{{o.orderContainers[0].orderId}}
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers  && o.orderContainers[0]">
+                            {{o.orderContainers[0].arrivalDateToCompany | date:'MM/dd/yyyy'}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                            {{o.orderContainers[0].containerNumber}} </p>
+                    </td>
+                    <td>
+                        <p *ngIf='o.suplier'> {{o.suplier.name}} </p>
+
+                    </td>
+                    <td>
+                        <p>{{portsNames[o.orderGenerals.dischargePortId]}} </p>
+
+                    </td>
+                    <td>
+                        <p>{{o.orderDescription}} </p>
+                        <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                        <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                    </td>
+                    <td>
+                        <p>{{lstWarehouses[o.orderContainers[0].warehousesId]}} </p>
+                    </td>
+
+                    <td>
+                        <p
+                            *ngIf="o.orderContainers && o.orderContainers.length > 0 &&  o.orderContainers[0].inlandShipper">
+                            {{o.orderContainers[0].inlandShipper.name}} </p>
+                    </td>
+                    <td>
+                        <div *ngIf="o.orderContainers && o.orderContainers[0].returnedDateToPort">
+                            {{o.orderContainers[0].returnedDateToPort| date:'MM/dd/yyyy'}}</div>
+                        <div *ngIf="o.orderContainers && !o.orderContainers[0].returnedDateToPort">not returned yet
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+            <thead *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==2">
+                <th>date</th>
+                <th>inland shipper</th>
+                <th>totalRate</th>
+                <th>note</th>
+
+            </thead>
+            <tbody *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==2">
+                <tr *ngFor="let p of truckPayments| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index"
+                    (click)=" openmodelPayments(i)">
+
+                    <td>
+                        {{p.paymentDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td>
+                        {{inlandShippersNames[p.inlandShipperId]}}
+                    </td>
+                    <td>
+                        {{p.totalRate}}
+                    </td>
+                    <td>
+                        {{p.note}}
+                    </td>
+
+                </tr>
+            </tbody>
+            <div *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==3">
+                <form class="editForm" style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-form-label">date of payment</label>
+                                <input type="date" class="form-control" name="paymentDate"
+                                    [(ngModel)]="payment.paymentDate">
+                            </div>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label class="col-form-label"> inland shipper</label>
+                            <ng-select [ngClass]="'ng-select'" [allowClear]="true" [options]="lstInlandShippers"
+                                name="inlandShipperId" (click)="getInlandShipperContract()"
+                                [(ngModel)]="payment.inlandShipperId"></ng-select>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label" for="note">note</label>
+                                <input class="form-control input-md" id="note" name="text" type="text"
+                                    placeholder="Enter note" name="note" [(ngModel)]="payment.note">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label" for="scanningRate">scanning rate</label>
+                                <input class="form-control input-md" id="note" name="scanningRate" type="number"
+                                    [(ngModel)]="inlandShipperAuth.scanningRate" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label" for="currencyId">currency</label>
+                                <ng-select [ngClass]="'ng-select'" name="currencyId"
+                                    (opened)="loadOptions(tupleTypes['Currency'])" (change)='simpleOption(i)'
+                                    [allowClear]="true" [options]="Options[tupleTypes['Currency']]"
+                                    [(ngModel)]="inlandShipperAuth.currencyId"></ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label" for="dangerousRate">dangerous rate</label>
+                                <input class="form-control input-md" id="note" name="dangerousRate" type="number"
+                                    [(ngModel)]="inlandShipperAuth.dangerousRate" min="0">
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2" *ngIf="payment.inlandShipperId">
+                            <button (click)="getContainersRate(payment.inlandShipperId)" class="btn btn-success "
+                                type="button " style="color: white;margin-top: 1.6rem !important;">
+                                get containers rate from contract
+
+                            </button>
+                        </div>
+                        <div class="col-md-7">
+                            <p style="color: red;margin-top: 5%;"> * all default values came from payment contract of
+                                the selected inland shipper</p>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <table class="table-responsive">
+                <thead *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==3">
+                    <th>Arrival To Company</th>
+                    <th>Supplier</th>
+                    <th>Container No</th>
+                    <th>Discharge port</th>
+                    <th>Description</th>
+                    <th>Warehouse</th>
+                    <th>Inland Shipper</th>
+                    <th>Returned To Port</th>
+                    <th>is scanned </th>
+                    <th>is dangerous </th>
+                    <th>Rate </th>
+                    <th>total rate </th>
+
+                </thead>
+                <tbody *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==3">
+                    <tr *ngFor="let o of lstOrders| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index "
+                        (click)="paymentActions=3">
+
+
+                        <td>
+                            <p *ngIf="o.orderContainers  && o.orderContainers[0]">
+                                {{o.orderContainers[0].arrivalDateToCompany | date:'MM/dd/yyyy'}}</p>
+                        </td>
+                        <td>
+                            <p *ngIf='o.suplier'> {{o.suplier.name}} </p>
+
+                        </td>
+                        <td>
+                            <p *ngIf="o.orderContainers && o.orderContainers[0]">
+                                {{o.orderContainers[0].containerNumber}} </p>
+                        </td>
+                        <td>
+                            <p>{{portsNames[o.orderGenerals.dischargePortId] }} </p>
+
+                        </td>
+                        <td>
+                            <p>{{o.orderDescription}} </p>|
+                            <span *ngIf="o.containerType"> {{o.containerType.name}}</span>|
+                            <span *ngIf="o.incoterms"> {{o.incoterms.name}}</span>
+                        </td>
+                        <td>
+                            <p>{{lstWarehouses[o.orderContainers[0].warehousesId]}} </p>
+                        </td>
+                        <td>
+                            <p
+                                *ngIf="o.orderContainers && o.orderContainers.length > 0 &&  o.orderContainers[0].inlandShipper">
+                                {{o.orderContainers[0].inlandShipper.name}} </p>
+                        </td>
+                        <td>
+                            <div *ngIf="o.orderContainers && o.orderContainers[0].returnedDateToPort">
+                                {{o.orderContainers[0].returnedDateToPort| date:'MM/dd/yyyy'}}</div>
+                            <div *ngIf="o.orderContainers && !o.orderContainers[0].returnedDateToPort">not returned yet
+                            </div>
+
+                        </td>
+                        <td>
+                            <input *ngIf="o.orderContainers && o.orderContainers[0]" type="text"
+                                [(ngModel)]="o.orderContainers[0].isScanned" class="form-control " disabled>
+                        </td>
+                        <td>
+                            <input *ngIf="o.orderContainers && o.orderContainers[0]" type="text"
+                                [(ngModel)]="o.orderContainers[0].goodDangerous" class="form-control " disabled>
+                        </td>
+
+                        <td>
+                            <input type="number" style="width: 100px;" min="0" [disabled]="!payment.inlandShipperId"
+                                [(ngModel)]="o.orderContainers[0].actualRate" class="form-control "
+                                (ngModelChange)="calculateTotalRate($event,i,o.orderContainers[0].goodDangerous,o.orderContainers[0].isScanned)">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control " min="0" [(ngModel)]="totalRate[i]"
+                                style="width: 100px;" [disabled]="!payment.inlandShipperId">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="totalRate">totla rate : </label>
+                            <input [(ngModel)]="payment.totalRate" name="totalRate" type="text" disabled>
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+        </table>
+
+
+        <div class="w-100 d-flex justify-content-center mt-2"
+            *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==3">
+            <button (click)="addTruckPayment()" class="btn btn-success mt-5" type="button "
+                [disabled]="!payment.totalRate">
+                <i class="fas fa-plus " style="color: white;"></i>
+                Add
+            </button>
+        </div>
+
+        <!-- end---- truck payment -->
+    </div>
+    <div class="card-loader" *ngIf="loadCard"><i class="pct-loader1 anim-rotate"></i></div>
+</app-card>
+<nav class="navbar col-sm-12 d-flex justify-content-center">
+    <div class="nav-item nav-grid">
+        <pagination-controls id="ordersPaging" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false"
+            responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</nav>
+
+<app-animation-modal [modalID]="'modal-8'" [modalClass]="'md-effect-8'" *ngIf="TopSearchObj.ContainerStatus.value ==2">
+    <h3 class="theme-bg2">{{editContainerName}}</h3>
+    <div>
+        <app-container [initObj]="initObj" [editMode]="editMode"></app-container>
+    </div>
+</app-animation-modal>
+<app-animation-modal [modalID]="'modal-9'" [modalClass]="'md-effect-8'"
+    *ngIf="TopSearchObj.ContainerStatus.value == 5 && paymentActions==2">
+    <h3 class="theme-bg2">{{truckPaymentDetails.paymentDate}}</h3>
+
+    <div class="row" style="padding: 15px 40px 10px;">
+        <div class="col-3">
+            <label>inland shipper name</label>
+            <p>{{inlandShippersNames[truckPaymentDetails.inlandShipperId]}}</p>
+        </div>
+        <div class="col-3">
+            <label>total Rate</label>
+            <div>{{truckPaymentDetails.totalRate}}<span> {{currencyNames[truckPaymentDetails.currencyId]}}</span></div>
+
+        </div>
+        <div class="col-2">
+            <label *ngIf="truckPaymentDetails.note">note</label>
+            <div> {{truckPaymentDetails.note}}</div>
+
+        </div>
+        <div class="col-4">
+            <label>payment date</label>
+            <div> {{truckPaymentDetails.paymentDate}}</div>
+
+        </div>
+
+        <div style="margin-top: 40px;">truck payment containers</div>
+
+
+    </div>
+    <div class="row">
+        <table class="table table-hover table-responsive" style="overflow-y: scroll;
+        height: 350px;">
+            <thead>
+                <th>#</th>
+                <th>Arrival To Company</th>
+                <th>Supplier</th>
+                <th>Container No</th>
+                <th>Discharge port</th>
+                <th>container Type</th>
+                <th>Warehouse</th>
+                <th>Returned To Port</th>
+                <th>is scanned </th>
+                <th>is dangerous </th>
+                <th>Rate </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of containersForPayment; let i = index " (dblclick)="dbclickRow(c.id)">
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td>
+                        <p>
+                            {{c.arrivalDateToCompany | date:'MM/dd/yyyy'}}</p>
+                    </td>
+                    <td>
+                        <p> {{suppliersNames[c.order.supplierId]}} </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            {{c.containerNumber}} </p>
+                    </td>
+                    <td>
+                        <p>{{portsNames[c.order.orderGenerals.dischargePortId]}} </p>
+
+                    </td>
+                    <td>
+                        {{containerTypesNames[c.containerTypeId]}}
+                    </td>
+                    <td>
+                        <p>{{lstWarehouses[c.warehousesId]}} </p>
+                    </td>
+                    <td>
+                        <div *ngIf="c.returnedDateToPort"> {{c.returnedDateToPort| date:'MM/dd/yyyy'}}</div>
+                        <div *ngIf="!c.returnedDateToPort">not returned yet</div>
+
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="c.isScanned" class="form-control " disabled>
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="c.goodDangerous" class="form-control " disabled>
+                    </td>
+                    <td>
+                        {{c.actualRate}}<span> {{currencyNames[truckPaymentDetails.currencyId]}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-animation-modal>

@@ -1,0 +1,31 @@
+<div class="col-md-12">
+    <app-card cardTitle="All Notifications Page" [options]="false" cardClass="Recent-Users" IloadCard='{{loadCard}}'>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody>
+                    <tr class="unread" *ngFor="let notify of lstNotification| paginate: {id:paggingManager.id, itemsPerPage: paggingManager.itemsPerPage, currentPage: paggingManager.currentPage, totalItems: paggingManager.totalItems } ; let i = index ">
+                        <td><img class="rounded-circle" style="width:40px;" [src]="'./attachment/' + notify.userpicture" alt="activity-user"></td>
+                        <td>
+                            <h6 class="mb-1">{{notify.englishName}}</h6>
+                            <p class="m-0">{{notify.content}}…</p>
+                            <p class="m-0" style="color:black">{{notify.supplierName}} - {{notify.orderDescription}} - {{notify.numberOfContainers}} * {{notify.containerTypeName}}</p>
+                        </td>
+                        <td>
+                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{notify.createdAt| date:'yyyy-MM-dd | h:mm a'}}</h6>
+                        </td>
+                        <td><a href="javascript:" (click)="goTo(notify.orderId)" class="label theme-bg text-white f-12">View More <i class="fas fa-arrow-right"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-card>
+
+</div>
+
+
+
+<div class="nav-item nav-grid w-100 d-flex justify-content-end">
+    <pagination-controls id="notespaging" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="false" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+</div>

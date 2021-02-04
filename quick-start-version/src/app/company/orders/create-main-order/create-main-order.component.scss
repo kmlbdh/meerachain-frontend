@@ -1,0 +1,24 @@
+.nav-pills {
+    margin-bottom: 1rem !important;
+}
+
+li .nav-link {
+    font-size: 97%;
+    font-weight: bold;
+}
+
+@keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(62, 191, 234, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 35px rgba(62, 191, 234, 0);
+    }
+}
+
+.animated {
+    animation: shadow-pulse .5s infinite;
+    margin-bottom: 0;
+    border-color: #04a9f5;
+    border: 1px solid;
+}
